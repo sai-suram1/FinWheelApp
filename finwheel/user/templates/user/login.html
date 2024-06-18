@@ -1,0 +1,20 @@
+<!-- templates/login.html -->
+
+{% extends 'home/layout.html' %}
+
+{% block title %}Login - Fin{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Login to Fin</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+        <button type="submit">Login</button>
+    </form>
+    <!-- Add more content specific to the login page -->
+</div>
+{% endblock %}

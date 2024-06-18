@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Fin</title>
+    <link rel="stylesheet" href="{% static 'ai/styles.css' %}">
+</head>
+<body>
+    <header>
+        <div class="logo">Fin</div>
+        <nav>
+            <ul>
+                <li><a href="{% url 'ai:dashboard' %}">Home</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="{% url 'user:logout' %}">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <div class="chat-container">
+            <div class="chat-box" id="chat-box">
+                <!-- Chat messages will be dynamically added here -->
+            </div>
+            <div class="user-input">
+                <input type="text" id="user-message" placeholder="Type your message...">
+                <button id="send-btn">Send</button>
+            </div>
+        </div>
+
+        <aside>
+            <div class="profile-info">
+                <!-- Display user profile information here -->
+            </div>
+            <div class="quick-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Help Center</a></li>
+                </ul>
+            </div>
+        </aside>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>Contact us: contact@finchatbot.com</p>
+            <ul class="social-links">
+                <li><a href="#">Facebook</a></li>
+                <li><a href="#">Twitter</a></li>
+                <li><a href="#">LinkedIn</a></li>
+            </ul>
+        </div>
+        <div class="legal">
+            <p>Terms of Service | Privacy Policy</p>
+        </div>
+    </footer>
+
+    <script src="{% static 'ai/index.js' %}"></script>
+</body>
+</html>
