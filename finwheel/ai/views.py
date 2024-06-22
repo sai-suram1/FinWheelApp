@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
+from django.http import JsonResponse,HttpResponse
 import json
 from ai.utils import *
 from django.views.decorators.csrf import csrf_exempt
@@ -19,11 +19,14 @@ def bot_operate(request):
             data = json.loads(request.body)
             print(data)
             # Process the data (example: add a new key-value pair)
-            processed_data = {**data, "processed": True, "response":send_message_and_get_response(data["value"])}
-            
+            processed_data = {"message":str(send_message_and_get_response(data[f"message"]))}
+            #print(processed_data)
+            print("sending data back")
             # Return a JSON response with the processed data
-            return JsonResponse(processed_data)
+            
+            x = JsonResponse(json.dumps(processed_data), status=200, safe=False)
+            return x
         except json.JSONDecodeError:
-            return JsonResponse({"error": "Invalid JSON"}, status=400)
+            return JsonResponse({'error': "Invalid JSON"}, status=400)
     else:
-        return JsonResponse({"error": "Invalid request method"}, status=405)
+        return JsonResponse({'error': "Invalid request method"}, status=405)

@@ -30,4 +30,6 @@ model = genai.GenerativeModel(model_name="gemini-1.0-pro-001")
 def send_message_and_get_response(input):
     response = model.start_chat(history=[])
     xt = response.send_message(input)
+    print("processing")
+    print(xt.text)
     return xt.text

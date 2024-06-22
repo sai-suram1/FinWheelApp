@@ -1,63 +1,76 @@
-// Example JavaScript for sending messages (dummy implementation)
-document.getElementById('send-btn').addEventListener('click', function() {
-    sendMessage();
-});
+document.addEventListener('DOMContentLoaded', () => {
+    const chatBox = document.getElementById('chat-box');
+    const userMessageInput = document.getElementById('user-message');
+    const sendBtn = document.getElementById('send-btn');
 
-document.getElementById('user-message').addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') {
-        sendMessage();
+    // Function to append message to chat box
+    function appendMessage(sender, message) {
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('message', sender);
+        console.log(message)
+        messageDiv.innerText = message;
+        chatBox.appendChild(messageDiv);
+        chatBox.scrollTop = chatBox.scrollHeight;
     }
-});
 
-function sendMessage() {
-    var messageInput = document.getElementById('user-message');
-    var message = messageInput.value.trim();
-    const data = {
-        key: "message",
-        value: message
-    };
-    var chatBox = document.getElementById('chat-box');
-    var messageElement = document.createElement('div');
-    messageElement.classList.add('message', 'user');
-    messageElement.textContent = message;
-    chatBox.appendChild(messageElement);
-    messageInput.value = '';
-    if (message !== '') {
+    // Function to handle user message
+    function handleUserMessage() {
+        const userMessage = userMessageInput.value.trim();
+        if (userMessage === '') return;
+
+        // Append user's message to the chat box
+        appendMessage('user', userMessage);
+
+        // Clear the input field
+        userMessageInput.value = '';
+        const botMessage = fetchBotResponse(userMessage);
+        appendMessage('bot', botMessage);
+        /* Simulate a response from the chatbot
+        setTimeout(() => {
+            const botMessage = 'Hello!';
+            appendMessage('bot', botMessage);
+        }, 500); */ //Simulate a 1-second delay for the bot response
+    }
+
+    function fetchBotResponse(userMessage) {
         try {
+            /*
             const response = fetch("bot", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(data)
+                body: JSON.stringify({ message: userMessage })
             });
-    
+            /*
             if (!response.ok) {
-                throw new Error('Network response was not ok ' + response.statusText);
+                throw new Error('Network response was not ok');
             }
-    
-            const jsonResponse =  response.json();
-            var final_output = JSON.stringify(jsonResponse, null, 2);
-            console.log(final_output)
+            
+            console.log(response.body)
+            var data = response.body;
+            return data;
+            */
+            fetch("bot", {method: 'POST', body: JSON.stringify({ message: userMessage })})
+            .then(response => {
+                var x = response.json();
+                console.log(JSON.parse(JSON.stringify(x)));
+                return JSON.stringify(x);
+            })
+            .catch(err => console.log(err))
         } catch (error) {
-            var final_output = 'Error: ' + error.message;
+            console.error('There was a problem with the fetch operation:', error);
+            return `Bot: Sorry, there was an error processing your request.`;
         }
-        var botMessage = document.createElement('div');
-        botMessage.classList.add('message', 'bot');
-        botMessage.textContent = final_output.response;
-        chatBox.appendChild(botMessage);
-        chatBox.scrollTop = chatBox.scrollHeight; // Scroll to bottom
-
-        /* Dummy response from the bot (to simulate a chat response)
-        setTimeout(function() {
-            var botMessage = document.createElement('div');
-            botMessage.classList.add('message', 'bot');
-            botMessage.textContent = final_output;
-            chatBox.appendChild(botMessage);
-            chatBox.scrollTop = chatBox.scrollHeight; // Scroll to bottom
-        }, 500);
-        */
-        
     }
-}
+    // Event listener for the send button
+    sendBtn.addEventListener('click', handleUserMessage);
+
+    // Event listener for the Enter key
+    userMessageInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            handleUserMessage();
+        }
+    });
+});
 
