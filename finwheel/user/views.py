@@ -4,6 +4,7 @@ from django.contrib.auth import logout, login, authenticate
 from requests import HTTPError
 from user.models import *
 from django.urls import reverse
+from ai.models import *
 # Create your views here.
 
 def index(request):
@@ -37,6 +38,8 @@ def register_view(request):
             us = User(username=username, email=email, password=password, first_name=fname, last_name=lname)
             us.save()
             login(request, us)  # Log in the new user
+            new_chat = Chat(for_user = us)
+            new_chat.save()
             return HttpResponseRedirect(reverse('ai:dashboard'))  # Redirect to homepage after successful registration
         else:
             return render(request, 'user/register.html', {"Error": "Registration Failed"})

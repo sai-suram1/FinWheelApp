@@ -1,0 +1,24 @@
+{% extends 'home/layout.html' %}
+
+{% block title %}Home - Fin{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <h1>Setup Your Account</h1>
+    {% if setup.0 == False %}
+        <div class="container">
+            <h2>Setup Your Bank</h2>
+            <p>To be able to trade UCFs and use our automated investment tools, we need to verify your identity and bank account</p>
+            <button><a href="{% url 'bank:dashboard' %}">Setup Bank</a></button>
+        </div>
+    {% elif setup.1 == False %}
+        <div class="container">
+            <h2>Set up your financial plan</h2>
+            <p>Set up your financial plan by talking with Fin and get started with investing!</p>
+            <button><a href="{% url 'ai:dashboard' %}">Talk with Fin</a></button>
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}

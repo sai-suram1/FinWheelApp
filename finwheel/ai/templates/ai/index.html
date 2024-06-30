@@ -12,7 +12,7 @@
         <div class="logo">Fin</div>
         <nav>
             <ul>
-                <li><a href="{% url 'ai:dashboard' %}">Home</a></li>
+                <li><a href="{% url 'home:dashboard' %}">Home</a></li>
                 <li><a href="#">About Us</a></li>
                 <li><a href="{% url 'user:logout' %}">Logout</a></li>
             </ul>
@@ -20,8 +20,33 @@
     </header>
     
     <main>
+        <aside style="margin-right: 20px;">
+            <div class="profile-info">
+                <!-- Display user profile information here -->
+            </div>
+            <div class="quick-links">
+                <h3>Chats</h3>
+                <ul>
+                    <li>
+                        <a href="#">
+                            <div style="border: 2px rounded black;">
+                                
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">Help Center</a>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+
         <div class="chat-container">
             <div class="chat-box" id="chat-box">
+                {% for x in chatHistory %} 
+                    user: {{x.user_message}} | {{x.date_created}}<br>
+                    bot: {{x.chatbot_response}}<br>
+                {% endfor %}
                 <!-- Chat messages will be dynamically added here -->
             </div>
             <div class="user-input">
@@ -30,9 +55,10 @@
             </div>
         </div>
 
+        <!--
         <aside>
             <div class="profile-info">
-                <!-- Display user profile information here -->
+                
             </div>
             <div class="quick-links">
                 <h3>Quick Links</h3>
@@ -42,6 +68,7 @@
                 </ul>
             </div>
         </aside>
+        -->
     </main>
 
     <footer>

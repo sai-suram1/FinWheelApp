@@ -1,0 +1,35 @@
+<!-- templates/home.html -->
+
+{% extends 'home/layout.html' %}
+
+{% block title %}Home - Fin{% endblock %}
+
+{% block content %}
+    {% if config_bank %}
+        <div class="container">
+            <h1>Set Up Your Bank</h1>
+            <form method="post">
+                {% csrf_token %}
+                <label for="bankname">Bank Name: </label>
+                <input type="text" id="bankname" name="name" required><br><br>
+                <label for="AccNum">Account Number</label>
+                <input type="text" id="AccNum" name="AccNum" required><br><br>
+                <label for="RoutNum">Account Number</label>
+                <input type="text" id="RoutNum" name="RoutNum" required><br><br>
+                <button type="submit">Set Bank</button>
+            </form>
+            <p style="color: red;">{{message}}</p>
+        </div>
+    {% else %} 
+        <div class="container">
+            <h1>Bank/Balance Information</h1>
+            <div>
+               <h3>Cash: {{user_account.cash_balance}}</h3><br>
+               <h5>Bank: {{user_account.bank_account.bank_name}}</h5><br>
+               <h6>Account Number: {{user_account.bank_account.bank_account_number}}</h6>
+            </div>
+            <p style="color: red;">{{message}}</p>
+        </div>
+    {% endif %}
+    
+{% endblock %}

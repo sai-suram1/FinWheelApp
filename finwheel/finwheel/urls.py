@@ -22,5 +22,6 @@ urlpatterns = [
     path("ucf/", include("ucf.urls")),
     path('user/', include("user.urls")),
     path('', include("home.urls")),
-    path('ai/', include("ai.urls"))
+    path('ai/', include("ai.urls")),
+    path('bank/', include("bank.urls"))
 ]

@@ -7,15 +7,15 @@ document.addEventListener('DOMContentLoaded', () => {
     function appendMessage(sender, message) {
         const messageDiv = document.createElement('div');
         messageDiv.classList.add('message', sender);
-        console.log(message)
-        messageDiv.innerText = message;
+        //console.log(message)
+        messageDiv.innerHTML = `${sender}: ${message}`;
         chatBox.appendChild(messageDiv);
         chatBox.scrollTop = chatBox.scrollHeight;
     }
 
     // Function to handle user message
-    function handleUserMessage() {
-        const userMessage = userMessageInput.value.trim();
+    async function handleUserMessage() {
+        var userMessage = userMessageInput.value.trim();
         if (userMessage === '') return;
 
         // Append user's message to the chat box
@@ -23,43 +23,61 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Clear the input field
         userMessageInput.value = '';
-        const botMessage = fetchBotResponse(userMessage);
-        appendMessage('bot', botMessage);
-        /* Simulate a response from the chatbot
+        
+        //Simulate a response from the chatbot
         setTimeout(() => {
-            const botMessage = 'Hello!';
-            appendMessage('bot', botMessage);
-        }, 500); */ //Simulate a 1-second delay for the bot response
-    }
-
-    function fetchBotResponse(userMessage) {
-        try {
-            /*
-            const response = fetch("bot", {
-                method: 'POST',
+            fetch("bot", {
+                method: 'POST', 
+                body: JSON.stringify({ message: userMessage }), 
                 headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ message: userMessage })
-            });
-            /*
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            
-            console.log(response.body)
-            var data = response.body;
-            return data;
-            */
-            fetch("bot", {method: 'POST', body: JSON.stringify({ message: userMessage })})
-            .then(response => {
-                var x = response.json();
-                console.log(JSON.parse(JSON.stringify(x)));
-                return JSON.stringify(x);
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{csrf_token}}' 
+            }})
+            .then(response => response.text())
+            .then(data => {
+                console.log(data);
+                appendMessage('bot', data);
             })
             .catch(err => console.log(err))
-        } catch (error) {
-            console.error('There was a problem with the fetch operation:', error);
+            
+        }, 2000);
+    }
+
+    async function fetchBotResponse(userMessage) {
+        try {
+            
+           /*
+            setTimeout(() => {
+                fetch("bot", {
+                    method: 'POST', 
+                    body: JSON.stringify({ message: userMessage }), 
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{csrf_token}}' 
+                }})
+                .then(response => response.text())
+                .then(data => {
+                    console.log(data);
+                    return data;  // Output: "hello!"
+                })
+                .catch(err => console.log(err))
+            }, 1500);
+            */
+            await fetch("bot", {
+                method: 'POST', 
+                body: JSON.stringify({ message: userMessage }), 
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{csrf_token}}' 
+            }})
+            .then(response => response.text())
+            .then(data => {
+                console.log(data);
+                return data;
+            })
+            .catch(err => console.log(err))
+        } catch (err) {
+            console.error('There was a problem with the fetch operation:', err);
             return `Bot: Sorry, there was an error processing your request.`;
         }
     }

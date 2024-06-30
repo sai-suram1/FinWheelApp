@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'ai',
     'home',
     'user',
+    'bank',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
