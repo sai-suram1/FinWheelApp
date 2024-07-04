@@ -1,19 +1,26 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse, HttpResponse
+from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
 import json
+
+from django.urls import reverse
 from ai.utils import *
 from django.views.decorators.csrf import csrf_exempt
 from ai.models import *
 import datetime
+import uuid
 # Create your views here.
 
 @login_required(login_url='/user/login')
 def dashboard(request):
-    ch = Chat.objects.get(for_user=request.user)
+    ch = Chat.objects.filter(for_user=request.user).order_by('-date_created')
+    chat_history = []
+    for k in ch:
+        lk = Chat_History.objects.filter(for_chat=k).order_by('order')
+        chat_history.append(lk)
     return render(request, "ai/index.html", {
-        "userChat": ch,
-        "chatHistory": Chat_History.objects.filter(for_chat=ch).order_by('order')
+        "chats": ch,
+        "chatHistory": chat_history
     })
 
 @login_required(login_url='/user/login')
@@ -21,13 +28,13 @@ def dashboard(request):
 def bot_operate(request):
     if request.method == "POST":
         try:
-            ch = Chat.objects.get(for_user=request.user)
+            data = json.loads(request.body)
+            ch = Chat.objects.get(for_user=request.user, chat_id=data["chat"])
             try:
                 last_message_number = Chat_History.objects.filter(for_chat=ch).order_by('order')[-1].order
             except Exception:
                 last_message_number = 0
             # Parse the JSON data from the request body
-            data = json.loads(request.body)
             #print(data)
             # Process the data (example: add a new key-value pair)
             try:
@@ -46,6 +53,51 @@ def bot_operate(request):
             # Return a JSON response with the processed data
             x = HttpResponse(processed_data)
             return x
+        except json.JSONDecodeError:
+            return JsonResponse({'error': "Invalid JSON"}, status=400)
+    else:
+        return JsonResponse({'error': "Invalid request method"}, status=405)
+    
+@login_required(login_url='/user/login')
+@csrf_exempt
+def sendChat(request):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            print(data)
+            chat = Chat.objects.get(for_user=request.user, chat_id=data[f"chat_id"])
+            generate_text_setting = ""
+            last_messages = Chat_History.objects.filter(for_chat=chat).order_by('order')
+            for message in last_messages:
+                generate_text_setting += f"user: {message.user_message} | Sent: {message.date_created}\nbot: {message.chatbot_response}\n"
+            x = HttpResponse(generate_text_setting)
+            return x
+        except json.JSONDecodeError:
+            return JsonResponse({'error': "Invalid JSON"}, status=400)
+    else:
+        return JsonResponse({'error': "Invalid request method"}, status=405)
+
+@login_required(login_url='/user/login')
+@csrf_exempt
+def addChat(request):
+    if request.method == "GET":
+        try:
+            chat = Chat(chat_id=uuid.uuid4(), for_user=request.user, date_created=datetime.datetime.now(), chat_name="New Chat")
+            chat.save()
+            return HttpResponseRedirect(reverse("ai:dashboard"))
+        except json.JSONDecodeError:
+            return JsonResponse({'error': "Invalid JSON"}, status=400)
+    else:
+        return JsonResponse({'error': "Invalid request method"}, status=405)
+
+@login_required(login_url='/user/login')
+@csrf_exempt
+def deleteChat(request, chatid):
+    if request.method == "GET" and request.user:
+        try:
+            chat = Chat.objects.get(chat_id=chatid, for_user=request.user)
+            chat.delete()
+            return HttpResponseRedirect(reverse("ai:dashboard"))
         except json.JSONDecodeError:
             return JsonResponse({'error': "Invalid JSON"}, status=400)
     else:

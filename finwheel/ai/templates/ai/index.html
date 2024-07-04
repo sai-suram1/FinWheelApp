@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chatbot Fin</title>
     <link rel="stylesheet" href="{% static 'ai/styles.css' %}">
+    
 </head>
 <body>
     <header>
@@ -27,15 +28,19 @@
             <div class="quick-links">
                 <h3>Chats</h3>
                 <ul>
+                    {% for x in chats %}
                     <li>
-                        <a href="#">
-                            <div style="border: 2px rounded black;">
-                                
+                        <a class="chatButton" id="{{x.chat_id}}" onclick="handleChatChange('{{x.chat_id}}')">
+                            <div style="border: 2px solid black;">
+                                <p style="text-align: left;">{{x.chat_name}}</p>
+                                <a href="{% url 'ai:deleteChat' x.chat_id %}"><i class="fa-solid fa-trash">delete</i></a>
+
                             </div>
                         </a>
                     </li>
+                    {% endfor %}
                     <li>
-                        <a href="#">Help Center</a>
+                        <a href="{% url 'ai:addChat' %}">Add Chat</a>
                     </li>
                 </ul>
             </div>
@@ -43,7 +48,7 @@
 
         <div class="chat-container">
             <div class="chat-box" id="chat-box">
-                {% for x in chatHistory %} 
+                {% for x in chatHistory.0 %} 
                     user: {{x.user_message}} | {{x.date_created}}<br>
                     bot: {{x.chatbot_response}}<br>
                 {% endfor %}
@@ -51,7 +56,7 @@
             </div>
             <div class="user-input">
                 <input type="text" id="user-message" placeholder="Type your message...">
-                <button id="send-btn">Send</button>
+                <button id="send-btn" class="{{chats.0.chat_id}}">Send</button>
             </div>
         </div>
 
@@ -86,5 +91,6 @@
     </footer>
 
     <script src="{% static 'ai/index.js' %}"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </body>
 </html>

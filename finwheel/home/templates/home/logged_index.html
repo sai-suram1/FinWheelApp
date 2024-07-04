@@ -10,13 +10,14 @@
         <div class="container">
             <h2>Setup Your Bank</h2>
             <p>To be able to trade UCFs and use our automated investment tools, we need to verify your identity and bank account</p>
-            <button><a href="{% url 'bank:dashboard' %}">Setup Bank</a></button>
-        </div>
-    {% elif setup.1 == False %}
+            <a href="{% url 'bank:dashboard' %}"><button>Setup Bank</button></a>
+        </div><br><br>
+    {% endif %}    
+    {% if setup.1 == False %}
         <div class="container">
             <h2>Set up your financial plan</h2>
             <p>Set up your financial plan by talking with Fin and get started with investing!</p>
-            <button><a href="{% url 'ai:dashboard' %}">Talk with Fin</a></button>
+            <a href="{% url 'ai:dashboard' %}"><button>Talk with Fin</button></a>
         </div>
     {% endif %}
 </div>

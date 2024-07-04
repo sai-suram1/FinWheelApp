@@ -2,6 +2,7 @@ from django.db import models
 from user.models import *
 # Create your models here.
 class Chat(models.Model):
+    chat_id = models.UUIDField(null=True)
     for_user = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name="user")
     chat_name = models.TextField(null=True)
     date_created = models.DateTimeField(auto_created=True)

@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 2000);
     }
 
-    async function fetchBotResponse(userMessage) {
+    async function fetchBotResponse(userMessage, chatID) {
         try {
             
            /*
@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
             */
             await fetch("bot", {
                 method: 'POST', 
-                body: JSON.stringify({ message: userMessage }), 
+                body: JSON.stringify({ message: userMessage, chat: sendBtn.classList[0]}), 
                 headers: {
                     'Content-Type': 'application/json',
                     'X-CSRFToken': '{{csrf_token}}' 
@@ -90,5 +90,60 @@ document.addEventListener('DOMContentLoaded', () => {
             handleUserMessage();
         }
     });
+
+    async function handleChatChange(chatID){
+        try {
+            document.getElementById('chat-box').innerHTML = ""; // clear the box
+            await fetch("chatpull", {
+                method: 'POST', 
+                body: JSON.stringify({ pullID: chatID }), 
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{csrf_token}}' 
+            }})
+            .then(response => response.text())
+            .then(data => {
+                console.log(data);
+                document.getElementById('chat-box').innerHTML = data;
+                sendBtn.setAttribute("class", chatID);
+            })
+            .catch(err => console.log(err))
+        } catch (err) {
+            console.error('There was a problem with the fetch operation:', err);
+            return `Bot: Sorry, there was an error processing your request.`;
+        }
+        
+    }
+
+    async function handleChatChange(chatID){
+        try {
+            document.getElementById('chat-box').innerHTML = ""; // clear the box
+            await fetch("chatpull", {
+                method: 'POST', 
+                body: JSON.stringify({ pullID: chatID }), 
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{csrf_token}}' 
+            }})
+            .then(response => response.text())
+            .then(data => {
+                console.log(data);
+                document.getElementById('chat-box').innerHTML = data;
+                sendBtn.setAttribute("class", chatID);
+            })
+            .catch(err => console.log(err))
+        } catch (err) {
+            console.error('There was a problem with the fetch operation:', err);
+            return `Bot: Sorry, there was an error processing your request.`;
+        }
+        
+    }
+
+
+    /* Event listener for the send button
+    const chatBtn = document.getElementByClass('chatButton');
+    chatBtn.addEventListener('click', handleChatChange(chatBtn.id));
+    */
+
 });
 
