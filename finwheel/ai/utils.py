@@ -49,3 +49,5 @@ def test_ai_connection():
         print('Available base models:', [m.name for m in genai.list_models()])
     except Exception:
         return False
+
+test_ai_connection()
