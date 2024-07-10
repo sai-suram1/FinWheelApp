@@ -1,4 +1,5 @@
 {% load static %}
+{% load markdownify %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +11,7 @@
 </head>
 <body>
     <header>
-        <div class="logo">Fin</div>
+        <div class="logo">FinWheel AI</div>
         <nav>
             <ul>
                 <li><a href="{% url 'home:dashboard' %}">Home</a></li>
@@ -30,7 +31,7 @@
                 <ul>
                     {% for x in chats %}
                     <li>
-                        <a class="chatButton" id="{{x.chat_id}}" onclick="handleChatChange('{{x.chat_id}}')">
+                        <a class="chatButton" id="{{x.chat_id}}" href="javascript:handleChatChange('{{x.chat_id}}')">
                             <div style="border: 2px solid black;">
                                 <p style="text-align: left;">{{x.chat_name}}</p>
                                 <a href="{% url 'ai:deleteChat' x.chat_id %}"><i class="fa-solid fa-trash">delete</i></a>
@@ -47,17 +48,25 @@
         </aside>
 
         <div class="chat-container">
-            <div class="chat-box" id="chat-box">
-                {% for x in chatHistory.0 %} 
-                    user: {{x.user_message}} | {{x.date_created}}<br>
-                    bot: {{x.chatbot_response}}<br>
-                {% endfor %}
-                <!-- Chat messages will be dynamically added here -->
-            </div>
-            <div class="user-input">
-                <input type="text" id="user-message" placeholder="Type your message...">
-                <button id="send-btn" class="{{chats.0.chat_id}}">Send</button>
-            </div>
+            <div id="div1" style="height: 800px;position:relative;">
+                <div id="div2" style="max-height:100%;overflow:auto;">
+                    <div class="chat-box" id="chat-box" style="position:relative;overflow:auto;max-height:100%;">
+                        {% for x in chatHistory.0 %} 
+                            <hr>
+                            <h4>user:</h4> {{x.user_message | markdownify}} | {{x.date_created}}<br><hr>
+                            <h4>bot:</h4> {{x.chatbot_response | markdownify}}<br>
+                        {% endfor %}
+                        <hr>
+                        <!-- Chat messages will be dynamically added here -->
+                    </div>
+                    <div class="user-input">
+                        <input type="text" id="user-message" placeholder="Type your message...">
+                        <button id="send-btn" class="{{chats.0.chat_id}}">Send</button>
+                    </div>
+                </div>
+              </div>
+            
+            
         </div>
 
         <!--
@@ -92,5 +101,30 @@
 
     <script src="{% static 'ai/index.js' %}"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script>
+        async function handleChatChange(chatID){
+        try {
+            document.getElementById('chat-box').innerHTML = ""; // clear the box
+            await fetch("chatpull", {
+                method: 'POST', 
+                body: JSON.stringify({ pullID: chatID }), 
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{csrf_token}}' 
+            }})
+            .then(response => response.text())
+            .then(data => {
+                console.log(data);
+                document.getElementById('chat-box').innerHTML = data;
+                sendBtn.setAttribute("class", chatID);
+            })
+            .catch(err => console.log(err))
+        } catch (err) {
+            console.error('There was a problem with the fetch operation:', err);
+            return `Bot: Sorry, there was an error processing your request.`;
+        }
+        
+    }
+    </script>
 </body>
 </html>

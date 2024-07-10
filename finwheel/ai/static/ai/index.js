@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const messageDiv = document.createElement('div');
         messageDiv.classList.add('message', sender);
         //console.log(message)
-        messageDiv.innerHTML = `${sender}: ${message}`;
+        messageDiv.innerHTML = `<hr><h4>${sender}:</h4> ${message}<hr>`;
         chatBox.appendChild(messageDiv);
         chatBox.scrollTop = chatBox.scrollHeight;
     }
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             fetch("bot", {
                 method: 'POST', 
-                body: JSON.stringify({ message: userMessage }), 
+                body: JSON.stringify({ message: userMessage , chat: sendBtn.className}), 
                 headers: {
                     'Content-Type': 'application/json',
                     'X-CSRFToken': '{{csrf_token}}' 
@@ -43,29 +43,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 2000);
     }
 
+
+    // NOT USED
     async function fetchBotResponse(userMessage, chatID) {
         try {
-            
-           /*
-            setTimeout(() => {
-                fetch("bot", {
-                    method: 'POST', 
-                    body: JSON.stringify({ message: userMessage }), 
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRFToken': '{{csrf_token}}' 
-                }})
-                .then(response => response.text())
-                .then(data => {
-                    console.log(data);
-                    return data;  // Output: "hello!"
-                })
-                .catch(err => console.log(err))
-            }, 1500);
-            */
             await fetch("bot", {
                 method: 'POST', 
-                body: JSON.stringify({ message: userMessage, chat: sendBtn.classList[0]}), 
+                body: JSON.stringify({ message: userMessage, chat: chatID}), 
                 headers: {
                     'Content-Type': 'application/json',
                     'X-CSRFToken': '{{csrf_token}}' 
@@ -115,35 +99,11 @@ document.addEventListener('DOMContentLoaded', () => {
         
     }
 
-    async function handleChatChange(chatID){
-        try {
-            document.getElementById('chat-box').innerHTML = ""; // clear the box
-            await fetch("chatpull", {
-                method: 'POST', 
-                body: JSON.stringify({ pullID: chatID }), 
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': '{{csrf_token}}' 
-            }})
-            .then(response => response.text())
-            .then(data => {
-                console.log(data);
-                document.getElementById('chat-box').innerHTML = data;
-                sendBtn.setAttribute("class", chatID);
-            })
-            .catch(err => console.log(err))
-        } catch (err) {
-            console.error('There was a problem with the fetch operation:', err);
-            return `Bot: Sorry, there was an error processing your request.`;
-        }
-        
-    }
 
-
-    /* Event listener for the send button
-    const chatBtn = document.getElementByClass('chatButton');
-    chatBtn.addEventListener('click', handleChatChange(chatBtn.id));
-    */
+   
+    //const chatBtn = document.getElementByClass('chatButton');
+    //chatBtn.addEventListener('click', handleChatChange(chatBtn.id));
+    
 
 });
 

@@ -5,6 +5,7 @@ from requests import HTTPError
 from user.models import *
 from django.urls import reverse
 from ai.models import *
+import datetime
 # Create your views here.
 
 def index(request):
@@ -32,13 +33,13 @@ def register_view(request):
         username = request.POST["username"]
         fname = request.POST["username"]
         lname = request.POST["username"]
-        password = request.POST["password"]
-        c_password = request.POST["confirm_password"]
-        if c_password == password and User.objects.get(username=username).DoesNotExist:
+        password = request.POST["password1"]
+        c_password = request.POST["password2"]
+        if c_password == password and User.objects.filter(username=username).count() == 0:
             us = User(username=username, email=email, password=password, first_name=fname, last_name=lname)
             us.save()
             login(request, us)  # Log in the new user
-            new_chat = Chat(for_user = us)
+            new_chat = Chat(for_user = us, date_created=datetime.datetime.now())
             new_chat.save()
             return HttpResponseRedirect(reverse('ai:dashboard'))  # Redirect to homepage after successful registration
         else:

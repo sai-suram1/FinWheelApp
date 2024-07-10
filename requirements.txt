@@ -3,3 +3,7 @@ google
 google-generativeai
 python-dotenv
 google-auth-oauthlib
+md-to-html
+markdown2
+django-markdownify
+whitenoise
