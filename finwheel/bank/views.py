@@ -25,13 +25,14 @@ def index(request):
                 "config_bank": config_bank
             })
 
-#keep for a moment
+#keep for a moment -> modify to making it take SSN with the other info to create a new bank acct. 
 @login_required(login_url='/user/login')
 def set_up_bank(request):
     config_bank = False
     if request.method == "POST":
         if CashAccount.objects.filter(for_user=request.user).count() < 1 or ExternalBankAccount.objects.filter(for_user=request.user).count() < 1:
             config_bank = True
+            # add area for taking an address info. 
         if config_bank:
             verify = bank_verification(request.user, request.POST["name"], request.POST["AccNum"], request.POST["RoutNum"])
             if verify:
@@ -51,3 +52,21 @@ def set_up_bank(request):
                 "user_account": user_account,
                 "config_bank": config_bank
             })
+        # take the customer ID and store it within the user profile
+        #begin the process of KYC Verification. 
+
+@login_required(login_url='/user/login')
+def account_view(request):
+    pass
+
+@login_required(login_url='/user/login')
+def card_view(request):
+    pass
+
+@login_required(login_url='/user/login')
+def investment_view(request):
+    pass     
+
+@login_required(login_url='/user/login')
+def transactions_view(request):
+    pass

@@ -23,27 +23,30 @@
     
     <main>
         <aside style="margin-right: 20px;">
-            <div class="profile-info">
+            <div id="div1" class="profile-info">
                 <!-- Display user profile information here -->
             </div>
-            <div class="quick-links">
+            <div class="quick-links" style="height:100%;position:relative;">
                 <h3>Chats</h3>
-                <ul>
-                    {% for x in chats %}
-                    <li>
-                        <a class="chatButton" id="{{x.chat_id}}" href="javascript:handleChatChange('{{x.chat_id}}')">
-                            <div style="border: 2px solid black;">
-                                <p style="text-align: left;">{{x.chat_name}}</p>
-                                <a href="{% url 'ai:deleteChat' x.chat_id %}"><i class="fa-solid fa-trash">delete</i></a>
+                <div id="div2" style="max-height:100%;overflow:auto;">
+                    <ul style="position:relative;overflow:auto;max-height:100%;overflow:auto;">
+                        {% for x in chats %}
+                        <li>
+                            <a class="chatButton" id="{{x.chat_id}}" href="javascript:handleChatChange('{{x.chat_id}}')">
+                                <div style="border: 2px solid black;">
+                                    <p style="text-align: left;">{{x.chat_name}}</p>
+                                    <a href="{% url 'ai:deleteChat' x.chat_id %}"><i class="fa-solid fa-trash">delete</i></a>
 
-                            </div>
-                        </a>
-                    </li>
-                    {% endfor %}
-                    <li>
-                        <a href="{% url 'ai:addChat' %}">Add Chat</a>
-                    </li>
-                </ul>
+                                </div>
+                            </a>
+                        </li>
+                        {% endfor %}
+                        <li>
+                            <a href="{% url 'ai:addChat' %}"><button class="button">Add Chat</button></a>
+                            
+                        </li>
+                    </ul>
+                </div>
             </div>
         </aside>
 
@@ -59,10 +62,14 @@
                         <hr>
                         <!-- Chat messages will be dynamically added here -->
                     </div>
-                    <div class="user-input" style="bottom: 0;">
-                        <input type="text" id="user-message" placeholder="Type your message...">
-                        <button id="send-btn" class="{{chats.0.chat_id}}">Send</button>
-                    </div>
+                    {% if chat == True %}
+                        <div class="user-input" style="bottom: 0;">
+                            <input type="text" id="user-message" placeholder="Type your message...">
+                            <button id="send-btn" class="{{chats.0.chat_id}}">Send</button>
+                        </div>
+                    {% else %} 
+                        <h4 style="text-align: center;">Click the "Add Chat" Button on the Left to get started and talk with Fin AI.</h4>
+                    {% endif %}
                 </div>
               </div>
             
@@ -87,7 +94,7 @@
 
     <footer>
         <div class="footer-content">
-            <p>Contact us: contact@finchatbot.com</p>
+            <p>Contact us: customer-service@finwheel.tech</p>
             <ul class="social-links">
                 <li><a href="#">Facebook</a></li>
                 <li><a href="#">Twitter</a></li>

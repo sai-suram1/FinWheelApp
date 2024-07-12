@@ -19,12 +19,18 @@ def dashboard(request):
     ch = Chat.objects.filter(for_user=request.user).order_by('-date_created')
     chat_history = []
     markdowner = Markdown()
+    chat = None
+    if ch.count() > 0:
+        chat = True
+    else:
+        chat = False
     for k in ch:
         lk = Chat_History.objects.filter(for_chat=k).order_by('order')
         chat_history.append(lk)
     return render(request, "ai/index.html", {
         "chats": ch,
-        "chatHistory": chat_history
+        "chatHistory": chat_history,
+        "chat": chat
     })
 
 @login_required(login_url='/user/login')

@@ -13,6 +13,8 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    
+    
 }
 
 header {
@@ -153,4 +155,74 @@ footer {
 
 .social-links li a:hover {
     text-decoration: underline;
+}
+
+button {
+    background-color: #4CAF50; /* Green background */
+    border: none;             /* Remove borders */
+    color: white;             /* White text */
+    padding: 15px 32px;       /* Some padding */
+    text-align: center;       /* Centered text */
+    text-decoration: none;    /* Remove underline */
+    display: inline-block;    /* Make the button appear inline */
+    font-size: 16px;          /* Set a font size */
+    margin: 4px 2px;          /* Add some margin */
+    cursor: pointer;          /* Add a pointer cursor on hover */
+    border-radius: 12px;      /* Rounded corners */
+    transition: background-color 0.3s; /* Smooth transition for background color */
+}
+  
+button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+  
+button:active {
+    background-color: #3e8e41; /* Even darker green on click */
+    box-shadow: 0 5px #666;    /* Add a shadow on click */
+    transform: translateY(4px);/* Move the button down a bit on click */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    display: flex;
+}
+
+.sidebar {
+    width: 250px;
+    height: 100vh; /* Full height */
+    background-color: #f1f1f1;
+    padding: 15px;
+    position: fixed; /* Fixed sidebar */
+    overflow-y: auto; /* Scrollable content */
+}
+
+.sidebar h2 {
+    text-align: center;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 8px;
+    text-align: center;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #000;
+    display: block;
+}
+
+.sidebar ul li a:hover {
+    background-color: #575757;
+    color: white;
+}
+
+.content {
+    margin-left: 270px; /* Same width as the sidebar plus padding */
+    padding: 20px;
 }
