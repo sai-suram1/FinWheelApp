@@ -32,9 +32,14 @@ def dashboard(request):
 def bot_operate(request):
     if request.method == "POST":
         try:
+            print(request.body)
             data = json.loads(request.body)
             print(data)
-            ch = Chat.objects.get(for_user=request.user, chat_id=data["chat"])
+            if data["chat"] == "":
+                ch = Chat(chat_id=uuid.uuid4(), for_user=request.user, date_created=datetime.datetime.now(), chat_name=f"New Chat - {datetime.datetime.now()}")
+                ch.save()
+            else:
+                ch = Chat.objects.get(for_user=request.user, chat_id=data["chat"])
             try:
                 last_message_number = Chat_History.objects.filter(for_chat=ch).order_by('order')[-1].order
             except Exception:
@@ -55,10 +60,12 @@ def bot_operate(request):
                 new_register.save()
             print("sending data back")
             markdowner = Markdown()
-            
+            if data["chat"] == "":
+                return HttpResponseRedirect(reverse("ai:dashboard"))
             # Return a JSON response with the processed data
-            x = HttpResponse(markdowner.convert(processed_data))
-            return x
+            else:
+                x = HttpResponse(markdowner.convert(processed_data))
+                return x
         except json.JSONDecodeError:
             return JsonResponse({'error': "Invalid JSON"}, status=400)
     else:

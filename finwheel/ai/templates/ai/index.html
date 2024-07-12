@@ -50,7 +50,7 @@
         <div class="chat-container">
             <div id="div1" style="height: 800px;position:relative;">
                 <div id="div2" style="max-height:100%;overflow:auto;">
-                    <div class="chat-box" id="chat-box" style="position:relative;overflow:auto;max-height:100%;">
+                    <div class="chat-box" id="chat-box" style="position:relative;overflow:auto;">
                         {% for x in chatHistory.0 %} 
                             <hr>
                             <h4>user:</h4> {{x.user_message | markdownify}} | {{x.date_created}}<br><hr>
@@ -59,7 +59,7 @@
                         <hr>
                         <!-- Chat messages will be dynamically added here -->
                     </div>
-                    <div class="user-input">
+                    <div class="user-input" style="bottom: 0;">
                         <input type="text" id="user-message" placeholder="Type your message...">
                         <button id="send-btn" class="{{chats.0.chat_id}}">Send</button>
                     </div>

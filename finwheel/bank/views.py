@@ -25,6 +25,7 @@ def index(request):
                 "config_bank": config_bank
             })
 
+#keep for a moment
 @login_required(login_url='/user/login')
 def set_up_bank(request):
     config_bank = False

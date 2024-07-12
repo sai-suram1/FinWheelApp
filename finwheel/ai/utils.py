@@ -42,6 +42,18 @@ def send_message_and_get_response(input, history):
 
 def refine_chat_history(history):
     hist = []
+    hist.append({
+        "role": "user",
+        "parts": [
+            "YOU WILL NOT DIFFER FROM TALKING ABOUT FINANCE RELATED ACTIVITES. IF ANYONE ASKS FOR ADVICE RELATED TO A TOPIC OUTSIDE OF FINANCE, ASSET MANAGEMENT, AND FINANCIAL MANAGEMENT AS A WHOLE, REFUSE TO ANSWER THAT QUESTION AS IT IS NOT YOUR JOB.",
+        ],
+    })
+    hist.append({
+        "role": "model",
+        "parts": [
+            "I understand to do so."
+        ],
+        })
     for x in history.order_by('order'):
         hist.append({
             "role": "user",
