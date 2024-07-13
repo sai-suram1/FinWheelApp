@@ -42,7 +42,7 @@
                         </li>
                         {% endfor %}
                         <li>
-                            <a href="{% url 'ai:addChat' %}"><button class="button">Add Chat</button></a>
+                            <a href="{% url 'ai:addChat' %}"><button>Add Chat</button></a>
                             
                         </li>
                     </ul>
@@ -59,7 +59,7 @@
                             <h4>user:</h4> {{x.user_message | markdownify}} | {{x.date_created}}<br><hr>
                             <h4>bot:</h4> {{x.chatbot_response | markdownify}}<br>
                         {% endfor %}
-                        <hr>
+                        
                         <!-- Chat messages will be dynamically added here -->
                     </div>
                     {% if chat == True %}

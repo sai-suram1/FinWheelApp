@@ -16,6 +16,7 @@ def load_creds():
     # The file token.json stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first
     # time.
+    
     if os.path.exists('token.json'):
         print("path exists")
         creds = Credentials.from_authorized_user_file('token.json', SCOPES)
@@ -31,3 +32,5 @@ def load_creds():
         with open('token.json', 'w') as token:
             token.write(creds.to_json())
     return creds
+    
+    

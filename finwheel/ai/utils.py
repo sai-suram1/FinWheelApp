@@ -70,9 +70,6 @@ def refine_chat_history(history):
     return hist
 
 def test_ai_connection():
-    creds = load_creds()
-    print(creds)
-
     try:
         import pprint
         import google.generativeai as genai

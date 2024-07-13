@@ -2,5 +2,6 @@ from django.urls import path
 from bank.views import *
 app_name = "bank"
 urlpatterns = [
-    path("", index, name="dashboard")
+    path("", index, name="dashboard"),
+    path("bank_hook", hook_receiver_view, name="webhook")
 ]

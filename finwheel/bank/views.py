@@ -6,6 +6,7 @@ from user.models import *
 from django.urls import reverse
 from bank.models import *
 from bank.utils import *
+from bank.banking_tools import *
 # Create your views here.
 
 @login_required(login_url='/user/login')
@@ -29,12 +30,22 @@ def index(request):
 @login_required(login_url='/user/login')
 def set_up_bank(request):
     config_bank = False
+    ip = request.META.get('REMOTE_ADDR')
     if request.method == "POST":
         if CashAccount.objects.filter(for_user=request.user).count() < 1 or ExternalBankAccount.objects.filter(for_user=request.user).count() < 1:
             config_bank = True
             # add area for taking an address info. 
         if config_bank:
-            verify = bank_verification(request.user, request.POST["name"], request.POST["AccNum"], request.POST["RoutNum"])
+            address = {
+                "address_type": "MAILING",
+                "is_primary": True,
+                "street": request.POST["street"],
+                "city": request.POST["city"],
+                "state": request.POST["state"],
+                "zip_code": request.POST["zip"],
+                "country": "US"
+            }
+            verify = create_new_customer(request.user, request.POST["phone"], address, request.POST["ssn"], request.POST["dob"], ip)
             if verify:
                 user_account = CashAccount.objects.get(for_user=request.user)
                 return render(request, "bank/index.html", {
@@ -70,3 +81,13 @@ def investment_view(request):
 @login_required(login_url='/user/login')
 def transactions_view(request):
     pass
+
+from django.views.decorators.http import require_http_methods
+
+@require_http_methods(["GET", "POST"])
+def hook_receiver_view(request): # KYC ONLY
+    # Listens only for GET and POST requests
+    # returns django.http.HttpResponseNotAllowed for other requests
+
+    # Handle the event appropriately
+    return HttpResponse('success')
