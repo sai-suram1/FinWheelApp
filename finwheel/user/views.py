@@ -36,7 +36,9 @@ def register_view(request):
         password = request.POST["password1"]
         c_password = request.POST["password2"]
         if c_password == password and User.objects.filter(username=username).count() == 0:
-            us = User(username=username, email=email, password=password, first_name=fname, last_name=lname)
+            us = User(username=username, email=email, password=password)
+            us.first_name = fname
+            us.last_name = lname
             us.save()
             login(request, us)  # Log in the new user
             new_chat = Chat(for_user = us, date_created=datetime.datetime.now())

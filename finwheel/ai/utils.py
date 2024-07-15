@@ -13,6 +13,7 @@ import google.generativeai as genai
 from dotenv import load_dotenv,dotenv_values
 config = dotenv_values("ai/.env")
 from ai.load_creds import *
+#from ai.models import *
 
 genai.configure(api_key=config["api-key"])
 
@@ -30,12 +31,13 @@ model = genai.GenerativeModel(model_name="gemini-1.5-pro")
 
 def send_message_and_get_response(input, history):
     # add code to have the model re-cap on the past knowledge and make a new judgement.
-    if ("yes" in input or "y" in input or "Yes" in input or "Y" in input) and ("confirm" in history[-1].chatbot_message or "agree" in history[-1].chatbot_message):
-        print("review past plan and make a solution.")
-        # create a financial plan that could be registered in the system and executed. 
+    if ("yes" in input or "y" in input or "Yes" in input or "Y" in input):
+        if ("confirm" in history.last().chatbot_response or "agree" in history.last().chatbot_response) and history.count() > 1:
+            print("review past plan and make a solution.")
+            # create a financial plan that could be registered in the system and executed. 
+    print("processing")        
     response = model.start_chat(history=refine_chat_history(history))
     xt = response.send_message(input)
-    print("processing")
     print(xt.text)
     return xt.text
 
@@ -46,6 +48,18 @@ def refine_chat_history(history):
         "role": "user",
         "parts": [
             "YOU WILL NOT DIFFER FROM TALKING ABOUT FINANCE RELATED ACTIVITES. IF ANYONE ASKS FOR ADVICE RELATED TO A TOPIC OUTSIDE OF FINANCE, ASSET MANAGEMENT, AND FINANCIAL MANAGEMENT AS A WHOLE, REFUSE TO ANSWER THAT QUESTION AS IT IS NOT YOUR JOB.",
+        ],
+    })
+    hist.append({
+        "role": "model",
+        "parts": [
+            "I understand to do so."
+        ],
+        })
+    hist.append({
+        "role": "user",
+        "parts": [
+            "YOU WILL NOT PROMOTE ANY OTHER FINANCIAL APPLICATIONS.",
         ],
     })
     hist.append({

@@ -45,7 +45,7 @@ def set_up_bank(request):
                 "zip_code": request.POST["zip"],
                 "country": "US"
             }
-            verify = create_new_customer(request.user, request.POST["phone"], address, request.POST["ssn"], request.POST["dob"], ip)
+            verify = create_new_customer(request.user, request.POST["number"], address, request.POST["ssn"], request.POST["dob"], ip)
             if verify:
                 user_account = CashAccount.objects.get(for_user=request.user)
                 return render(request, "bank/index.html", {

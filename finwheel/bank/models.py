@@ -3,6 +3,7 @@ from user.models import *
 # Create your models here.
 
 class ExternalBankAccount(models.Model):
+    for_user = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name="customerexternalaccount", null=True)
     bank_name = models.TextField()
     bank_routing_number = models.TextField()
     bank_account_number = models.TextField()
@@ -28,7 +29,7 @@ class CashAccount(models.Model):
     customer_id = models.TextField(null=True)
     cash_balance = models.DecimalField(decimal_places=2, max_digits=9)
     for_user = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name="user_balance")
-    bank_account = models.ForeignKey(ExternalBankAccount, on_delete=models.DO_NOTHING, related_name="externalBankAccount")
+    bank_account = models.ForeignKey(ExternalBankAccount, on_delete=models.DO_NOTHING, related_name="externalBankAccount", null=True)
 
 class Transaction(models.Model):
     STATUS_CHOICES = (

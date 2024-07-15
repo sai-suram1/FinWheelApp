@@ -9,7 +9,7 @@ print(auth)
 
 def create_new_customer(User, phone, address_list, ssn, dob, ip_address):
     url = "https://sandbox.bond.tech/api/v0/customers/"
-    kyc_user = KYC(address=address_list["street"], state=address_list["state"], zipCode=address_list["zip"], city=address_list["city"], ssn=sha256(b""+ssn).hexdigest(), dob=dob, ip_address=ip_address, phone=phone)
+    kyc_user = KYC(address=address_list["street"], state=address_list["state"], zipCode=address_list["zip_code"], city=address_list["city"], ssn=sha256(f'{ssn}'.encode("utf-8")).hexdigest(), dob=dob, ip_address=ip_address, phone=phone)
     payload = {
         "dob": dob,
         "first_name": User.first_name,
@@ -32,7 +32,7 @@ def create_new_customer(User, phone, address_list, ssn, dob, ip_address):
     response = requests.post(url, json=payload, headers=headers)
     kyc_user.save()
     
-    print(response.json()["customer_id"])
+    print(response.json())
     kyc_user.customer_id = response.json()["customer_id"]
     kyc_user.save()
     kj = CashAccount.objects.get(for_user=User)
@@ -72,7 +72,7 @@ def makeWebHooksOperate():
 
     payload = {
         "events": ["kyc.verification.document_required", "kyc.verification.error", "kyc.verification.failure", "kyc.verification.reenter_information", "kyc.verification.success", "kyc.verification.timeout", "kyc.verification.under_review"],
-        "url": "https://hostname.com/webhook/route",
+        "url": "https://127.0.0.1:8000/bank_hook",
         "description": "KYC state changes.",
         "version": "0.1",
         "status": "STATUS_ENABLED"
