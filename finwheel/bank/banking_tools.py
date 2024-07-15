@@ -3,6 +3,8 @@ from dotenv import *
 from bank.models import *
 from user.models import *
 from hashlib import sha256
+import datetime 
+from json import JSONEncoder
 
 auth = dotenv_values("bank/.env")
 print(auth)
@@ -39,6 +41,85 @@ def create_new_customer(User, phone, address_list, ssn, dob, ip_address):
     kj.customer_id = response.json()["customer_id"]
     kj.save()
     start_KYC(KYC, ssn)
+
+
+def alpaca_account_making(User, phone, address_list, ssn, dob, ip_address):
+    import requests
+    date_time = f"2024-07-15T21:18:31Z"
+    url = "https://broker-api.sandbox.alpaca.markets/v1/accounts"
+
+    payload = {
+        "contact": {
+            "email_address": User.email,
+            "phone_number": phone,
+            "city": address_list["city"],
+            "state": address_list["state"],
+            "postal_code": address_list["zip_code"],
+            "street_address": address_list["street"],
+            "unit": address_list["unit"]
+        },
+        "identity": {
+            "tax_id_type": "USA_SSN",
+            "given_name": User.first_name,
+            "family_name": User.last_name,
+            "date_of_birth": dob,
+            "tax_id": ssn,
+            # extra stuff we need to ask lol
+            "country_of_citizenship": "USA",
+            "country_of_tax_residence": "USA",
+            "country_of_birth": "USA",
+            "funding_source": ["employment_income"]
+        },
+        "disclosures": {
+            "is_control_person": False,
+            "is_affiliated_exchange_or_finra": False,
+            "is_politically_exposed": False,
+            "immediate_family_exposed": False,
+            "employment_status": "employed"
+        },
+        "trusted_contact": {
+            "given_name": User.first_name,
+            "family_name": User.last_name,
+            "email_address": User.email,
+            "street_address": [address_list["street"]],
+            "city": address_list["city"],
+            "state": address_list["state"],
+            "postal_code": address_list["zip_code"],
+            "country": "USA",
+            "phone_number": phone,
+        },
+        "agreements": [
+            { "agreement": "margin_agreement", 
+            "signed_at": date_time, "ip_address": ip_address,
+            },
+            { "agreement": "account_agreement", "signed_at":  date_time, "ip_address": ip_address,},
+            { "agreement": "customer_agreement", "signed_at": date_time, "ip_address": ip_address, },
+            { "agreement": "crypto_agreement", "signed_at": date_time,"ip_address": ip_address, },
+            {
+                "agreement": "options_agreement",
+                "ip_address": ip_address,
+                "signed_at": date_time
+            }
+        ],
+        "documents": [
+            {
+                "document_type": "identity_verification",
+                "content": "/9j/Cg==",
+                "mime_type": "image/jpeg"
+            }
+        ],
+        "enabled_assets": ["us_equity", "crypto", "us_option"]
+    }
+    headers = {
+        "accept": "application/json",
+        "content-type": "application/json",
+        "authorization": "Basic Q0tCTVA1M0taSVc1V0JST0pUQlg6MnpsWGJncWJ3VU9xbGxFajVoeWJONnRvTGFpOE1rZVBjcUgyS09KOQ=="
+    }
+
+    response = requests.post(url, json=payload, headers=headers)
+
+    print(response.text)
+    print(response.status_code)
 
 
 import requests

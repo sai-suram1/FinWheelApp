@@ -43,9 +43,12 @@ def set_up_bank(request):
                 "city": request.POST["city"],
                 "state": request.POST["state"],
                 "zip_code": request.POST["zip"],
-                "country": "US"
+                "unit": request.POST["unit"],
+                "country": "USA"
             }
-            verify = create_new_customer(request.user, request.POST["number"], address, request.POST["ssn"], request.POST["dob"], ip)
+            bank = ExternalBankAccount(for_user=request.user, bank_name=request.POST["name"], bank_account_number=request.POST["AccNum"], bank_routing_number=request.POST["RoutNum"], verified=False)
+            bank.save()
+            verify = alpaca_account_making(request.user, request.POST["number"], address, request.POST["ssn"], request.POST["dob"], ip)
             if verify:
                 user_account = CashAccount.objects.get(for_user=request.user)
                 return render(request, "bank/index.html", {
