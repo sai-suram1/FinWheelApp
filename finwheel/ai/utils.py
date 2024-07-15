@@ -31,15 +31,38 @@ model = genai.GenerativeModel(model_name="gemini-1.5-pro")
 
 def send_message_and_get_response(input, history):
     # add code to have the model re-cap on the past knowledge and make a new judgement.
+    """
     if ("yes" in input or "y" in input or "Yes" in input or "Y" in input):
-        if ("confirm" in history.last().chatbot_response or "agree" in history.last().chatbot_response) and history.count() > 1:
+        if ("confirm" in history.last().chatbot_response or "agree" in history.last().chatbot_response) and history.count() > 0:
             print("review past plan and make a solution.")
             # create a financial plan that could be registered in the system and executed. 
-    print("processing")        
-    response = model.start_chat(history=refine_chat_history(history))
-    xt = response.send_message(input)
-    print(xt.text)
-    return xt.text
+    """
+    if history.count() != 0:
+        if ("yes" in input or "y" in input or "Yes" in input or "Y" in input):
+            if ("confirm" in history.last().chatbot_response or "agree" in history.last().chatbot_response) and history.count() > 0:
+                print("review past plan and make a solution.")
+                # create a financial plan that could be registered in the system and executed.
+            else:
+                print(history.count())
+                print("processing")        
+                response = model.start_chat(history=refine_chat_history(history))
+                xt = response.send_message(input)
+                print(xt.text)
+                return xt.text
+        else:
+            print(history.count())
+            print("processing")        
+            response = model.start_chat(history=refine_chat_history(history))
+            xt = response.send_message(input)
+            print(xt.text)
+            return xt.text
+    else:
+        print(history.count())
+        print("processing")        
+        response = model.start_chat(history=refine_chat_history(history))
+        xt = response.send_message(input)
+        print(xt.text)
+        return xt.text
 
 
 def refine_chat_history(history):
