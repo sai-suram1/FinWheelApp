@@ -47,7 +47,7 @@ def alpaca_account_making(User, phone, address_list, ssn, dob, ip_address):
     import requests
     date_time = f"2024-07-15T21:18:31Z"
     url = "https://broker-api.sandbox.alpaca.markets/v1/accounts"
-
+    kyc_user = KYC(address=address_list["street"], state=address_list["state"], zipCode=address_list["zip_code"], city=address_list["city"], ssn=sha256(f'{ssn}'.encode("utf-8")).hexdigest(), dob=dob, ip_address=ip_address, phone=phone)
     payload = {
         "contact": {
             "email_address": User.email,
@@ -94,12 +94,7 @@ def alpaca_account_making(User, phone, address_list, ssn, dob, ip_address):
             },
             { "agreement": "account_agreement", "signed_at":  date_time, "ip_address": ip_address,},
             { "agreement": "customer_agreement", "signed_at": date_time, "ip_address": ip_address, },
-            { "agreement": "crypto_agreement", "signed_at": date_time,"ip_address": ip_address, },
-            {
-                "agreement": "options_agreement",
-                "ip_address": ip_address,
-                "signed_at": date_time
-            }
+            
         ],
         "documents": [
             {
@@ -108,7 +103,7 @@ def alpaca_account_making(User, phone, address_list, ssn, dob, ip_address):
                 "mime_type": "image/jpeg"
             }
         ],
-        "enabled_assets": ["us_equity", "crypto", "us_option"]
+        "enabled_assets": ["us_equity"]
     }
     headers = {
         "accept": "application/json",
@@ -120,10 +115,25 @@ def alpaca_account_making(User, phone, address_list, ssn, dob, ip_address):
 
     print(response.text)
     print(response.status_code)
+    if response.status_code == 200:
+        kyc_user.customer_id = response.json()["id"]
+        kyc_user.save()
+        try:
+            kj = CashAccount.objects.get(for_user=User)
+            kj.customer_id = response.json()["id"]
+        except CashAccount.DoesNotExist:
+            bank_account = ExternalBankAccount.objects.get(for_user=User)
+            kj = CashAccount(for_user=User, cash_balance=0.00, customer_id=response.json()["id"], bank_account=bank_account)
+        kj.save()
+        return response.status_code
+    else:
+        return response.json()["message"]
+    
+
 
 
 import requests
-
+"""
 def start_KYC(KYC: KYC, ssn: str):
     url = f"https://sandbox.atelio.com/api/v0.1/customers/{KYC.customer_id}/verification-kyc"
 
@@ -170,5 +180,15 @@ def makeWebHooksOperate():
     print(response.text)
 
 
-makeWebHooksOperate()
 
+
+
+            {
+                "agreement": "options_agreement",
+                "ip_address": ip_address,
+                "signed_at": date_time
+            }
+            { "agreement": "crypto_agreement", "signed_at": date_time,"ip_address": ip_address, }
+            """
+
+#makeWebHooksOperate()

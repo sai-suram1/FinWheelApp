@@ -46,10 +46,13 @@ def set_up_bank(request):
                 "unit": request.POST["unit"],
                 "country": "USA"
             }
-            bank = ExternalBankAccount(for_user=request.user, bank_name=request.POST["name"], bank_account_number=request.POST["AccNum"], bank_routing_number=request.POST["RoutNum"], verified=False)
-            bank.save()
+            try:
+                bank = ExternalBankAccount.objects.get(for_user=request.user)
+            except ExternalBankAccount.DoesNotExist:
+                bank = ExternalBankAccount(for_user=request.user, bank_name=request.POST["name"], bank_account_number=request.POST["AccNum"], bank_routing_number=request.POST["RoutNum"], verified=False)
+                bank.save()
             verify = alpaca_account_making(request.user, request.POST["number"], address, request.POST["ssn"], request.POST["dob"], ip)
-            if verify:
+            if verify == 200:
                 user_account = CashAccount.objects.get(for_user=request.user)
                 return render(request, "bank/index.html", {
                     "user_account": user_account,
@@ -57,7 +60,7 @@ def set_up_bank(request):
                 })
             else:
                 return render(request, "bank/index.html", {
-                    "message": "Bank Information Provided is Invalid",
+                    "message": verify,
                     "config_bank": config_bank
                 })
         else:
