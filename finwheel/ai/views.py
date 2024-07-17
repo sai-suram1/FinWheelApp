@@ -27,8 +27,10 @@ def dashboard(request):
     for k in ch:
         lk = Chat_History.objects.filter(for_chat=k).order_by('order')
         chat_history.append(lk)
+    print(ch.count())
     return render(request, "ai/index.html", {
         "chats": ch,
+        "chatCount": len(ch),
         "chatHistory": chat_history,
         "chat": chat
     })

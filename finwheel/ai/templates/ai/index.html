@@ -30,17 +30,21 @@
                 <h3>Chats</h3>
                 <div id="div2" style="max-height:100%;overflow:auto;">
                     <ul style="position:relative;overflow:auto;max-height:100%;overflow:auto;">
-                        {% for x in chats %}
-                        <li>
-                            <a class="chatButton" id="{{x.chat_id}}" href="javascript:handleChatChange('{{x.chat_id}}')">
-                                <div style="border: 2px solid black;">
-                                    <p style="text-align: left;">{{x.chat_name}}</p>
-                                    <a href="{% url 'ai:deleteChat' x.chat_id %}"><i class="fa-solid fa-trash">delete</i></a>
+                        {% if chatCount != 0 %}
+                            {% for x in chats %}
+                                <li>
+                                    {% if x.chat_id != None %}
+                                        <a class="chatButton" id="{{x.chat_id}}" href="javascript:handleChatChange('{{x.chat_id}}')">
+                                            <div style="border: 2px solid black;">
+                                                <p style="text-align: left;">{{x.chat_name}}</p>
+                                                <a href="{% url 'ai:deleteChat' x.chat_id %}"><i class="fa-solid fa-trash">delete</i></a>
 
-                                </div>
-                            </a>
-                        </li>
-                        {% endfor %}
+                                            </div>
+                                        </a>
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                        {% endif %}
                         <li>
                             <a href="{% url 'ai:addChat' %}"><button>Add Chat</button></a>
                             
@@ -54,12 +58,13 @@
             <div id="div1" style="height: 800px;position:relative;">
                 <div id="div2" style="max-height:100%;overflow:auto;">
                     <div class="chat-box" id="chat-box" style="position:relative;overflow:auto;">
-                        {% for x in chatHistory.0 %} 
-                            <hr>
-                            <h4>user:</h4> {{x.user_message | markdownify}} | {{x.date_created}}<br><hr>
-                            <h4>bot:</h4> {{x.chatbot_response | markdownify}}<br>
-                        {% endfor %}
-                        
+                        {% if chatHistory.0 != None %}
+                            {% for x in chatHistory.0 %} 
+                                <hr>
+                                <h4>user:</h4> {{x.user_message | markdownify}} | {{x.date_created}}<br><hr>
+                                <h4>bot:</h4> {{x.chatbot_response | markdownify}}<br>
+                            {% endfor %}
+                        {% endif %}
                         <!-- Chat messages will be dynamically added here -->
                     </div>
                     {% if chat == True %}
