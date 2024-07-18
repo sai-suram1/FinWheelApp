@@ -31,8 +31,8 @@ def register_view(request):
     if request.method == 'POST':
         email = request.POST["email"]
         username = request.POST["username"]
-        fname = request.POST["username"]
-        lname = request.POST["username"]
+        fname = request.POST["first_name"]
+        lname = request.POST["last_name"]
         password = request.POST["password1"]
         c_password = request.POST["password2"]
         if c_password == password and User.objects.filter(username=username).count() == 0:

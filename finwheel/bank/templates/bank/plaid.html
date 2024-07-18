@@ -1,0 +1,42 @@
+<html>
+    <meta
+  http-equiv="Content-Security-Policy"
+  content="default-src https://cdn.plaid.com/
+  script-src https://cdn.plaid.com/link/v2/stable/link-initialize.js
+  unsafe-inline https://cdn.plaid.com/link/v2/stable/link-initialize.js
+  frame-src https://cdn.plaid.com/
+  connect-src https://production.plaid.com/" />
+    <script>
+        const handler = Plaid.create({
+            token: 'GENERATED_LINK_TOKEN',
+            onSuccess: (public_token, metadata) => {
+                fetch('localhost:8000/plaidverification', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: json.Stringify({
+                        'public_token': public_token,
+                    }),
+                });
+            },
+            onLoad: () => {},
+            onExit: (err, metadata) => {
+                supportHandler.report({
+                    error: error,
+                    institution: metadata.institution,
+                    link_session_id: metadata.link_session_id,
+                    plaid_request_id: metadata.request_id,
+                    status: metadata.status,
+                });
+            },
+            onEvent: (eventName, metadata) => {
+                
+                // send event and metadata to self-hosted analytics
+                analytics.send(eventName, metadata);
+                
+            },
+        });
+    </script>
+    <script src="https://cdn.plaid.com/link/v2/stable/link-initialize.js"></script>
+</html>

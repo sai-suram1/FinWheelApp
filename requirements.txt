@@ -7,3 +7,4 @@ md-to-html
 markdown2
 django-markdownify
 whitenoise
+plaid-python

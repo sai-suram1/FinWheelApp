@@ -1,5 +1,6 @@
 from django.db import models
 from user.models import *
+from django.contrib.auth.models import User
 # Create your models here.
 
 class ExternalBankAccount(models.Model):
@@ -7,6 +8,8 @@ class ExternalBankAccount(models.Model):
     bank_name = models.TextField()
     bank_routing_number = models.TextField()
     bank_account_number = models.TextField()
+    ach_authorized = models.BooleanField(null=True)
+    processor_token = models.TextField(null=True)
     verified = models.BooleanField()
 
 class KYC(models.Model):

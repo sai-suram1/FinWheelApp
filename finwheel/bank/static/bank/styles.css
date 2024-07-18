@@ -107,3 +107,18 @@ form button {
 form button:hover {
     background-color: #2980b9; /* Darker blue on hover */
 }
+
+button {
+    background-color: #4CAF50; /* Green background */
+    border: none;             /* Remove borders */
+    color: white;             /* White text */
+    padding: 15px 32px;       /* Some padding */
+    text-align: center;       /* Centered text */
+    text-decoration: none;    /* Remove underline */
+    display: inline-block;    /* Make the button appear inline */
+    font-size: 16px;          /* Set a font size */
+    margin: 4px 2px;          /* Add some margin */
+    cursor: pointer;          /* Add a pointer cursor on hover */
+    border-radius: 12px;      /* Rounded corners */
+    transition: background-color 0.3s; /* Smooth transition for background color */
+}

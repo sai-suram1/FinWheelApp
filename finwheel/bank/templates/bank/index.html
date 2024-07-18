@@ -94,12 +94,24 @@
         </div>
     {% else %} 
         <div class="container">
-            <h1>Bank/Balance Information</h1>
-            <div>
-               <h3>Cash: {{user_account.cash_balance}}</h3><br>
-               <h5>Bank: {{user_account.bank_account.bank_name}}</h5><br>
-               <h6>Account Number: {{user_account.bank_account.bank_account_number}}</h6>
+            <h1>Bank/Balance Information</h1><hr>
+            <div style="margin:10px; border: 2px solid black;">
+                <h2>FinWheel</h2>
+                <h3>Cash: {{user_account.cash_balance}}</h3><br>
+                <a href=""><button>Add Money</button></a>
             </div>
+            <hr>
+            <div style="margin: 10px; border: 2px solid black;">
+                <h2>External Account</h2>
+                <h3>Bank: {{user_account.bank_account.bank_name}}</h3>
+                <h4>Account Number: {{user_account.bank_account.bank_account_number}}</h4>
+                {% if user_account.bank_account.verified %} 
+                    <h4 style="color:green">Verified</h4>
+                {% else %} 
+                    <h4 style="color:grey">Not Verified Yet</h4>
+                {% endif %}
+            </div>
+            
             <p style="color: red;">{{message}}</p>
         </div>
     {% endif %}
