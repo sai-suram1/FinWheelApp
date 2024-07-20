@@ -177,7 +177,7 @@ def check_if_account_is_verified(alpaca_account_id, external_bank_account):
         external_bank_account.save()
         return True
 
-def create_ACH_relationship(account_id, bank_account: ExternalBankAccount, processor_token):
+def create_ACH_relationship(account_id, bank_account: ExternalBankAccount):
     import requests
 
     url = f"https://broker-api.sandbox.alpaca.markets/v1/accounts/{account_id}/ach_relationships"
@@ -188,75 +188,98 @@ def create_ACH_relationship(account_id, bank_account: ExternalBankAccount, proce
         "bank_routing_number": bank_account.bank_routing_number,
         "account_owner_name": f"{bank_account.for_user.first_name} {bank_account.for_user.last_name}",
         "instant": True,
-        "processor_token": processor_token
+        #"processor_token": processor_token
     }
     headers = {
         "accept": "application/json",
-        "content-type": "application/json"
+        "content-type": "application/json",
+        "authorization": "Basic Q0tCTVA1M0taSVc1V0JST0pUQlg6MnpsWGJncWJ3VU9xbGxFajVoeWJONnRvTGFpOE1rZVBjcUgyS09KOQ=="
     }
 
     response = requests.post(url, json=payload, headers=headers)
 
     print(response.text)
+    if response.status_code == 409 or response.status_code == 200:
+        k = check_on_ACH_relationship(account_id)
+        if k == False:
+            return False
+        else:
+            return True
+    elif response.status_code == 400:
+        return False
+        
 
 
-#import requests
-"""
-def start_KYC(KYC: KYC, ssn: str):
-    url = f"https://sandbox.atelio.com/api/v0.1/customers/{KYC.customer_id}/verification-kyc"
+def check_on_ACH_relationship(account_id):
+    import requests
 
-    payload = {
-        "program_id": "72585109-8222-4221-b15b-48e87ffed790",
-        "ssn": ssn,
-        "phone": KYC.phone,
-        "phone_country_code": "1",
-        "email": KYC.for_user.email,
-        "dob": KYC.dob,
-        "ip": KYC.ip_address
-    }
+    url = f"https://broker-api.sandbox.alpaca.markets/v1/accounts/{account_id}/ach_relationships"
 
+    headers = {"accept": "application/json", "authorization": "Basic Q0tCTVA1M0taSVc1V0JST0pUQlg6MnpsWGJncWJ3VU9xbGxFajVoeWJONnRvTGFpOE1rZVBjcUgyS09KOQ=="}
+
+    response = requests.get(url, headers=headers)
+
+    #print(response.text)
+    #print(response.json())
+    if response.json()[0]["status"] != "APPROVED":
+        return False
+    else:
+        return True
+
+
+def pull_ach_relationships(account_id):
+    import requests
+
+    url = f"https://broker-api.sandbox.alpaca.markets/v1/accounts/{account_id}/ach_relationships"
+
+    headers = {"accept": "application/json", "authorization": "Basic Q0tCTVA1M0taSVc1V0JST0pUQlg6MnpsWGJncWJ3VU9xbGxFajVoeWJONnRvTGFpOE1rZVBjcUgyS09KOQ=="}
+
+    response = requests.get(url, headers=headers)
+
+    return response.json()[0]["id"]
+
+
+
+def make_transaction(account: CashAccount,acc_num, amount, order):
+    import requests
+
+    url = f"https://broker-api.sandbox.alpaca.markets/v1/accounts/{account.customer_id}/transfers"
     headers = {
         "accept": "application/json",
         "content-type": "application/json",
-        "Identity": auth["id"],
-        "Authorization": auth["auth"]
+        "authorization": "Basic Q0tCTVA1M0taSVc1V0JST0pUQlg6MnpsWGJncWJ3VU9xbGxFajVoeWJONnRvTGFpOE1rZVBjcUgyS09KOQ=="
     }
-
-    response = requests.post(url, headers=headers)
-
-    print(response.text)
-
-def makeWebHooksOperate():
-    url = "https://sandbox.atelio.com/api/v0.1/webhooks"
-
-    payload = {
-        "events": ["kyc.verification.document_required", "kyc.verification.error", "kyc.verification.failure", "kyc.verification.reenter_information", "kyc.verification.success", "kyc.verification.timeout", "kyc.verification.under_review"],
-        "url": "https://127.0.0.1:8000/bank_hook",
-        "description": "KYC state changes.",
-        "version": "0.1",
-        "status": "STATUS_ENABLED"
-    }
-    headers = {
-        "accept": "application/json",
-        "content-type": "application/json",
-        "Identity": auth["id"],
-        "Authorization": auth["auth"]
-    }
-
-    response = requests.post(url, json=payload, headers=headers)
-
-    print(response.text)
-
-
-
-
-
-            {
-                "agreement": "options_agreement",
-                "ip_address": ip_address,
-                "signed_at": date_time
+    payload = None
+    record = Transaction(amount=amount, date_executed=datetime.datetime.now(), for_account=CashAccount)
+    if order == "INCOMING": # deposit
+        payload = {
+            "transfer_type": "ach",
+            "direction": "INCOMING",
+            "timing": "immediate",
+            "relationship_id": pull_ach_relationships(account.customer_id),
+            "amount": amount,
+            "fee_payment_method": "user"
+        }
+        record.transaction_type = "DEP"
+    elif order == "OUTGOING":
+        record.transaction_type = "WTH"
+        if str(account.cash_balance) >= amount:
+            payload = {
+                "transfer_type": "ach",
+                "direction": "OUTGOING",
+                "timing": "immediate",
+                "relationship_id": pull_ach_relationships(account.customer_id),
+                "amount": amount,
+                "fee_payment_method": "user"
             }
-            { "agreement": "crypto_agreement", "signed_at": date_time,"ip_address": ip_address, }
-            """
+        else:
+            return False
+    
+    response = requests.post(url, json=payload, headers=headers)
 
-#makeWebHooksOperate()
+    print(response.text)
+    if response.status_code != 200:
+        return False
+    else:
+        record.save()
+        return True

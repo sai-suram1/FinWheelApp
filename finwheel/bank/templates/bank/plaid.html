@@ -1,14 +1,8 @@
 <html>
-    <meta
-  http-equiv="Content-Security-Policy"
-  content="default-src https://cdn.plaid.com/
-  script-src https://cdn.plaid.com/link/v2/stable/link-initialize.js
-  unsafe-inline https://cdn.plaid.com/link/v2/stable/link-initialize.js
-  frame-src https://cdn.plaid.com/
-  connect-src https://production.plaid.com/" />
+    <script src="https://cdn.plaid.com/link/v2/stable/link-initialize.js"></script>
     <script>
         const handler = Plaid.create({
-            token: 'GENERATED_LINK_TOKEN',
+            token: '{{token}}',
             onSuccess: (public_token, metadata) => {
                 fetch('localhost:8000/plaidverification', {
                     method: 'POST',
@@ -38,5 +32,5 @@
             },
         });
     </script>
-    <script src="https://cdn.plaid.com/link/v2/stable/link-initialize.js"></script>
+    
 </html>

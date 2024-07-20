@@ -86,7 +86,9 @@ form label {
 form input[type="text"],
 form input[type="password"],
 form input[type="email"],
-form input[type="tel"] {
+form input[type="tel"],
+select,
+option {
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc; /* Light grey border */

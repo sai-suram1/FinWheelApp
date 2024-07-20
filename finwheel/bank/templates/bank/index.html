@@ -114,6 +114,22 @@
             
             <p style="color: red;">{{message}}</p>
         </div>
+        <div class="container">
+            <h1>Past Transactions</h1><hr>
+            {% for x in transactions %} 
+                <div style="margin: 10px; border: 2px solid black;">
+                    {% if x.transaction_type == "DEP" %} 
+                        <h2>Deposit</h2>
+                    {% elif x.transaction_type == "WTH" %} 
+                        <h2>Withdrawl</h2>
+                    {% endif %}
+                    <h3>Amount: {{x.amount}}</h3>
+                    <h4>Date: {{x.date_executed}}</h4>
+                </div>
+            {% endfor %}
+            
+            <p style="color: red;">{{message}}</p>
+        </div>
     {% endif %}
     
 {% endblock %}

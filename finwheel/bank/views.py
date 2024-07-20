@@ -9,6 +9,7 @@ from bank.utils import *
 from bank.banking_tools import *
 import json
 import plaid
+from dotenv import dotenv_values
 from plaid.api import plaid_api
 from plaid.model.link_token_create_request import LinkTokenCreateRequest
 from plaid.model.link_token_create_request_user import LinkTokenCreateRequestUser
@@ -22,16 +23,21 @@ from plaid.model.depository_account_subtype import DepositoryAccountSubtype
 from plaid.model.credit_account_subtypes import CreditAccountSubtypes
 from plaid.model.credit_account_subtype import CreditAccountSubtype
 from plaid import api_client
+from plaid.model.products import Products
 from tests.integration.util import create_client
+from django.shortcuts import redirect
+from plaid.model.link_token_create_request_auth import LinkTokenCreateRequestAuth
 
-client = create_client()
+stuff = dotenv_values('bank/.env')
+client_id = stuff['CLIENT_ID']
+secret = stuff['SECRET']
+client = create_client(client_id, secret)
 
 # Create your views here.
 
 @login_required(login_url='/user/login')
 def index(request):
     config_bank = False
-    
     if request.method == "GET":
         if CashAccount.objects.filter(for_user=request.user).count() < 1 or ExternalBankAccount.objects.filter(for_user=request.user).count() < 1:
             config_bank = True
@@ -44,11 +50,22 @@ def index(request):
             xt = check_if_account_is_verified(user_account.customer_id,ExternalBankAccount.objects.get(for_user=request.user))
             print(xt)
             if xt and user_account.bank_account.ach_authorized != True:
-                return HttpResponseRedirect(reverse("bank:achverification"))
-            else:
+                #return HttpResponseRedirect(reverse("bank:achverification"))
+                x = create_ACH_relationship(user_account.customer_id, user_account.bank_account)
+                if x:
+                    user_account.bank_account.ach_authorized = True
+                    user_account.bank_account.save()
+                else:
+                    config_bank = True
                 return render(request, "bank/index.html", {
                     "user_account": user_account,
                     "config_bank": config_bank
+                })
+            else:
+                return render(request, "bank/index.html", {
+                    "user_account": user_account,
+                    "config_bank": config_bank,
+                    "transactions": Transaction.objects.filter(for_account=user_account).order_by('-date_executed')[0:5]
                 })
 
 #keep for a moment -> modify to making it take SSN with the other info to create a new bank acct. 
@@ -117,6 +134,24 @@ def investment_view(request):
 def transactions_view(request):
     pass
 
+#transaction management
+@login_required(login_url="/user/login")
+def start_transaction(request):
+    if request.method == "GET":
+        cash_account = CashAccount.objects.get(for_user=request.user)
+        l = ExternalBankAccount.objects.filter(for_user=request.user, verified=True, ach_authorized=True)
+        return render(request, "bank/transaction.html", {"external_bank_accounts": l, "cash": cash_account})
+    else:
+        bank = request.POST["bank"]
+        amount = request.POST["amount"]
+        order_type = request.POST["order_type"]
+        cash_account = CashAccount.objects.get(for_user=request.user)
+        lk = make_transaction(cash_account, bank, amount, order_type)
+        if lk != True:
+            return render(request, "bank/transaction.html", {"external_bank_accounts": l, "message": "withdrawal amount is past FinWheel Balance or some other error."})
+        else:
+            return HttpResponseRedirect(reverse("bank:dashboard"))
+
 from django.views.decorators.http import require_http_methods
 
 @require_http_methods(["GET", "POST"])
@@ -132,39 +167,27 @@ def send_to_plaid(request):
     if request.method == 'GET':
         # Account filtering isn't required here, but sometimes 
         # it's helpful to see an example. 
-
-        request = LinkTokenCreateRequest(
+        requestz = LinkTokenCreateRequest(
         user=LinkTokenCreateRequestUser(
             client_user_id='user-id',
-            phone_number='+1 415 5550123'
+            phone_number='+1 415 555 0123'
         ),
-        client_name='Personal Finance App',
-        products=[plaid.Products('transactions')],
-        transactions=LinkTokenTransactions(
-            days_requested=730
-        ),
-        country_codes=[plaid.model.country_code.CountryCode('US')],
+        client_name='FinWheel Investments',
+        products=[Products('auth')],
+        country_codes=[CountryCode('US')],
         language='en',
-        webhook='https://sample-web-hook.com',
-        redirect_uri='https://domainname.com/oauth-page.html',
-        account_filters=LinkTokenAccountFilters(
-            depository=DepositoryFilter(
-            account_subtypes=DepositoryAccountSubtypes([
-                DepositoryAccountSubtype('checking'),
-                DepositoryAccountSubtype('savings')
-            ])
-            ),
-            credit=CreditFilter(
-            account_subtypes=CreditAccountSubtypes([
-                CreditAccountSubtype('credit card')
-            ])
-            )
+        required_if_supported_products=[Products('identity')],
+        #webhook='https://sample-web-hook.com',
+        #redirect_uri='https://127.0.0.1:8000/bank',
+        auth=LinkTokenCreateRequestAuth(
+            automated_microdeposits_enabled=True
         )
         )
-        # create link token
-        response = client.link_token_create(request)
+        response = client.link_token_create(requestz)
         link_token = response['link_token']
-        return render(request, "bank/plaid.html")
+        print(link_token)
+        #return render(request, "bank/plaid.html", {"token": str(link_token)})
+        return redirect(f"https://cdn.plaid.com/link/v2/stable/link.html?isWebview=true&token={link_token}")
     else:
         data = json.loads(request.body)
         x = CashAccount.objects.get(for_user=request.user)
