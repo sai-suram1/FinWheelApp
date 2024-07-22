@@ -1,6 +1,7 @@
 from django.db import models
 from user.models import *
 from django.contrib.auth.models import User
+import django_celery_beat.models
 # Create your models here.
 
 class ExternalBankAccount(models.Model):

@@ -8,3 +8,5 @@ markdown2
 django-markdownify
 whitenoise
 plaid-python
+celery
+redis

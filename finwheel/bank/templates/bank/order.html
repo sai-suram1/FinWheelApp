@@ -10,27 +10,36 @@
             <p style="color: red;">{{message}}</p>
             <form method="post" action="{% url 'bank:transaction' %}">
                 {% csrf_token %}
-                <h3>Create a New Bank Transfer</h3><hr><br>
-                <label for="bank_accounts">From Account: </label>
-                <select id="bank_accounts" name="bank">
+                <h3>Create a new Stock Order</h3><hr><br>
+                <label for="stock">Stock Ticker: </label>
+                <input type="text" id="stock" name="stock_tick"><br><br>
+                <h3>Order Side</h3>
+                <select id="order_s" name="order_side" required>
                     <option value="">----</option>
-                    {% for x in external_bank_accounts %}
-                        <option value="{{x.bank_account_number}}">{{x.bank_name}} - {{x.bank_account_number}}</option>
-                    {% endfor %}
+                    <option value="buy">BUY</option>
+                    <option value="sell">SELL</option>
+                    <option value="buy_minus">Short</option>
+                    <option value="sell_short">Sell Short</option>
                 </select><br><br>
-                <h3>Type of Transfer</h3>
+                <h3>Order Type</h3>
                 <select id="order_t" name="order_type" required>
                     <option value="">----</option>
-                    <option value="INCOMING">Deposit Funds to FinWheel</option>
-                    <option value="OUTGOING">Withdraw Funds from FinWheel</option>
+                    <option value="market">MARKET</option>
+                    <option value="limit">LIMIT</option>
+                    <option value="stop">STOP</option>
+                    <option value="stop_limit">STOP LIMIT</option>
                 </select><br><br>
+                <div id="pricepoint" style="display:none;">
+                    <label for="PriceNum">Price Point: </label>
+                    <input type="number" id="PriceNum" name="price" required step="0.01" min="0"><br><br>
+                </div>
+                
                 <hr>
-                <label for="AmtNum">Amount</label>
+                <label for="AmtNum">Qty</label>
                 <input type="number" id="AmtNum" name="amount" required step="0.01" min="0"><br><br>
                 
                 <div class="summary">
                     <h3>Summary</h3>
-                    <h4 id="sumBalBefore">Current Cash Balance: {{cash.cash_balance}}</h4>
                     <h4 id="sumOrder">Order Type: ----</h4>
                     <h4 id="sumAmt">Amount: ----</h4>
                     <h4 id="sumAcct">From/To: ----</h4>
@@ -44,17 +53,19 @@
             const amt = document.getElementById('AmtNum');
             const order = document.getElementById('order_t');
             const acct = document.getElementById('bank_accounts');
-            const newB = document.getElementById('sumNewBalance');
+            const stock = document.getElementById('stock');
             const oamt = {{cash.cash_balance}};
             // Add event listener to detect changes in input value
             amt.addEventListener('input', function() {
                 const newAmtText = amt.value;
                 const sumAmt = document.getElementById('sumAmt');
+                const newB = document.getElementById('sumNewBalance');
                 sumAmt.textContent = "Amount: $"+newAmtText;
-                if (order.value == "INCOMING"){
-                    newB.textContent = "New Balance: $"+Number(Number(newAmtText) + oamt);
-                } else if (order.value == "OUTGOING") {
-                    newB.textContent = "New Balance: $"+Number(oamt - Number(newAmtText));
+                console.log(order.textContent);
+                if (order.textContent == "Deposit Funds to FinWheel"){
+                    newB.textContent = "New Balance: "+Number(Number(newAmtText) + oamt);
+                } else if (order.textContent == "Withdraw Funds to FinWheel") {
+                    newB.textContent = "New Balance: "+Number(Number(newAmtText) - oamt);
                 }
                 console.log(newAmtText);
                 console.log(newB.textContent);
@@ -65,18 +76,23 @@
             order.addEventListener('change', function() {
                 const newOrderText = order.value;
                 const sumOrder = document.getElementById('sumOrder');
+
                 sumOrder.textContent = "Order Type: "+newOrderText;
-                console.log(order.value);
+                if (newOrderText == "limit" || newOrderText == "stop_limit"){
+                    document.getElementById('pricepoint').style.display = 'block';
+                } else {
+                    document.getElementById('pricepoint').style.display = 'none';
+                }
             });
 
             // Add event listener to detect changes in input value
             acct.addEventListener('change', function() {
-                const newAcctText = acct.value;
+                const newAcctText = acct.textContent;
                 console.log(newAcctText);
                 const sumAcct = document.getElementById('sumAcct');
-                if (order.value == "INCOMING"){
+                if (order.textContent == "Deposit Funds to FinWheel"){
                     sumAcct.textContent = "From Account: "+newAcctText;
-                } else if (order.value == "OUTGOING") {
+                } else if (order.textContent == "Withdraw Funds to FinWheel") {
                     sumAcct.textContent = "To Account: "+newAcctText;
                 }
             });

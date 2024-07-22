@@ -98,7 +98,7 @@
             <div style="margin:10px; border: 2px solid black;">
                 <h2>FinWheel</h2>
                 <h3>Cash: {{user_account.cash_balance}}</h3><br>
-                <a href=""><button>Add Money</button></a>
+                <a href="{% url 'bank:transaction' %}"><button>Add Money</button></a>
             </div>
             <hr>
             <div style="margin: 10px; border: 2px solid black;">
