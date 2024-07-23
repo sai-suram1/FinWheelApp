@@ -6,6 +6,7 @@ from hashlib import sha256
 import datetime 
 from json import JSONEncoder
 from bank.plaid_tools import *
+import decimal
 
 auth = dotenv_values("bank/.env")
 print(auth)
@@ -242,7 +243,7 @@ def pull_ach_relationships(account_id):
 
 def make_transaction(account: CashAccount,acc_num, amount, order):
     import requests
-
+    print(type(amount))
     url = f"https://broker-api.sandbox.alpaca.markets/v1/accounts/{account.customer_id}/transfers"
     headers = {
         "accept": "application/json",
@@ -250,7 +251,7 @@ def make_transaction(account: CashAccount,acc_num, amount, order):
         "authorization": "Basic Q0tCTVA1M0taSVc1V0JST0pUQlg6MnpsWGJncWJ3VU9xbGxFajVoeWJONnRvTGFpOE1rZVBjcUgyS09KOQ=="
     }
     payload = None
-    record = Transaction(amount=amount, date_executed=datetime.datetime.now(), for_account=CashAccount)
+    record = Transaction(amount=amount, date_executed=datetime.datetime.now(), for_account=account)
     if order == "INCOMING": # deposit
         payload = {
             "transfer_type": "ach",
@@ -261,9 +262,10 @@ def make_transaction(account: CashAccount,acc_num, amount, order):
             "fee_payment_method": "user"
         }
         record.transaction_type = "DEP"
+        account.cash_balance += decimal.Decimal(amount)
     elif order == "OUTGOING":
         record.transaction_type = "WTH"
-        if str(account.cash_balance) >= amount:
+        if account.cash_balance >= decimal.Decimal(amount):
             payload = {
                 "transfer_type": "ach",
                 "direction": "OUTGOING",
@@ -272,14 +274,72 @@ def make_transaction(account: CashAccount,acc_num, amount, order):
                 "amount": amount,
                 "fee_payment_method": "user"
             }
+            account.cash_balance -= decimal.Decimal(amount)
         else:
             return False
+        
     
     response = requests.post(url, json=payload, headers=headers)
 
     print(response.text)
+    print(response.status_code)
     if response.status_code != 200:
         return False
     else:
+        account.save()
         record.save()
         return True
+
+
+def get_account_info(user: CashAccount):
+    import requests
+
+    url = f"https://broker-api.sandbox.alpaca.markets/v1/accounts/{user.customer_id}"
+
+    headers = {"accept": "application/json", "authorization": "Basic Q0tCTVA1M0taSVc1V0JST0pUQlg6MnpsWGJncWJ3VU9xbGxFajVoeWJONnRvTGFpOE1rZVBjcUgyS09KOQ=="}
+
+    response = requests.get(url, headers=headers)
+    print(response.json())
+    return dict(response.json())
+
+def get_positions_from_account(user: CashAccount):
+    import requests
+
+    url = f"https://broker-api.sandbox.alpaca.markets/v1/trading/accounts/{user.customer_id}/positions"
+
+    headers = {"accept": "application/json","authorization": "Basic Q0tCTVA1M0taSVc1V0JST0pUQlg6MnpsWGJncWJ3VU9xbGxFajVoeWJONnRvTGFpOE1rZVBjcUgyS09KOQ=="}
+
+    response = requests.get(url, headers=headers)
+
+    #print(response.text)
+    print(response.json())
+    return dict(response.json())
+
+def process_order(ticker, side, type, qty, pricept: int, cash_account: CashAccount):
+    import requests
+
+    url = f"https://broker-api.sandbox.alpaca.markets/v1/trading/accounts/{cash_account.customer_id}/orders"
+
+    payload = {
+        "side": side,
+        "type": type,
+        "time_in_force": "day",
+        "commission_type": "notional",
+        "symbol": "AAPL",
+        "qty": qty,    
+    }
+
+    """
+    "limit_price": "3.14",
+        "stop_price": "3.14",
+        "trail_price": "3.14",
+        "trail_percent": "5.0"
+    """
+    headers = {
+        "accept": "application/json",
+        "content-type": "application/json"
+    }
+
+    response = requests.post(url, json=payload, headers=headers)
+
+    print(response.text)

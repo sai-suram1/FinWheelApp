@@ -137,9 +137,9 @@ def transactions_view(request):
 #transaction management
 @login_required(login_url="/user/login")
 def start_transaction(request):
+    l = ExternalBankAccount.objects.filter(for_user=request.user, verified=True, ach_authorized=True)
     if request.method == "GET":
         cash_account = CashAccount.objects.get(for_user=request.user)
-        l = ExternalBankAccount.objects.filter(for_user=request.user, verified=True, ach_authorized=True)
         return render(request, "bank/transaction.html", {"external_bank_accounts": l, "cash": cash_account})
     else:
         bank = request.POST["bank"]
@@ -148,10 +148,25 @@ def start_transaction(request):
         cash_account = CashAccount.objects.get(for_user=request.user)
         lk = make_transaction(cash_account, bank, amount, order_type)
         if lk != True:
+            print(lk)
             return render(request, "bank/transaction.html", {"external_bank_accounts": l, "message": "withdrawal amount is past FinWheel Balance or some other error."})
         else:
             return HttpResponseRedirect(reverse("bank:dashboard"))
 
+@login_required(login_url="/user/login")
+def make_order(request):
+    if request.method == "GET":
+        cash_account = CashAccount.objects.get(for_user=request.user)
+        l = ExternalBankAccount.objects.filter(for_user=request.user, verified=True, ach_authorized=True)
+        return render(request, "bank/order.html", {"external_bank_accounts": l, "cash": cash_account})
+    else:
+        ticker = request.POST["stock_tick"]
+        side = request.POST["order_side"]
+        type = request.POST["order_type"]
+        qty = request.POST["amount"]
+        if "price" in request.POST.keys():  
+            pricept = request.POST["price"]
+        process_order(ticker, side, type, qty, pricept, cash_account)
 from django.views.decorators.http import require_http_methods
 
 @require_http_methods(["GET", "POST"])
@@ -162,6 +177,7 @@ def hook_receiver_view(request): # KYC ONLY
     # Handle the event appropriately
     return HttpResponse('success')
 
+"""
 @login_required(login_url='/user/login')
 def send_to_plaid(request):
     if request.method == 'GET':
@@ -194,3 +210,4 @@ def send_to_plaid(request):
         p_token = get_plaid_processor_token(account_id=x.customer_id, public_token=data["public_token"])
         k = create_ACH_relationship(account_id=x.customer_id, bank_account=x.bank_account, processor_token=p_token)
         return HttpResponseRedirect(reverse("bank:dashboard"))
+        """

@@ -6,6 +6,8 @@ from user.models import *
 from django.urls import reverse
 from ai.models import *
 import datetime
+from django.conf import settings
+from django.core.mail import send_mail
 # Create your views here.
 
 def index(request):
