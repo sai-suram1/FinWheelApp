@@ -13,6 +13,8 @@
                 <h3>Create a new Stock Order</h3><hr><br>
                 <label for="stock">Stock Ticker: </label>
                 <input type="text" id="stock" name="stock_tick"><br><br>
+                <button onclick="getquote()">Get Quote</button><br><br>
+                <h4 id="stockprice">Price: -----</h4><br><br>
                 <h3>Order Side</h3>
                 <select id="order_s" name="order_side" required>
                     <option value="">----</option>
@@ -28,6 +30,13 @@
                     <option value="limit">LIMIT</option>
                     <option value="stop">STOP</option>
                     <option value="stop_limit">STOP LIMIT</option>
+                </select><br><br>
+                <h3>Time In Force</h3>
+                <select id="order_t" name="order_type" required>
+                    <option value="">----</option>
+                    <option value="day">DAY</option>
+                    <option value="gtc">GOOD UNTIL CANCELED</option>
+                    <option value="opg">OFFICIAL OPENING PRICE</option>
                 </select><br><br>
                 <div id="pricepoint" style="display:none;">
                     <label for="PriceNum">Price Point: </label>
@@ -96,5 +105,25 @@
                     sumAcct.textContent = "To Account: "+newAcctText;
                 }
             });
+
+            function getquote() {
+                const newStockText = stock.value;
+                const j = document.getElementById('stockprice');
+                fetch("{% url 'bank:quote' %}", {
+                    method: 'POST', 
+                    body: JSON.stringify({ symbol: newStockText }), 
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{csrf_token}}' 
+                    }
+                })
+                .then(response => response.text())
+                .then(data => {
+                    console.log(data);
+                    j.textContent = "Price: "+Number(data);
+                })
+                
+            };
+            
         </script>
 {% endblock %}

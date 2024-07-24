@@ -343,3 +343,16 @@ def process_order(ticker, side, type, qty, pricept: int, cash_account: CashAccou
     response = requests.post(url, json=payload, headers=headers)
 
     print(response.text)
+
+def get_quote(symbol):
+    import requests
+
+    url = f"https://paper-api.alpaca.markets/v2/assets/{symbol}"
+
+    headers = {"accept": "application/json", "APCA-API-KEY-ID": "PKGFLKPMUCPMK13R0UQW","APCA-API-SECRET-KEY": "rWg3Ho4fnC3niaEuejw1nLgaOezN7Ve0c3ZzBMUf"}
+
+    response = requests.get(url, headers=headers)
+
+    print(response.text)
+
+    return response.json()

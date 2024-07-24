@@ -27,6 +27,7 @@ from plaid.model.products import Products
 #from tests.integration.util import create_client
 from django.shortcuts import redirect
 from plaid.model.link_token_create_request_auth import LinkTokenCreateRequestAuth
+from django.http import JsonResponse
 
 stuff = dotenv_values('bank/.env')
 client_id = stuff['CLIENT_ID']
@@ -177,6 +178,16 @@ def hook_receiver_view(request): # KYC ONLY
     # Handle the event appropriately
     return HttpResponse('success')
 
+
+@login_required(login_url="/user/login")
+def latest_quote(request):
+    if request.method == "POST":
+        symbol = json.loads(request.body)
+        print(symbol)
+        xt = get_quote(symbol["symbol"])
+        print(xt)
+        #return JsonResponse({"price": xt["quote"]["ap"]})
+        return HttpResponse(f'{dict(xt)["last_price"]}')
 """
 @login_required(login_url='/user/login')
 def send_to_plaid(request):
