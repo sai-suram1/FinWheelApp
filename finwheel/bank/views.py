@@ -24,14 +24,14 @@ from plaid.model.credit_account_subtypes import CreditAccountSubtypes
 from plaid.model.credit_account_subtype import CreditAccountSubtype
 from plaid import api_client
 from plaid.model.products import Products
-from tests.integration.util import create_client
+#from tests.integration.util import create_client
 from django.shortcuts import redirect
 from plaid.model.link_token_create_request_auth import LinkTokenCreateRequestAuth
 
 stuff = dotenv_values('bank/.env')
 client_id = stuff['CLIENT_ID']
 secret = stuff['SECRET']
-client = create_client(client_id, secret)
+#client = create_client(client_id, secret)
 
 # Create your views here.
 

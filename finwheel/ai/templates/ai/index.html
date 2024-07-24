@@ -55,8 +55,8 @@
         </aside>
 
         <div class="chat-container">
-            <div id="div1" style="height: 800px;position:relative;">
-                <div id="div2" style="max-height:100%;overflow:auto;">
+            <div id="div1" style="position:relative;">
+                <div id="div2" style="max-height:100%;overflow:auto;height: 700px;">
                     <div class="chat-box" id="chat-box" style="position:relative;overflow:auto;">
                         {% if chatHistory.0 != None %}
                             {% for x in chatHistory.0 %} 
@@ -67,17 +67,18 @@
                         {% endif %}
                         <!-- Chat messages will be dynamically added here -->
                     </div>
-                    {% if chat == True %}
-                        <div class="user-input" style="bottom: 0;">
-                            <input type="text" id="user-message" placeholder="Type your message...">
-                            <button id="send-btn" class="{{chats.0.chat_id}}">Send</button>
-                        </div>
-                    {% else %} 
-                        <h4 style="text-align: center;">Click the "Add Chat" Button on the Left to get started and talk with Fin AI.</h4>
-                    {% endif %}
+                    {% if chat == False %} 
+                    <h4 style="text-align: center; top: 800;">Click the "Add Chat" Button on the Left to get started and talk with Fin AI.</h4>
+                    {% endif %} 
+                
                 </div>
               </div>
-            
+              {% if chat == True %}
+              <div class="user-input" style="bottom: 800;">
+                  <input type="text" id="user-message" placeholder="Type your message...">
+                  <button id="send-btn" class="{{chats.0.chat_id}}">Send</button>
+              </div>
+            {% endif %}
             
         </div>
 

@@ -14,3 +14,8 @@ class Chat_History(models.Model):
     user_message = models.TextField()
     chatbot_response = models.TextField()
 
+class model_parameters(models.Model):
+    user_msg = models.TextField()
+    model_msg = models.TextField()
+
+

@@ -10,3 +10,5 @@ whitenoise
 plaid-python
 celery
 redis
+django_celery_results
+django_celery_beat

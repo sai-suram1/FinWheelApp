@@ -11,6 +11,8 @@ import os
 from google.generativeai.types import HarmCategory, HarmBlockThreshold
 import google.generativeai as genai
 from dotenv import load_dotenv,dotenv_values
+
+from ai.models import model_parameters
 config = dotenv_values("ai/.env")
 from ai.load_creds import *
 #from ai.models import *
@@ -23,7 +25,7 @@ generation_config = {
     "temperature": 0.9,
     "top_p": 1,
     "top_k": 0,
-    "max_output_tokens": 8192,
+    "max_output_tokens": 10000000,
     #"Content-Type": "application/json",
 }
 #print('Available base models:', [m.name for m in genai.list_models()])
@@ -67,24 +69,21 @@ def send_message_and_get_response(input, history):
 
 def refine_chat_history(history):
     hist = []
-    hist.append({
-        "role": "user",
-        "parts": [
-            "YOU WILL NOT DIFFER FROM TALKING ABOUT FINANCE RELATED ACTIVITES. IF ANYONE ASKS FOR ADVICE RELATED TO A TOPIC OUTSIDE OF FINANCE, ASSET MANAGEMENT, AND FINANCIAL MANAGEMENT AS A WHOLE, REFUSE TO ANSWER THAT QUESTION AS IT IS NOT YOUR JOB.",
-        ],
-    })
-    hist.append({
-        "role": "model",
-        "parts": [
-            "I understand to do so."
-        ],
+    lk = model_parameters.objects.all()
+    for d in lk:
+        hist.append({
+            "role": "user",
+            "parts": [
+                d.user_msg,
+            ],
         })
-    hist.append({
-        "role": "user",
-        "parts": [
-            "YOU WILL NOT PROMOTE ANY OTHER FINANCIAL APPLICATIONS.",
-        ],
-    })
+        hist.append({
+            "role": "model",
+            "parts": [
+                d.model_msg
+            ],
+            })
+    
     hist.append({
         "role": "model",
         "parts": [
