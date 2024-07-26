@@ -325,7 +325,7 @@ def process_order(ticker, side, type, qty, pricept: int, cash_account: CashAccou
         "type": type,
         "time_in_force": "day",
         "commission_type": "notional",
-        "symbol": "AAPL",
+        "symbol": ticker,
         "qty": qty,    
     }
 
@@ -337,7 +337,8 @@ def process_order(ticker, side, type, qty, pricept: int, cash_account: CashAccou
     """
     headers = {
         "accept": "application/json",
-        "content-type": "application/json"
+        "content-type": "application/json",
+        "authorization": "Basic Q0tCTVA1M0taSVc1V0JST0pUQlg6MnpsWGJncWJ3VU9xbGxFajVoeWJONnRvTGFpOE1rZVBjcUgyS09KOQ=="
     }
 
     response = requests.post(url, json=payload, headers=headers)
@@ -347,7 +348,7 @@ def process_order(ticker, side, type, qty, pricept: int, cash_account: CashAccou
 def get_quote(symbol):
     import requests
 
-    url = f"https://paper-api.alpaca.markets/v2/assets/{symbol}"
+    url = f"https://data.alpaca.markets/v2/stocks/{symbol}/quotes/latest?feed=iex"
 
     headers = {"accept": "application/json", "APCA-API-KEY-ID": "PKGFLKPMUCPMK13R0UQW","APCA-API-SECRET-KEY": "rWg3Ho4fnC3niaEuejw1nLgaOezN7Ve0c3ZzBMUf"}
 

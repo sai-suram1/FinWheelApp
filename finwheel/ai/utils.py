@@ -28,8 +28,42 @@ generation_config = {
     "max_output_tokens": 10000000,
     #"Content-Type": "application/json",
 }
+
+def refine_chat_history(history):
+    hist=[]
+    lk = model_parameters.objects.all()
+    for d in lk:
+        hist.append({
+            "role": "user",
+            "parts": [
+                d.user_msg,
+            ],
+        })
+        hist.append({
+            "role": "model",
+            "parts": [
+                d.model_msg
+            ],
+        })
+    for x in history.order_by('order'):
+        hist.append({
+            "role": "user",
+            "parts": [
+                x.user_message,
+            ],
+        })
+        hist.append({
+        "role": "model",
+        "parts": [
+            x.chatbot_response
+        ],
+        })
+    return hist
+
+
+
 #print('Available base models:', [m.name for m in genai.list_models()])
-model = genai.GenerativeModel(model_name="gemini-1.5-pro")
+model = genai.GenerativeModel(model_name="gemini-1.5-flash-latest")
 
 def send_message_and_get_response(input, history):
     # add code to have the model re-cap on the past knowledge and make a new judgement.
@@ -60,50 +94,14 @@ def send_message_and_get_response(input, history):
             return xt.text
     else:
         print(history.count())
-        print("processing")        
-        response = model.start_chat(history=refine_chat_history(history))
+        print("processing")
+        response = model.start_chat(history=refine_chat_history(history))        
         xt = response.send_message(input)
         print(xt.text)
         return xt.text
 
 
-def refine_chat_history(history):
-    hist = []
-    lk = model_parameters.objects.all()
-    for d in lk:
-        hist.append({
-            "role": "user",
-            "parts": [
-                d.user_msg,
-            ],
-        })
-        hist.append({
-            "role": "model",
-            "parts": [
-                d.model_msg
-            ],
-            })
-    
-    hist.append({
-        "role": "model",
-        "parts": [
-            "I understand to do so."
-        ],
-        })
-    for x in history.order_by('order'):
-        hist.append({
-            "role": "user",
-            "parts": [
-                x.user_message,
-            ],
-        })
-        hist.append({
-        "role": "model",
-        "parts": [
-            x.chatbot_response
-        ],
-        })
-    return hist
+
 
 def test_ai_connection():
     try:

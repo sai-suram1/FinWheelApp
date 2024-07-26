@@ -156,18 +156,20 @@ def start_transaction(request):
 
 @login_required(login_url="/user/login")
 def make_order(request):
+    cash_account = CashAccount.objects.get(for_user=request.user)
+    l = ExternalBankAccount.objects.filter(for_user=request.user, verified=True, ach_authorized=True)
     if request.method == "GET":
-        cash_account = CashAccount.objects.get(for_user=request.user)
-        l = ExternalBankAccount.objects.filter(for_user=request.user, verified=True, ach_authorized=True)
         return render(request, "bank/order.html", {"external_bank_accounts": l, "cash": cash_account})
     else:
         ticker = request.POST["stock_tick"]
         side = request.POST["order_side"]
         type = request.POST["order_type"]
         qty = request.POST["amount"]
+        pricept = 0
         if "price" in request.POST.keys():  
             pricept = request.POST["price"]
         process_order(ticker, side, type, qty, pricept, cash_account)
+        return render(request, "bank/order.html", {"external_bank_accounts": l, "cash": cash_account})
 from django.views.decorators.http import require_http_methods
 
 @require_http_methods(["GET", "POST"])
@@ -187,7 +189,10 @@ def latest_quote(request):
         xt = get_quote(symbol["symbol"])
         print(xt)
         #return JsonResponse({"price": xt["quote"]["ap"]})
-        return HttpResponse(f'{dict(xt)["last_price"]}')
+        return HttpResponse(f'{dict(xt)["quote"]["bp"]}')
+    
+
+
 """
 @login_required(login_url='/user/login')
 def send_to_plaid(request):

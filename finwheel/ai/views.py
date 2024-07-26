@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
 import json
-
+import threading
 from django.urls import reverse
 from ai.utils import *
 from django.views.decorators.csrf import csrf_exempt
@@ -11,7 +11,11 @@ import datetime
 import uuid
 import markdown2
 from markdown2 import Markdown
+import ai.train
 
+
+#thread1 = threading.Thread(target=ai.train.read_input_output,args=['finwheel/ai/training_data_finance_50000.csv'])
+#thread1.start()
 # Create your views here.
 
 @login_required(login_url='/user/login')

@@ -8,7 +8,7 @@
         <div class="container">
             <h1>Bank Transfer</h1>
             <p style="color: red;">{{message}}</p>
-            <form method="post" action="{% url 'bank:transaction' %}">
+            <form method="post" action="{% url 'bank:order' %}">
                 {% csrf_token %}
                 <h3>Create a new Stock Order</h3><hr><br>
                 <label for="stock">Stock Ticker: </label>
@@ -38,11 +38,12 @@
                     <option value="gtc">GOOD UNTIL CANCELED</option>
                     <option value="opg">OFFICIAL OPENING PRICE</option>
                 </select><br><br>
+                <!--
                 <div id="pricepoint" style="display:none;">
                     <label for="PriceNum">Price Point: </label>
                     <input type="number" id="PriceNum" name="price" required step="0.01" min="0"><br><br>
                 </div>
-                
+                -->
                 <hr>
                 <label for="AmtNum">Qty</label>
                 <input type="number" id="AmtNum" name="amount" required step="0.01" min="0"><br><br>
@@ -54,22 +55,48 @@
                     <h4 id="sumAcct">From/To: ----</h4>
                     <h4 id="sumNewBalance">New Balance: ----</h4>
                 </div><br><br>
-                <button type="submit">Submit</button>
+                <input type="submit">
             </form>
         </div>
-
+        <iframe
+                referrerpolicy="origin"
+                width="80%"
+                height="470"
+                style="display:none; margin-left: 10px;"
+                id="stock_graph"
+                style="background: #FFFFFF; padding: 10px; border: none; border-radius: 5px; box-shadow: 0 2px 4px 0 rgba(0,0,0,.2)"
+                src="https://jika.io/embed/area-chart?symbol=AAPL&selection=one_year&closeKey=close&boxShadow=true&graphColor=1652f0&textColor=161c2d&backgroundColor=FFFFFF&fontFamily=Montserrat"
+            ></iframe><br><br>
+            <iframe
+                referrerpolicy="origin"
+                width="80%"
+                height="470"
+                style="display:none; margin-left: 10px;"
+                id="stock_graph_pred"
+                style="background: #FFFFFF; padding: 10px; border: none; border-radius: 5px; box-shadow: 0 2px 4px 0 rgba(0,0,0,.2)"
+                src="https://jika.io/embed/forecast-price-target?symbol=AAPL&boxShadow=true&graphColor=1652f0&textColor=161c2d&backgroundColor=FFFFFF&fontFamily=Montserrat"
+            ></iframe>
+            <iframe
+                referrerpolicy="origin"
+                width="80%"
+                height="470"
+                style="display:none; margin-left: 10px;"
+                id="stock_graph_pred"
+                style="background: #FFFFFF; padding: 10px; border: none; border-radius: 5px; box-shadow: 0 2px 4px 0 rgba(0,0,0,.2)"
+                src="https://jika.io/embed/forecast-price-target?symbol=AAPL&boxShadow=true&graphColor=1652f0&textColor=161c2d&backgroundColor=FFFFFF&fontFamily=Montserrat"
+            ></iframe>
         <script>
             const amt = document.getElementById('AmtNum');
             const order = document.getElementById('order_t');
-            const acct = document.getElementById('bank_accounts');
             const stock = document.getElementById('stock');
+            var stockPrice = 0;
             const oamt = {{cash.cash_balance}};
             // Add event listener to detect changes in input value
             amt.addEventListener('input', function() {
                 const newAmtText = amt.value;
                 const sumAmt = document.getElementById('sumAmt');
                 const newB = document.getElementById('sumNewBalance');
-                sumAmt.textContent = "Amount: $"+newAmtText;
+                sumAmt.textContent = "Amount: $"+Number(newAmtText*order.value);
                 console.log(order.textContent);
                 if (order.textContent == "Deposit Funds to FinWheel"){
                     newB.textContent = "New Balance: "+Number(Number(newAmtText) + oamt);
@@ -120,7 +147,15 @@
                 .then(response => response.text())
                 .then(data => {
                     console.log(data);
+                    stockPrice = Number(data);
                     j.textContent = "Price: "+Number(data);
+                    const graphs = document.getElementById('graphs');
+                    const sg = document.getElementById('stock_graph');
+                    sg.src = `https://jika.io/embed/area-chart?symbol=${newStockText}&selection=one_year&closeKey=close&boxShadow=true&graphColor=1652f0&textColor=161c2d&backgroundColor=FFFFFF&fontFamily=Nunito`;
+                    const sgp = document.getElementById('stock_graph_pred');
+                    sgp.src = `https://jika.io/embed/forecast-price-target?symbol=${newStockText}&boxShadow=true&graphColor=1652f0&textColor=161c2d&backgroundColor=FFFFFF&fontFamily=Montserrat`;
+                    sg.style.display = 'block';
+                    sgp.style.display = 'block';
                 })
                 
             };
