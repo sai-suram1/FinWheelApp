@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_celery_results',  # To store task results
     'django_celery_beat',  # For periodic tasks
+    'django_template_maths',
+    'mathfilters'
 
 ]
 

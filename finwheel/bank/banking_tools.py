@@ -7,6 +7,7 @@ import datetime
 from json import JSONEncoder
 from bank.plaid_tools import *
 import decimal
+import ast
 
 auth = dotenv_values("bank/.env")
 print(auth)
@@ -315,7 +316,7 @@ def get_positions_from_account(user: CashAccount):
     print(response.json())
     return dict(response.json())
 
-def process_order(ticker, side, type, qty, pricept: int, cash_account: CashAccount):
+def process_order(ticker, side, type, time, qty, pricept: int, cash_account: CashAccount):
     import requests
 
     url = f"https://broker-api.sandbox.alpaca.markets/v1/trading/accounts/{cash_account.customer_id}/orders"
@@ -323,12 +324,23 @@ def process_order(ticker, side, type, qty, pricept: int, cash_account: CashAccou
     payload = {
         "side": side,
         "type": type,
-        "time_in_force": "day",
+        "time_in_force": time,
         "commission_type": "notional",
         "symbol": ticker,
-        "qty": qty,    
+        "qty": qty,
+        "commmission": 0.01,    
     }
 
+    if type == "limit" or type=="stop_limit":
+        payload.update({"limit_price": pricept})
+    elif type == "stop" or type=="stop_limit":
+        payload.update({"stop_price": pricept})
+    elif type == "trailing_stop":
+        payload.update({"trail_price": pricept})
+
+    if "stop_price" in payload.keys() and "limit_price" in payload.keys():
+        payload.update({"stop_loss": {"stop_price": pricept, "limit_price": pricept}})
+    
     """
     "limit_price": "3.14",
         "stop_price": "3.14",
@@ -356,4 +368,29 @@ def get_quote(symbol):
 
     print(response.text)
 
+    return response.json()
+
+def get_open_positions(account_id):
+    import requests
+
+    url = f"https://broker-api.sandbox.alpaca.markets/v1/trading/accounts/{account_id}/positions"
+
+    headers = {"accept": "application/json", "authorization": "Basic Q0tCTVA1M0taSVc1V0JST0pUQlg6MnpsWGJncWJ3VU9xbGxFajVoeWJONnRvTGFpOE1rZVBjcUgyS09KOQ=="}
+
+    response = requests.get(url, headers=headers)
+
+    #print(response.text)
+    return response.json()
+
+def get_open_orders(account_id):
+    import requests
+
+    url = f"https://broker-api.sandbox.alpaca.markets/v1/trading/accounts/{account_id}/orders?status=open"
+
+    headers = {"accept": "application/json", "authorization": "Basic Q0tCTVA1M0taSVc1V0JST0pUQlg6MnpsWGJncWJ3VU9xbGxFajVoeWJONnRvTGFpOE1rZVBjcUgyS09KOQ=="}
+
+    response = requests.get(url, headers=headers)
+
+    print(response.json())
+    #print(type(response.json()))
     return response.json()

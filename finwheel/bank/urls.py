@@ -8,5 +8,6 @@ urlpatterns = [
     #path("plaidverification", send_to_plaid, name="achverification"),
     path("transaction", start_transaction, name="transaction"),
     path("order", make_order, name="order"),
-    path("quote", latest_quote, name="quote")
+    path("quote", latest_quote, name="quote"),
+    path("investments", investment_view, name="investments")
 ]

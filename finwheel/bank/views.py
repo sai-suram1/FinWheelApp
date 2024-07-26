@@ -129,7 +129,10 @@ def card_view(request):
 
 @login_required(login_url='/user/login')
 def investment_view(request):
-    pass     
+    user_account = CashAccount.objects.get(for_user=request.user)
+    positions = get_open_positions(user_account.customer_id)
+    orders = get_open_orders(user_account.customer_id)
+    return render(request, "bank/investments.html", {"positions": positions, "orders":orders, "acct":user_account})     
 
 @login_required(login_url='/user/login')
 def transactions_view(request):
@@ -165,10 +168,11 @@ def make_order(request):
         side = request.POST["order_side"]
         type = request.POST["order_type"]
         qty = request.POST["amount"]
+        time = request.POST["order_time"]
         pricept = 0
         if "price" in request.POST.keys():  
             pricept = request.POST["price"]
-        process_order(ticker, side, type, qty, pricept, cash_account)
+        process_order(ticker, side, type, time, qty, pricept, cash_account)
         return render(request, "bank/order.html", {"external_bank_accounts": l, "cash": cash_account})
 from django.views.decorators.http import require_http_methods
 
