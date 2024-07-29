@@ -30,20 +30,20 @@
                     <option value="limit">LIMIT</option>
                     <option value="stop">STOP</option>
                     <option value="stop_limit">STOP LIMIT</option>
+                    <option value="trailing_stop">TRAILING STOP</option>
                 </select><br><br>
                 <h3>Time In Force</h3>
-                <select id="order_t" name="order_type" required>
+                <select id="order_ti" name="order_time" required>
                     <option value="">----</option>
                     <option value="day">DAY</option>
                     <option value="gtc">GOOD UNTIL CANCELED</option>
                     <option value="opg">OFFICIAL OPENING PRICE</option>
                 </select><br><br>
-                <!--
+                
                 <div id="pricepoint" style="display:none;">
                     <label for="PriceNum">Price Point: </label>
                     <input type="number" id="PriceNum" name="price" required step="0.01" min="0"><br><br>
                 </div>
-                -->
                 <hr>
                 <label for="AmtNum">Qty</label>
                 <input type="number" id="AmtNum" name="amount" required step="0.01" min="0"><br><br>
@@ -88,24 +88,44 @@
         <script>
             const amt = document.getElementById('AmtNum');
             const order = document.getElementById('order_t');
+            const orderS = document.getElementById('order_s');
             const stock = document.getElementById('stock');
+            const limits = document.getElementById('pricepoint')
             var stockPrice = 0;
+            var pricept = 0;
             const oamt = {{cash.cash_balance}};
-            // Add event listener to detect changes in input value
+            // Add event listener to detect changes in input value (QUANTITY)
             amt.addEventListener('input', function() {
                 const newAmtText = amt.value;
                 const sumAmt = document.getElementById('sumAmt');
                 const newB = document.getElementById('sumNewBalance');
-                sumAmt.textContent = "Amount: $"+Number(newAmtText*order.value);
-                console.log(order.textContent);
-                if (order.textContent == "Deposit Funds to FinWheel"){
-                    newB.textContent = "New Balance: "+Number(Number(newAmtText) + oamt);
-                } else if (order.textContent == "Withdraw Funds to FinWheel") {
-                    newB.textContent = "New Balance: "+Number(Number(newAmtText) - oamt);
+                if (pricept == 0){
+                    sumAmt.textContent = "Amount: $"+Number(newAmtText*stockPrice);
+                    console.log(order.textContent);
+                    if (orderS.value == "buy" || orderS.value == "buy_minus"){
+                        newB.textContent = "New Balance: "+Number(oamt - Number(newAmtText*Number(stockPrice)));
+                    } else if (orderS.value == "sell" || orderS.value == "sell_short") {
+                        newB.textContent = "New Balance: "+Number(Number(newAmtText*Number(stockPrice)) + oamt);
+                    }
+                    console.log(newAmtText);
+                    console.log(newB.textContent);
+                } else {
+                    sumAmt.textContent = "Amount: $"+Number(newAmtText*pricept);
+                    console.log(order.textContent);
+                    if (orderS.value == "buy" || orderS.value == "buy_minus"){
+                        newB.textContent = "New Balance: "+Number(oamt - Number(newAmtText*Number(pricept)));
+                    } else if (orderS.value == "sell" || orderS.value == "sell_short") {
+                        newB.textContent = "New Balance: "+Number(Number(newAmtText*Number(pricept)) + oamt);
+                    }
+                    console.log(newAmtText);
+                    console.log(newB.textContent);
                 }
-                console.log(newAmtText);
-                console.log(newB.textContent);
-                
+            });
+
+            limits.addEventListener('input', function(){
+                const newLimit = limits.value;
+                console.log(newLimit);
+                pricept = Number(newLimit);
             });
 
             // Add event listener to detect changes in input value
@@ -114,7 +134,7 @@
                 const sumOrder = document.getElementById('sumOrder');
 
                 sumOrder.textContent = "Order Type: "+newOrderText;
-                if (newOrderText == "limit" || newOrderText == "stop_limit"){
+                if (newOrderText == "limit" || newOrderText == "stop_limit" || newOrderText == "stop" || newOrderText == "trailing_stop"){
                     document.getElementById('pricepoint').style.display = 'block';
                 } else {
                     document.getElementById('pricepoint').style.display = 'none';

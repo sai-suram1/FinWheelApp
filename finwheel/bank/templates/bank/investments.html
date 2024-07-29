@@ -1,0 +1,78 @@
+{% extends 'home/layout.html' %}
+{% load mathfilters %}
+
+
+{% block title %}Home - Fin{% endblock %}
+
+{% block content %}
+    
+        <div class="container">
+            <h1>Current Investments and Holdings</h1>
+            <strong><p>Cash: {{acct.cash_balance}}</p></strong><hr><br>
+            <style>
+                table, th, td, tr {
+                    border: 1px solid black;
+                    text-align: center;
+                    padding:10px;
+                }
+                button {
+                    background-color: #4CAF50; /* Green background */
+                    border: none;             /* Remove borders */
+                    color: white;             /* White text */
+                    padding: 15px 32px;       /* Some padding */
+                    text-align: center;       /* Centered text */
+                    text-decoration: none;    /* Remove underline */
+                    display: inline-block;    /* Make the button appear inline */
+                    font-size: 16px;          /* Set a font size */
+                    margin: 4px 2px;          /* Add some margin */
+                    cursor: pointer;          /* Add a pointer cursor on hover */
+                    border-radius: 12px;      /* Rounded corners */
+                    transition: background-color 0.3s; /* Smooth transition for background color */
+                }
+            </style>
+            <table style="border: 1px solid black;">
+                    <tr>
+                        <th><p>Symbol</p></th>
+                        <th><p>Quantity</p></th>
+                        <th><p>Cost Basis</p></th>
+                        <th><p>Gain/Loss</p></th>
+                        <th><p>Gain/Loss  (%)</p></th>
+                        <th><p>Current Price</p></th>
+                    </tr>
+                    {% for x in positions %}
+                        <tr>
+                            {% for key, value in x.items %} 
+                                {% if key == "symbol" or key == "qty" or key == "cost_basis" or key == "current_price" or key == "unrealized_pl" or key == "unrealized_plpc" %}
+                                    {% if key == "unrealized_plpc" %}
+                                        <td><p>{{ value|mul:100 }}</p></td>
+                                    {% else %} 
+                                        <td><p>{{value}}</p></td>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+            </table>
+            <p style="color: red;">{{message}}</p>
+        </div>
+        <div class="container">
+            <h1>Open Orders</h1>
+            {% for x in orders %} 
+                <div class="container">
+                    {% for key, value in x.items %} 
+                        {% if key == "symbol" or key == "qty" or key == "order_type" or key == "limit_price" or key == "stop_price" or key == "trail_price" %}
+                            {% if value != None %}
+                                <p>{{key}} - <strong>{{value}}</strong></p>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endfor %}
+            <p style="color: red;">{{message}}</p>
+        </div>
+        <div class="container">
+            <h1>Wanna make a trade?</h1>
+            <a href="{% url 'bank:order' %}" style="text-align: center;"><button>Make a Trade</button></a>
+        </div>
+        
+{% endblock %}

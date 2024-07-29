@@ -19,6 +19,7 @@
             <li><a href="{% url 'home:dashboard' %}">Home</a></li>
             {% if user.is_authenticated %}
             <li><a href="{% url 'ai:dashboard' %}">AI</a></li>
+            <li><a href="{% url 'bank:investments' %}">Investments</a></li>
             <li><a href="{% url 'user:logout' %}">Logout</a></li>
             {% else %}
             <li><a href="{% url 'user:login' %}">Login</a></li>
