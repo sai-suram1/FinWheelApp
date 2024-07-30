@@ -130,9 +130,16 @@ def card_view(request):
 @login_required(login_url='/user/login')
 def investment_view(request):
     user_account = CashAccount.objects.get(for_user=request.user)
-    positions = get_open_positions(user_account.customer_id)
-    orders = get_open_orders(user_account.customer_id)
+    positions = get_positions_from_account(user_account)
+    print(positions)
+    orders = get_open_orders(user_account)
     return render(request, "bank/investments.html", {"positions": positions, "orders":orders, "acct":user_account})     
+
+@login_required(login_url='/user/login')
+def cancel_order_view(request, order_id):
+    user_account = CashAccount.objects.get(for_user=request.user)
+    cancel_order(user_account, order_id)
+    return HttpResponseRedirect(reverse("bank:investments"))
 
 @login_required(login_url='/user/login')
 def transactions_view(request):
@@ -172,8 +179,14 @@ def make_order(request):
         pricept = 0
         if "price" in request.POST.keys():  
             pricept = request.POST["price"]
-        process_order(ticker, side, type, time, qty, pricept, cash_account)
-        return render(request, "bank/order.html", {"external_bank_accounts": l, "cash": cash_account})
+        
+        xt = process_order(ticker, side, type, time, qty, pricept, cash_account)
+        if xt != None:
+             return render(request, "bank/order.html", {"external_bank_accounts": l, "cash": cash_account, "message": xt})
+        else:
+            print("order processed")
+            return HttpResponseRedirect(reverse("bank:investments"))
+       
 from django.views.decorators.http import require_http_methods
 
 @require_http_methods(["GET", "POST"])

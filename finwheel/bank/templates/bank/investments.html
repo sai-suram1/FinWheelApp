@@ -60,9 +60,16 @@
             {% for x in orders %} 
                 <div class="container">
                     {% for key, value in x.items %} 
-                        {% if key == "symbol" or key == "qty" or key == "order_type" or key == "limit_price" or key == "stop_price" or key == "trail_price" %}
+                        {% if key == "symbol" or key == "qty" or key == "order_type" or key == "limit_price" or key == "stop_price" or key == "trail_price" or key == "id" %}
                             {% if value != None %}
                                 <p>{{key}} - <strong>{{value}}</strong></p>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                    {% for key, value in x.items %} 
+                        {% if key == "id" %}
+                            {% if value != None %}
+                                <a href="{% url 'bank:cancel' value %}" style="text-align: center;"><button style=" background-color:red;">Cancel this Order</button></a>
                             {% endif %}
                         {% endif %}
                     {% endfor %}
@@ -70,9 +77,11 @@
             {% endfor %}
             <p style="color: red;">{{message}}</p>
         </div>
-        <div class="container">
+        <div class="container" style="text-align: center;">
             <h1>Wanna make a trade?</h1>
             <a href="{% url 'bank:order' %}" style="text-align: center;"><button>Make a Trade</button></a>
+            <h1>Wanna make a new automated financial plan?</h1>
+            <a href="{% url 'ai:dashboard' %}" style="text-align: center;"><button>Talk to Fin</button></a>
         </div>
         
 {% endblock %}

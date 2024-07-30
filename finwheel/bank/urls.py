@@ -9,5 +9,6 @@ urlpatterns = [
     path("transaction", start_transaction, name="transaction"),
     path("order", make_order, name="order"),
     path("quote", latest_quote, name="quote"),
-    path("investments", investment_view, name="investments")
+    path("investments", investment_view, name="investments"),
+    path("cancelorder/<uuid:order_id>", cancel_order_view, name="cancel")
 ]

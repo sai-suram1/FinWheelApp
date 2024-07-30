@@ -60,7 +60,7 @@ def bot_operate(request):
             #print(data)
             # Process the data (example: add a new key-value pair)
             try:
-                processed_data = str(send_message_and_get_response(data[f"message"], Chat_History.objects.filter(for_chat=ch).order_by('order')))
+                processed_data = str(send_message_and_get_response(data[f"message"], Chat_History.objects.filter(for_chat=ch).order_by('date_created')))
                 print(processed_data)
                 new_register = Chat_History(for_chat=ch, order=last_message_number+1, user_message=data[f"message"], chatbot_response=processed_data, date_created=datetime.datetime.now())
                 new_register.save()

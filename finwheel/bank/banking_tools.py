@@ -7,7 +7,6 @@ import datetime
 from json import JSONEncoder
 from bank.plaid_tools import *
 import decimal
-import ast
 
 auth = dotenv_values("bank/.env")
 print(auth)
@@ -210,7 +209,17 @@ def create_ACH_relationship(account_id, bank_account: ExternalBankAccount):
     elif response.status_code == 400:
         return False
         
+def get_open_orders(acct: CashAccount):
+    import requests
 
+    url = f"https://broker-api.sandbox.alpaca.markets/v1/trading/accounts/{acct.customer_id}/orders?status=open"
+
+    headers = {"accept": "application/json", "authorization": "Basic Q0tCTVA1M0taSVc1V0JST0pUQlg6MnpsWGJncWJ3VU9xbGxFajVoeWJONnRvTGFpOE1rZVBjcUgyS09KOQ=="}
+
+    response = requests.get(url, headers=headers)
+
+    print(response.text)
+    return response.json()
 
 def check_on_ACH_relationship(account_id):
     import requests
@@ -292,17 +301,6 @@ def make_transaction(account: CashAccount,acc_num, amount, order):
         return True
 
 
-def get_account_info(user: CashAccount):
-    import requests
-
-    url = f"https://broker-api.sandbox.alpaca.markets/v1/accounts/{user.customer_id}"
-
-    headers = {"accept": "application/json", "authorization": "Basic Q0tCTVA1M0taSVc1V0JST0pUQlg6MnpsWGJncWJ3VU9xbGxFajVoeWJONnRvTGFpOE1rZVBjcUgyS09KOQ=="}
-
-    response = requests.get(url, headers=headers)
-    print(response.json())
-    return dict(response.json())
-
 def get_positions_from_account(user: CashAccount):
     import requests
 
@@ -314,48 +312,32 @@ def get_positions_from_account(user: CashAccount):
 
     #print(response.text)
     print(response.json())
-    return dict(response.json())
+    return list(response.json())
 
-def process_order(ticker, side, type, time, qty, pricept: int, cash_account: CashAccount):
+def cancel_order(user:CashAccount, order_id):
     import requests
 
-    url = f"https://broker-api.sandbox.alpaca.markets/v1/trading/accounts/{cash_account.customer_id}/orders"
+    url = f"https://broker-api.sandbox.alpaca.markets/v1/trading/accounts/{user.customer_id}/orders/{order_id}"
 
-    payload = {
-        "side": side,
-        "type": type,
-        "time_in_force": time,
-        "commission_type": "notional",
-        "symbol": ticker,
-        "qty": qty,
-        "commmission": 0.01,    
-    }
+    headers = {"accept": "application/json", "authorization": "Basic Q0tCTVA1M0taSVc1V0JST0pUQlg6MnpsWGJncWJ3VU9xbGxFajVoeWJONnRvTGFpOE1rZVBjcUgyS09KOQ=="}
 
-    if type == "limit" or type=="stop_limit":
-        payload.update({"limit_price": pricept})
-    elif type == "stop" or type=="stop_limit":
-        payload.update({"stop_price": pricept})
-    elif type == "trailing_stop":
-        payload.update({"trail_price": pricept})
-
-    if "stop_price" in payload.keys() and "limit_price" in payload.keys():
-        payload.update({"stop_loss": {"stop_price": pricept, "limit_price": pricept}})
-    
-    """
-    "limit_price": "3.14",
-        "stop_price": "3.14",
-        "trail_price": "3.14",
-        "trail_percent": "5.0"
-    """
-    headers = {
-        "accept": "application/json",
-        "content-type": "application/json",
-        "authorization": "Basic Q0tCTVA1M0taSVc1V0JST0pUQlg6MnpsWGJncWJ3VU9xbGxFajVoeWJONnRvTGFpOE1rZVBjcUgyS09KOQ=="
-    }
-
-    response = requests.post(url, json=payload, headers=headers)
+    response = requests.delete(url, headers=headers)
 
     print(response.text)
+
+
+
+def get_account_info(acct: CashAccount):
+    import requests
+
+    url = f"https://broker-api.sandbox.alpaca.markets/v1/trading/accounts/{acct.customer_id}/account"
+
+    headers = {"accept": "application/json", "authorization": "Basic Q0tCTVA1M0taSVc1V0JST0pUQlg6MnpsWGJncWJ3VU9xbGxFajVoeWJONnRvTGFpOE1rZVBjcUgyS09KOQ=="}
+
+    response = requests.get(url, headers=headers)
+
+    print(response.text)
+    return response.json()
 
 def get_quote(symbol):
     import requests
@@ -370,27 +352,64 @@ def get_quote(symbol):
 
     return response.json()
 
-def get_open_positions(account_id):
+def process_order(ticker, side, type, time, qty, pricept: int, cash_account: CashAccount):
     import requests
 
-    url = f"https://broker-api.sandbox.alpaca.markets/v1/trading/accounts/{account_id}/positions"
+    acct_info = dict(get_account_info(cash_account))
+    print(acct_info)
+    positions = get_positions_from_account(cash_account)
+    quote = get_quote(ticker)["quote"]["ap"]
+    buying_power = None
+    cash = None
+    position_qty = None
+    position_exists = None
+    if side == "buy":
+        buying_power = acct_info["buying_power"]
+        cash = acct_info["cash"]
+        if (quote*qty) > cash:
+            return "Order Not Executed: Not Enough Cash"
+        else:
+            cash_account.cash_balance -= decimal.Decimal((quote*float(qty)))
+    else:
+        for x in positions:
+            if x["symbol"] == ticker:
+                position_exists = True
+                position_qty = x["qty"]
+                break
+        if position_exists == False or qty > position_qty:
+            return "You are selling more stock than you actually have."
+        else:
+            cash_account.cash_balance += decimal.Decimal((quote*float(qty)))
+    
 
-    headers = {"accept": "application/json", "authorization": "Basic Q0tCTVA1M0taSVc1V0JST0pUQlg6MnpsWGJncWJ3VU9xbGxFajVoeWJONnRvTGFpOE1rZVBjcUgyS09KOQ=="}
+    url = f"https://broker-api.sandbox.alpaca.markets/v1/trading/accounts/{cash_account.customer_id}/orders"
 
-    response = requests.get(url, headers=headers)
+    payload = {
+        "side": side,
+        "type": type,
+        "time_in_force": time,
+        "commission_type": "notional",
+        "symbol": ticker,
+        "qty": qty,    
+    }
 
-    #print(response.text)
-    return response.json()
+    if type == "limit" or type == "stop_limit":
+        payload.update({"limit_price": pricept})
+    if type == "stop" or type == "stop_limit":
+        payload.update({"stop_price": pricept})
+    if type == "trailing_stop":
+        payload.update({"trail_price": pricept})
 
-def get_open_orders(account_id):
-    import requests
+    headers = {
+        "accept": "application/json",
+        "content-type": "application/json",
+        "authorization": "Basic Q0tCTVA1M0taSVc1V0JST0pUQlg6MnpsWGJncWJ3VU9xbGxFajVoeWJONnRvTGFpOE1rZVBjcUgyS09KOQ=="
+    }
 
-    url = f"https://broker-api.sandbox.alpaca.markets/v1/trading/accounts/{account_id}/orders?status=open"
+    response = requests.post(url, json=payload, headers=headers)
+    cash_account.save()
+    if response.status_code != 200:
+        return response.json()["message"]
+    else: 
+        print(response.text)
 
-    headers = {"accept": "application/json", "authorization": "Basic Q0tCTVA1M0taSVc1V0JST0pUQlg6MnpsWGJncWJ3VU9xbGxFajVoeWJONnRvTGFpOE1rZVBjcUgyS09KOQ=="}
-
-    response = requests.get(url, headers=headers)
-
-    print(response.json())
-    #print(type(response.json()))
-    return response.json()

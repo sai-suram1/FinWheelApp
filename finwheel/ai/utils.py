@@ -101,6 +101,14 @@ def send_message_and_get_response(input, history):
         return xt.text
 
 
+def create_financial_plan(history):
+    
+
+
+
+
+
+
 
 
 def test_ai_connection():
