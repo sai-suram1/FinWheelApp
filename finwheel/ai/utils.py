@@ -11,10 +11,12 @@ import os
 from google.generativeai.types import HarmCategory, HarmBlockThreshold
 import google.generativeai as genai
 from dotenv import load_dotenv,dotenv_values
-
+from user.models import *
 from ai.models import model_parameters
 config = dotenv_values("ai/.env")
 from ai.load_creds import *
+import decimal
+import datetime
 #from ai.models import *
 
 genai.configure(api_key=config["api-key"])
@@ -66,7 +68,7 @@ def refine_chat_history(history):
 model = genai.GenerativeModel(model_name="gemini-1.5-flash-latest")
 
 
-def create_financial_plan(history):
+def create_financial_plan(user, history):
     analyzer = model.start_chat(history = refine_chat_history(history))
     xt = analyzer.send_message("What should be done for the financial plan")
     """
@@ -78,12 +80,45 @@ def create_financial_plan(history):
 
     INVESTMENT FREQUENCY: (Choose from DAY, WEEK, MONTH)
     INVESTMENT AMOUNT PER MONTH: <Investment amount, NO $>
+
+    When I ask for all the assets to be invested in with the new portfolio, each asset must be listed in this exact order. 
+    DO NOT USE ANY MARKDOWN OR OTHER TEXTUAL ADJUSTMENTS. 
+
+    ASSET TICKER: <asset ticker>
+    INVESTMENT FREQUENCY: (Choose from DAY, WEEK, MONTH)
+    INVESTMENT AMOUNT PER MONTH: <Investment amount, NO $>
+    ~
     """
 
-    print(xt.text)
+    #print(xt.text)
+    lk = xt.text.split("\n")
+    investment_freq = lk[0].split(":")[1].strip()
+    investment_amt = float(lk[1].split(":")[1].strip())
+    #print(investment_freq)
+    #print(investment_amt)
+    assets = []
+    xt = analyzer.send_message("What are all of the assets the user wants to invest in?")
+    #print(xt.text)
+    kj = xt.text.split("~")
+    for p in kj:
+        stuff = p.split("\n")
+        #print(stuff)
+        asd = {}
+        for d in stuff:
+            if d == '' or d == ' ':
+                continue
+            else:
+                #print(d.split(":"))
+                asd.update({d.split(":")[0]: d.split(":")[1].strip()})
+        assets.append(asd)
+    print(assets)
 
+    #make financial plan
+    f = FinancialPlan(for_user=user, recurring_deposit_amount=decimal.Decimal(investment_amt), recurring_deposit_frequency=investment_freq, last_recurring_deposit=datetime.datetime.now(), next_recurring_deposit = datetime.datetime.now()+datetime.timedelta(hours=(24*30)))
+    f.save()
+    return True
 
-def send_message_and_get_response(input, history):
+def send_message_and_get_response(input, history, user):
     # add code to have the model re-cap on the past knowledge and make a new judgement.
     """
     if ("yes" in input or "y" in input or "Yes" in input or "Y" in input):
@@ -95,7 +130,9 @@ def send_message_and_get_response(input, history):
         if ("yes" in input or "y" in input or "Yes" in input or "Y" in input):
             if ("confirm" in history.last().chatbot_response or "agree" in history.last().chatbot_response) and history.count() > 0:
                 print("review past plan and make a solution.")
-                create_financial_plan(history)
+                lk = create_financial_plan(user, history)
+                if lk:
+                    return "Financial Plan Created Successfully"
             else:
                 print(history.count())
                 print("processing")        
