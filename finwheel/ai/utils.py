@@ -65,6 +65,24 @@ def refine_chat_history(history):
 #print('Available base models:', [m.name for m in genai.list_models()])
 model = genai.GenerativeModel(model_name="gemini-1.5-flash-latest")
 
+
+def create_financial_plan(history):
+    analyzer = model.start_chat(history = refine_chat_history(history))
+    xt = analyzer.send_message("What should be done for the financial plan")
+    """
+    PLAN TO TRAIN
+    
+    ADMIN PRIVELIGES: 
+    - When I ask for analyzing what should be done for this financial plan, I want the following to the returned in this exact order. 
+    DO NOT USE ANY MARKDOWN OR OTHER TEXTUAL ADJUSTMENTS. 
+
+    INVESTMENT FREQUENCY: (Choose from DAY, WEEK, MONTH)
+    INVESTMENT AMOUNT PER MONTH: <Investment amount, NO $>
+    """
+
+    print(xt.text)
+
+
 def send_message_and_get_response(input, history):
     # add code to have the model re-cap on the past knowledge and make a new judgement.
     """
@@ -77,7 +95,7 @@ def send_message_and_get_response(input, history):
         if ("yes" in input or "y" in input or "Yes" in input or "Y" in input):
             if ("confirm" in history.last().chatbot_response or "agree" in history.last().chatbot_response) and history.count() > 0:
                 print("review past plan and make a solution.")
-                # create a financial plan that could be registered in the system and executed.
+                create_financial_plan(history)
             else:
                 print(history.count())
                 print("processing")        
@@ -99,15 +117,6 @@ def send_message_and_get_response(input, history):
         xt = response.send_message(input)
         print(xt.text)
         return xt.text
-
-
-def create_financial_plan(history):
-    
-
-
-
-
-
 
 
 
