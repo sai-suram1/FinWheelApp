@@ -118,6 +118,11 @@ def create_financial_plan(user, history):
     f.save()
     return True
 
+def make_action(history):
+    analyzer = model.start_chat(history = refine_chat_history(history))
+    sol_finder = analyzer.send_message("From this chat, what action should be executed currently?\n DO NOT USE MARKDOWN OR OTHER TEXTUAL EDITS \n - creating financial plans \n - trading stocks/assets directly.\n- changing user settings\n- ordering money transfers between accounts.\n- analysis of SEC and Earnings Data of Assets.\n - Rebalancing Portfolios and Making changes to Financial plans.")
+    print(sol_finder.text)
+
 def send_message_and_get_response(input, history, user):
     # add code to have the model re-cap on the past knowledge and make a new judgement.
     """
@@ -130,7 +135,14 @@ def send_message_and_get_response(input, history, user):
         if ("yes" in input or "y" in input or "Yes" in input or "Y" in input):
             if ("confirm" in history.last().chatbot_response or "agree" in history.last().chatbot_response) and history.count() > 0:
                 print("review past plan and make a solution.")
-                lk = create_financial_plan(user, history)
+                make_action(history)
+                # we have covered financial plans. We need to cover the following:
+                # trading stocks/assets directly. 
+                # changing user settings
+                # ordering money transfers between accounts. 
+                # analysis of SEC and Earnings Data of Assets. 
+                # Rebalancing Portfolios and Making changes to Financial plans.
+                lk = create_financial_plan(user, history) 
                 if lk:
                     return "Financial Plan Created Successfully"
             else:
