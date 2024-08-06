@@ -6,8 +6,8 @@ def verify_setup(user):
     # verify the user set up everything
 
     # 1. Check to see if they verified their bank/info
-    account = CashAccount.objects.filter(for_user=user)
-    if account.count() == 1 and account[0].bank_account.verified:
+    account = CashAccount.objects.get(for_user=user)
+    if account.bank_account.verified == True:
         verification_list.append(True)
     else:
         verification_list.append(False)

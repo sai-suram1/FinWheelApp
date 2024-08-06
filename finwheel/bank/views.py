@@ -143,7 +143,7 @@ def cancel_order_view(request, order_id):
 
 @login_required(login_url='/user/login')
 def transactions_view(request):
-    pass
+    return render(request, "bank/account_stats.html")
 
 #transaction management
 @login_required(login_url="/user/login")

@@ -7,6 +7,7 @@ urlpatterns = [
     path("bank_hook", hook_receiver_view, name="webhook"),
     #path("plaidverification", send_to_plaid, name="achverification"),
     path("transaction", start_transaction, name="transaction"),
+    path("account_info", transactions_view, name="account_info"),
     path("order", make_order, name="order"),
     path("quote", latest_quote, name="quote"),
     path("investments", investment_view, name="investments"),

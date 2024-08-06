@@ -13,7 +13,7 @@
                 table, th, td, tr {
                     border: 1px solid black;
                     text-align: center;
-                    padding:10px;
+                    padding:5px;
                 }
                 button {
                     background-color: #4CAF50; /* Green background */
@@ -29,6 +29,10 @@
                     border-radius: 12px;      /* Rounded corners */
                     transition: background-color 0.3s; /* Smooth transition for background color */
                 }
+                div {
+                    margin: 20px;
+                }
+
             </style>
             <table style="border: 1px solid black;">
                     <tr>
@@ -78,9 +82,9 @@
             <p style="color: red;">{{message}}</p>
         </div>
         <div class="container" style="text-align: center;">
-            <h1>Wanna make a trade?</h1>
+            <h3>Wanna make a trade?</h3>
             <a href="{% url 'bank:order' %}" style="text-align: center;"><button>Make a Trade</button></a>
-            <h1>Wanna make a new automated financial plan?</h1>
+            <h3>Wanna make a new automated financial plan?</h3>
             <a href="{% url 'ai:dashboard' %}" style="text-align: center;"><button>Talk to Fin</button></a>
         </div>
         
