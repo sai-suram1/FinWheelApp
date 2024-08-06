@@ -11,6 +11,8 @@ import os
 from google.generativeai.types import HarmCategory, HarmBlockThreshold
 import google.generativeai as genai
 from dotenv import load_dotenv,dotenv_values
+from bank.banking_tools import process_order
+from bank.models import CashAccount
 from user.models import *
 from ai.models import model_parameters
 config = dotenv_values("ai/.env")
@@ -69,12 +71,27 @@ model = genai.GenerativeModel(model_name="gemini-1.5-flash-latest")
 
 
 def find_and_make_trade(user, history):
-    analyzer = model.start_chat(history = refine_chat_history(history))
-    xt = analyzer.send_message("What is the trade that needs to be made?")
-    """
+    ana = model.start_chat(history = refine_chat_history(history))
+    x = ana.send_message("""What is the trade that needs to be made? DO NOT USE ANY MARKDOWN OR OTHER TEXTUAL ADJUSTMENTS. 
         WHEN I ASK FOR THE TRADE THAT IS NEEDED TO BE MADE
         I want the following returned in this exact order:
+        
+
+        TICKER: <TICKER>
+        ORDER SIDE: <BUY, SELL>
+        TIME IN FORCE: <day, gtc, otp>
+        TYPE: <market, limit, stop_limit, trailing_stop>
+        (gtc means "Good until Canceled" and otp means "Official Opening Price")
+        QUANTITY OF SHARES: <qty>
+        OR 
+        AMOUNT TO INVEST: <cash_amt>
+        """)
+    #print(x.text)
+    """
         DO NOT USE ANY MARKDOWN OR OTHER TEXTUAL ADJUSTMENTS. 
+        WHEN I ASK FOR THE TRADE THAT IS NEEDED TO BE MADE
+        I want the following returned in this exact order:
+        
 
         TICKER: <TICKER>
         ORDER SIDE: <BUY, SELL>
@@ -84,28 +101,27 @@ def find_and_make_trade(user, history):
         OR 
         AMOUNT TO INVEST: <cash_amt>
     """
-    lk = xt.text.split("\n")
-    investment_freq = lk[0].split(":")[1].strip()
-    investment_amt = float(lk[1].split(":")[1].strip())
-    #print(investment_freq)
-    #print(investment_amt)
-    assets = []
-    print(xt.text)
-    kj = xt.text.split("~")
-    for p in kj:
-        stuff = p.split("\n")
-        #print(stuff)
-        asd = {}
-        for d in stuff:
-            if d == '' or d == ' ':
-                continue
-            else:
-                #print(d.split(":"))
-                asd.update({d.split(":")[0]: d.split(":")[1].strip()})
-        assets.append(asd)
-    print(assets)
-    
+    print(x.text)
+    lk = x.text.split("\n")
+    print(lk)
+    info = []
+    for p in lk:
+        if p == '':
+            continue
+        else:
+            s = p.split(":")
+            info.append({s[0]:s[1].strip()})
+    print(info)
+    if "QUANTITY OF SHARES" in x.text and "PRICEPOINT" in x.text:
+        xy = process_order(ticker=info[0]["TICKER"], side=info[1]["ORDER SIDE"], type=info[2]["TYPE"], time=info[3]["TIME IN FORCE"], qty=info[4]["QUANTITY OF SHARES"], cash_account=CashAccount.objects.get(for_user=user), pricept=info[5]["PRICEPOINT"])
+    elif "AMOUNT TO INVEST" in x.text and "PRICEPOINT" in x.text:
+        xy = process_order(ticker=info[0]["TICKER"], side=info[1]["ORDER SIDE"], type=info[2]["TYPE"], time=info[3]["TIME IN FORCE"], cash_amt=info[4]["AMOUNT TO INVEST"], cash_account=CashAccount.objects.get(for_user=user),pricept=info[5]["PRICEPOINT"])
+    elif "QUANTITY OF SHARES" in x.text and "PRICEPOINT" not in x.text:
+        xy = process_order(ticker=info[0]["TICKER"], side=info[1]["ORDER SIDE"], type=info[2]["TYPE"], time=info[3]["TIME IN FORCE"], qty=info[4]["QUANTITY OF SHARES"], cash_account=CashAccount.objects.get(for_user=user))
+    elif "AMOUNT TO INVEST" in x.text and "PRICEPOINT" not in x.text:
+        xy = process_order(ticker=info[0]["TICKER"], side=info[1]["ORDER SIDE"], type=info[2]["TYPE"], time=info[3]["TIME IN FORCE"], cash_amt=info[4]["AMOUNT TO INVEST"], cash_account=CashAccount.objects.get(for_user=user))
 
+    return "Order had been made."
 
 def create_financial_plan(user, history):
     analyzer = model.start_chat(history = refine_chat_history(history))
@@ -194,12 +210,14 @@ def send_message_and_get_response(input, history, user):
             if ("confirm" in history.last().chatbot_response or "agree" in history.last().chatbot_response) and history.count() > 0:
                 print("review past plan and make a solution.")
                 plan = make_action(history)
-                if plan == "creating investment plans/portfolios":
+                if "creating investment plans/portfolios" in plan:
                     lk = create_financial_plan(user, history) 
                     if lk:
                         return "Financial Plan Created Successfully"
-                elif plan == "trading stocks/assets directly":
-                    find_and_make_trade(user, history)
+                elif "trading stocks/assets directly" in plan:
+                    d = find_and_make_trade(user, history)
+                    if type(d) == str:
+                        return d
                 # we have covered financial plans. We need to cover the following:
                 # trading stocks/assets directly. 
                 # changing user settings

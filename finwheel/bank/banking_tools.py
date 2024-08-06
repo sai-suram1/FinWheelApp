@@ -363,7 +363,7 @@ def process_order(ticker, side, type, time, qty, cash_amt, pricept: int, cash_ac
     cash = None
     position_qty = None
     position_exists = None
-    if side == "buy":
+    if str(side).lower() == "buy":
         buying_power = acct_info["buying_power"]
         cash = acct_info["cash"]
         if qty != None:
@@ -392,7 +392,7 @@ def process_order(ticker, side, type, time, qty, cash_amt, pricept: int, cash_ac
 
     payload = {
         "side": side,
-        "type": type,
+        "type": str(type).lower(),
         "time_in_force": time,
         "commission_type": "notional",
         "symbol": ticker,

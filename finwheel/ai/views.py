@@ -96,7 +96,6 @@ def sendChat(request):
             markdowner = Markdown()
             for message in last_messages:
                 generate_text_setting += f"<hr> <h4>user:</h4> {markdowner.convert(message.user_message)} | Sent: {message.date_created}<br><hr><h4>bot:</h4> {markdowner.convert(message.chatbot_response)}<br>"
-                
             x = HttpResponse(generate_text_setting)
             return x
         except json.JSONDecodeError:
