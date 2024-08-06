@@ -352,7 +352,7 @@ def get_quote(symbol):
 
     return response.json()
 
-def process_order(ticker, side, type, time, qty, pricept: int, cash_account: CashAccount):
+def process_order(ticker, side, type, time, qty, cash_amt, pricept: int, cash_account: CashAccount):
     import requests
 
     acct_info = dict(get_account_info(cash_account))
@@ -366,10 +366,16 @@ def process_order(ticker, side, type, time, qty, pricept: int, cash_account: Cas
     if side == "buy":
         buying_power = acct_info["buying_power"]
         cash = acct_info["cash"]
-        if (quote*qty) > cash:
-            return "Order Not Executed: Not Enough Cash"
+        if qty != None:
+            if (quote*qty) > cash:
+                return "Order Not Executed: Not Enough Cash"
+            else:
+                cash_account.cash_balance -= decimal.Decimal((quote*float(qty)))
         else:
-            cash_account.cash_balance -= decimal.Decimal((quote*float(qty)))
+            if cash_amt > cash:
+                return "Order Not Executed: Not Enough Cash"
+            else:
+                cash_account.cash_balance -= decimal.Decimal(float(cash_amt))
     else:
         for x in positions:
             if x["symbol"] == ticker:
