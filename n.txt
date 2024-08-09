@@ -1,0 +1,3071 @@
+713
+Glossary
+Y
+yield The rate of return on an investment, usually ex-
+pressed as an annual percentage rate. Related item(s): 
+current yield; dividend yield; nominal yield.
+yield-based option A security representing the right to 
+receive, in cash, the difference between the current 
+yield of an underlying U.S. government security and 
+the strike price of the option. A yield-based option is 
+used to speculate on or hedge against the risk associated 
+with fluctuating interest rates; its strike price represents 
+the anticipated yield of the underlying debt security.
+yield curve A graphic representation of the actual or 
+projected yields of fixed-income securities in relation 
+to their maturities. Related item(s): flat yield curve; 
+inverted yield curve.
+yield to call (YTC) The rate of return on a bond that ac-
+counts for the difference between the bond’s acquisition 
+cost and its proceeds, including interest income, calcu-
+lated to the earliest date that the bond may be called by 
+the issuing corporation. Related item(s): bond yield.
+yield to maturity (YTM) The rate of return on a bond 
+that accounts for the difference between the bond’s 
+acquisition cost and its maturity proceeds, including 
+interest income. Related item(s): bond yield.
+YTC See yield to call.
+YTM See yield to maturity.
+Z
+zero-coupon bond A corporate or municipal debt secu-
+rity traded at a deep discount from face value. The bond 
+pays no interest; rather, it may be redeemed at maturity 
+for its full face value. It may be issued at a discount, or 
+it may be stripped of its coupons and repackaged.
+zero-minus tick A security transaction’s execution price 
+that is equal to the price of the last sale but lower than 
+the last different price. Related item(s): minus tick; plus 
+tick; zero-plus tick.
+zero-plus tick A security transaction’s execution price 
+that is equal to the price of the last sale but higher than 
+the last different price. Related item(s): minus tick; plus 
+tick; zero-minus tick.
+
+
+715
+Index
+Symbols
+5% markup policy  372, 678
+12b-1 asset-based fees  710
+12b-1 mutual funds  420, 432
+30-day visible supply  709
+30-day visible supply index  123
+75-5-10 test  412, 705
+360-day-year interest accrual  81–82
+365-day-year interest accrual  81–82
+401(k) plan  460, 469, 679
+403(b) plan  467, 679
+A
+Acceptance ratio  659
+Acceptance, waiver, and consent 
+(AWC)  633, 659
+Account agreement
+joint  260
+margin agreement  278
+partnership  261
+trust agreement  262
+Account executive (AE)  659
+Account number  390
+Accounts
+frozen  258, 264, 282
+restricted  284, 290–291
+Accredited investor  329, 659
+Accretion of bond discount  659
+Accrual accounting  659
+Accrued interest  81–84, 397, 659
+Accumulation account  659
+Accumulation plans of mutual funds  
+442
+Accumulation stage  659
+Accumulation unit  659
+Acid-test ratio  659
+ACT  659
+Act of 1933  659
+Act of 1934  659
+Additional securities issues  318, 319
+Additional takedown  129–130
+Adjacent acreage  659
+Adjustable-rate dividend  15–16
+Adjusted basis  659
+Adjusted gross income (AGI)  659
+Adjustment bonds. See Income bond
+Administrator  659
+ADR  659
+Ad valorem taxes  659. See Property 
+taxes
+Advance/decline line  659
+Advance refunding  659. 
+See Prerefunding
+Advertisement  660
+Advertising  148–149, 154, 313. See 
+also Sales literature
+Advisory board  660
+AE  660
+Affiliate  660
+Aftermarket  315, 320
+Agency basis  660
+Agency issue  660
+exempted from Regulation T 
+requirements  281
+governmental  49, 75–78
+issuance of  79
+taxation of  75, 76, 77
+Agency transactions  146, 660
+Agents  351, 368, 660
+Aggressive investment strategy  660
+AGI  660
+Agreement among underwriters  660
+Agreement of limited partnership  660
+AIR  660
+Allied member  660
+Allocation priorities of investment 
+syndicate  130
+All-or-none order (AON)  362, 660
+All-or-none underwriting (AON)  324, 
+660
+Alternative minimum tax (AMT)  115, 
+148, 586, 596–597, 660
+Alternative (OCO, “one cancels the 
+other”) orders  362
+Alternative order  660
+AMBAC Indemnity Corporation 
+(AMBAC)  660
+American depositary receipt (ADR)  
+30–31, 661
+American-style options  171
+AMEX Major Market Index (XMI)  214
+Amortization  661
+Amortization of bond premium  661
+Amount  390
+Annual compliance review  661
+Annual ROI  661
+Annuitant  661
+Annuities  477
+assumed interest rate  483–484
+combination  479
+distribution from  483–484, 485
+fixed  477, 478
+immediate  482
+joint life with last survivor payout  
+485
+life income payout  485
+life with period certain payout  485
+periodic payment deferred  482
+purchasing of  482
+single premium deferred  482
+taxation of  487
+variable. See Variable annuity
+Annuitization  488
+payout options  485
+Annuitize  661
+Annuity  661
+Annuity unit  661
+Antidilution provision  9, 68
+Antifraud regulations  333–334. See 
+also Disclosure requirements
+Anti-Money Laundering  661
+AON  661
+AP  661
+Appreciation  661
+Apprenticeship, securities  152
+Approved plan  661
+Arbitrage  350, 661
+Arbitrageur  661
+Arbitration  632, 661
+Ascending triangle  661
+Ask  661
+Ask price  183, 345, 368
+Assessed value  661
+Assessment  627, 661
+Asset  3, 661
+Asset allocation  582–583
+Asset allocation fund  425–426, 661
+Asset-backed security  84, 661
+Assignee  661
+Assignee of record  661
+Assignment  399, 661
+Associated person of a member (AP)  
+662
+Associated persons
+documentation requirements for  153
+ethical business practices for  565–
+571
+Assumed interest rate (AIR)  662
+At-the-close order  662
+At the money  662
+At the money option contract  178, 180
+At-the-opening order  662
+At-the-open orders  361–362
+
+716
+Index
+Auction market  349, 662. See 
+also Exchange market
+Auction rate securities (ARS)  662
+Audited financial statement  662
+Authorized stock  4, 662
+Authorizing resolution  662
+Automated Confirmation Transaction 
+(ACT) Service  662
+Automatic exercise  662
+Average  662
+Average basis  662
+Average cost basis  441, 589
+Average price  662
+Awards  637
+B
+B  662
+BA  662
+Back away  662
+Back-end load  428, 432, 662
+Backing away from firm quote, 
+prohibited  369
+Balanced fund  425, 662
+Balanced investment strategy  662
+Balance of payments (BOP)  662
+Balance of payments, international  
+530–531
+Balance of trade  662
+Balance sheet  3, 662
+Balance sheet equation  662
+Balloon maturity  44, 111, 663
+BAN  663
+Banker’s acceptance (BA)  91, 663
+Bank-grade bonds. See Investment-grade 
+bonds
+Bank guarantee letter  663
+Banking act  663
+Bank Secrecy Act  663
+Bar chart  663
+Basis
+average cost  441
+in limited partnership  510–513
+of corporate bonds  593
+of municipal bonds  591–592
+of mutual fund shares  440
+of serial bond  111
+Basis point  46, 663
+Basis quote  663
+BD  663
+Bear  663
+Bearer bond  45, 46, 663
+Bearish positions  174, 176, 188, 204, 
+206, 209
+Bear market  663
+Beneficial owner  278
+Best efforts underwriting  324, 663
+Beta coefficient  663
+Beta value of portfolio  216, 579
+Bid  663
+Bid form  663
+Bid price  183, 345, 368
+Big Board. See New York Stock 
+Exchange (NYSE)
+Blind pool  663
+Block trade  663
+Blue-chip stock  663
+Blue sky  663
+Blue-sky laws  615, 663
+Board broker. See Order book official 
+(OBO)
+Board of directors (BOD)  4, 663
+of investment company  418, 420
+Bona fide quote  142, 369, 371, 663
+Bond  663
+Bond anticipation note (BAN)  663
+municipal  117
+Bond attorney  663
+Bond Buyer indexes  664
+Bond Buyer, The  122, 123–124, 129, 
+155
+Bond certificates  44
+Bond counsel  120, 122, 664
+Bond fund  426, 664
+Bond interest coverage ratio  664
+Bond laddering  100, 664
+Bond quote  664
+Bond rating  664
+Bond ratio  664
+Bond resolution  119
+protective covenants of  114–115
+Bonds
+accrued interest  81–84
+and debt service  50–54, 111–112, 
+114, 134–140
+callable  51–53
+characteristics of  43–46
+duration of  579
+general obligation  111–113
+listings (quotes) of  46, 97–98, 
+368–372
+municipal. see Municipal bond
+ratings of  47–50
+registration of  45–46
+revenue  113
+secured  60–62
+trading of  65–69
+unsecured  60, 61–62
+with put options  54
+zero-coupon  63–64
+Bond swap  664
+Bond yield  664
+Book-entry bonds  46, 71
+Book-entry security  664
+Book value of stock  6–7
+Book value per share  664
+Bought  390
+Branch office  664
+Breadth-of-market theory  664
+Breakeven point  179, 180, 664
+on spreads  203
+Breakout  664
+Breakpoint  433–435, 664
+Breakpoint sale  664
+prohibited  435–436
+Broad-based index  214, 664
+Broker  664
+Broker call rate  278
+Broker/dealer (BD)  665
+Broker-dealer registration  628
+Brokered CD  92
+Broker fail  665
+Broker loan rate  94
+Brokers and broker/dealers  346–347, 
+608–609
+required membership in SIPC of  608
+Broker’s broker  144, 665
+Broker’s loan  665
+Bucketing  665
+Build America Bonds  118
+Bull  665
+Bulletin board  665
+Bullish position  174, 185, 203, 206
+Bull market  665
+Business cycle  521–522, 665
+Business day  665
+Business development company  547, 
+665
+Buyer’s option  665
+Buy-in  665
+Buying power  665
+Buy stop order  354, 665
+C
+C  665
+Calendar spread  665. See Time spread
+Call  665
+Callable bond  665
+Callable preferred stock  665
+Callable securities
+bonds  51–53
+preferred stock  17
+Call buyer  665
+Call date  665
+Call feature  665
+Call loan  665
+Call loan rate  665. See Broker loan rate
+Call options  172, 174–175
+basic terminology for  178–179, 182
+buying  185–186
+covered  196
+gains and losses for  186
+writing  186–187
+Call premium  51
+Call price  665
+Call protection  52, 666
+Call provision  666
+
+717
+Index
+Call risk  52, 93, 577, 666
+Call spread  201, 203–204, 204, 666
+Call writer  666
+Capacity  390
+Capital  666
+Capital appreciation  12, 666
+Capital asset  666
+Capital Asset Pricing Model (CAPM)  
+581
+Capital contribution  666
+Capital gain  666
+Capital gains and losses  12, 230, 439
+taxation of  12–13, 109, 441, 
+585–586, 588–589
+Capital in excess of par (capital surplus)  
+6
+Capitalization  3, 666
+of closed-end investment companies  
+411
+of mutual funds  411
+Capitalization ratio  666
+Capital loss  666
+Capital market  90, 666
+Capital market financing  317
+Capital risk  666
+Capital stock  666
+Capital structure  666
+Capital surplus  666
+Capped index option  666
+Capping  666
+Carried interest  666
+Cash accounts  256, 259, 666
+and Regulation T  279
+Cash assets ratio  666
+Cash dividend  666
+Cash equivalent  666
+Cash flow  666
+Cashiering department  387, 666
+Cashless collar  198
+Cash market  666
+Cash-on-delivery (COD) settlement  
+254
+Cash settlement  394
+Cash trade  25, 153, 666
+Cash transaction  666
+Catastrophe call  667
+CATS (Certificates of Accrual on 
+Treasury Securities)  74, 667. See 
+also Treasury receipt
+CBOE  667
+CD  667
+CD rate  93
+Certificate negotiability  399
+Certificate of deposit (CD)  92–93, 667
+Certificates of accrual on Treasury 
+securities (CATS)  667
+Certificates of participation (COPs)  115
+Change  667
+Charges  391
+Charitable donations, taxation of  
+594–595
+Chartist  667
+CHB  667
+Chicago Board Options Exchange 
+(CBOE)  223, 667
+Chicago Stock Exchange (CHX)  667
+Churning  264, 567, 667
+Circuit-breaker rules. See Trading halt
+Class  667
+Class A share  667
+Class B share  667
+Class C share  667
+Class D share  667
+Classical economic  667
+Clearing agency  667
+Clearing broker/dealer  667
+Clearing corporation  144
+CLN  667
+Close  667
+Closed-end covenant  667. See Trust 
+indenture, closed-end
+Closed-end investment company  411, 
+412, 667
+Closed-end management company  667
+Closing an options position  191, 
+194–195
+Closing date  667
+Closing purchase  668
+Closing range  668
+Closing sale  668
+Closing transaction  194, 226
+tax consequences of  229–230
+CMO  668
+CMV  668
+COD  668
+Code of Arbitration  628, 635
+Code of Arbitration Procedure  668
+Code of Procedure  627, 632, 668
+Coincident indicator  668
+Cold calling. See Telemarketing
+Collars  198–199
+Collateral  668
+Collateralized debt obligations (CDOs)  
+88
+Collateralized mortgage obligations 
+(CMOs)  84–87, 668
+Collateral trust bond  61, 668
+Collateral trust certificate  668
+Collection ratio  138, 668
+Collect on delivery (COD)  668
+College savings plans  464
+Combination  212–213, 668
+Combination fund  668
+Combination (growth and income) fund  
+424
+Combination privilege  668
+Combined account  668
+Combined distribution  668
+Combined distribution of new securities  
+319
+Combined margin account  299–300
+Commercial bank  668
+Commercial paper  91, 668
+interest rate  94
+Commingling  668
+Commission  390, 630, 668. See Sales 
+charge
+Commissioner  668
+Commission house broker (CHB)  348, 
+668
+Committee on Uniform Securities 
+Identification Procedures  668. 
+See CUSIP
+Common stock  668
+classes of  4–6
+listings (quotes) of  21–24, 368–372
+measures of value of  6–7
+rights of ownership  7–10
+versus mutual fund shares  425
+Common stock ratio  669
+Communications with the public  638
+Compensation  638
+Competitive bidding  79, 122, 125–129, 
+320, 322
+split-rate bids  128
+Competitive bid underwriting  669
+Compliance department  669
+Composite average  669
+Comptroller of the Currency  48
+Concession  129, 669
+Conduct Rules  627, 669
+Conduit theory (taxation of pass-
+through funds)  439–440, 669
+Confidence theory  669
+Confirmation  390, 669
+Confirmations of trades  146, 153, 155
+Congestion  669
+Consolidated Quotation System (CQS)  
+669
+Consolidated Tape (CT)  669
+Consolidated Tape system (CTS)  365
+Consolidated Tape (trade reporting 
+system)  344
+Consolidation  669
+Constant dollar plan  582, 669
+Constant ratio plan  582, 669
+Construction loan notes (CLNs)  117, 
+669
+Constructive receipt  669
+Consumer Price Index (CPI)  74, 89, 
+522, 669
+Consumption  669
+Contemporaneous trader  610, 669
+Contested offer  633
+Contingent deferred sales load  669
+Contingent order  669
+Continuing education  629
+Contra broker  669
+
+718
+Index
+Contraction  670
+Contractionary policy  670
+Contraction, economic  521
+Control (controlling, controlled by, 
+under common control with)  670
+Control person  670
+Control relationships  145–146, 154
+Control security  330, 670
+Conversion parity  670
+Conversion price  66, 670
+Conversion privilege  670
+Conversion rate  670
+Conversion ratio  66, 670
+Conversion value  670
+Convertible bond  670
+Convertible preferred stock  670
+Convertible securities  65–69
+bonds  65–69
+parity prices of  67–68
+preferred stock  16
+Cooling-off period  312–313, 670
+Coordination for blue-sky issues  615
+COP  670
+Corporate account  253, 256, 670
+Corporate bonds  43, 50–51, 59–63, 670. 
+See also Bonds
+secured  60–62
+taxation of  593
+unsecured  60, 61–62
+Corporate retirement plans  468
+defined benefit plan  468
+defined contribution plan  468
+Corporation  670
+Correspondence  638, 639, 640
+Cost base. See Basis
+Cost basis  670
+Cost depletion  670
+Coterminous  670
+Coterminous municipal debt  112
+Counteroffer (counterbid)  369
+Coupon  43, 45, 54
+Coupon bonds  670. See Bearer bonds
+Coupon dates of bonds  80
+Coupon yield  670
+Covenants  64, 114–115, 671
+Coverage ratio  138, 671
+Covered call  197
+Covered call writer  671
+Covered put writer  671
+CPI  671
+CQS  671
+CR  671
+Credit agreement  278, 671
+Credit balance (CR)  671
+Credit department  387, 671
+Credit, extension of. See Margin trading
+Creditor  671
+Credit register  295
+Credit risk  671
+Credit spread  202, 203, 204, 206, 671
+gains and losses for  207
+Crossed market  671
+Cross guarantee  294
+Crossover point  671
+Cum rights  28–29, 671
+Cumulative preferred stock  16, 671
+Cumulative voting  7, 671
+Currency risk  31
+Currency transaction report  671
+Current assets  671
+Current dividend yield  18
+Current liabilities  671
+Current market value (CMV)  671
+Current price  671
+Current ratio  671
+Current yield (CY)  55, 671
+CUSIP  671
+CUSIP numbers  20, 390
+Custodial account  254, 262–263, 671
+Custodian  671
+of investment company  419–420
+of UGMA/UTMA account  267–268
+Customer  671
+Customer accounts
+beneficial owner  278
+confirmations of trades  146, 153
+death of accountholder  260, 
+265–266
+for day traders  294
+for employees of other firms  155, 
+258–259
+for margin trades. see Margin trading
+frozen  258, 265
+in mutual funds  442–444
+insured by SIPC  607–608
+new accounts  251–254, 259
+nominal (named) owner  278
+options accounts  224–225
+payment and delivery options  254
+registration of  260–265
+sharing in  155
+special situations  257–258
+statements  257, 612
+transferring  258–259
+types of account ownership  253
+types of accounts  256–257, 260–265
+UGMA/UTMA  262, 266–269
+updating  253
+Customer account statement  391
+Customer agreement  672
+Customer and portfolio management  
+580–584. See also Prohibited practices
+confirmations of trades  146, 153
+customer complaints  152
+guarantees against loss  145, 570
+mutual fund investment objectives  
+423–427
+suitability (“know your customer”) 
+issues  87, 154, 572–581, 612–613
+Customer confidentiality  155
+Customer, defined  430
+Customer ledger  672
+Customer orders
+crossing  352
+filling  347
+routing and processing of  365
+time-sensitive  361–362
+types of  352–362
+Customer portfolio margining (CPM)  
+300
+Customer statement  672
+Cyclical industry  672
+D
+Dated date  672
+Dated date of bonds  80
+Day order  361, 672
+Day trader  293, 672
+Dealer  672
+Dealer paper  92, 672
+Dealers and broker/dealers  346–347
+required membership in SIPC of  608
+Death
+of accountholder  260, 265–266
+of UGMA/UTMA beneficiary or 
+custodian  269
+Debenture  62–63, 672
+convertible  66
+Debit balance (DR)  672
+Debit register  672
+Debit spread  202, 202–203, 206–207, 
+672
+gains and losses for  207
+Debt  3
+Debt financing  672
+Debt per capita  672
+Debt ratio  672
+municipal  138
+Debt register (DR)  282
+Debt securities  3, 672
+agency issues, governmental  75–78
+bonds  43
+listings (quotes) of  97–99
+money market instruments  91–93
+mortgage-backed securities  76
+municipal notes  116
+Treasury securities  71–74
+Debt service  50–54, 672
+Debt service ratio  672
+Debt service reserve fund  672
+Debt statement of municipality  135–
+136
+Debt-to-equity ratio  672
+Declaration date  672
+Decreasing debt service  672
+Deduction  672
+Default  60, 83, 116, 672
+
+719
+Index
+Default risk  672
+Defeasance  53, 672
+Defensive industry  672
+Defensive investment strategy  672
+Deferred annuity  672
+Deferred compensation plan  459, 673
+Deferring trading decisions  186, 189
+Deficiency letter  312, 673
+Defined benefit plan  673
+Defined contribution plan  673
+Deflation  523, 673
+Delivery  388, 673
+Delivery requirements. See Good 
+delivery
+Delivery vs. payment (DVP)  673
+Demand  673
+Demand deposit  673
+Demand-pull  673
+Department of enforcement  632
+Depletion  673
+Depreciation  673
+Depreciation and depletion write-offs  
+510
+Depreciation expense  673
+Depression  673
+economic  521
+Derivative  673
+Descending triangle  673
+Description  390
+Designated examining authority (DEA). 
+See Self-regulatory organization (SRO)
+Designated market maker (DMM)  673
+Designated order  673
+Designated primary market maker 
+(DPM)  223
+Devaluation  673
+Developmental drilling program  673
+Diagonal spread  202, 673
+Dilution  673
+Direct debt  673
+Direct paper  92, 673
+Direct participation program (DPP)  673
+characteristics of  497–500
+economic viability of, analyzing  
+510–514
+equipment leasing programs  510
+formation and dissolution of  499–
+502
+limited partnerships versus 
+Subchapter S corporations  497
+oil and gas partnerships  507–509
+real estate partnerships  505–507
+taxation of  497–498, 505, 510–513
+types and activities of partners  
+503–504
+Disciplinary action  630
+Disclosure  390, 391, 642
+Disclosure requirements. See 
+also Antifraud regulations
+for accounts of employees of other 
+firms  258–259
+for confirmations of trades  146–147
+for control relationships  154
+for day trading accounts  294
+for direct participation programs  
+499–500
+for final prospectus  314–316
+for financial advisory relationships  
+154
+for margin accounts  278–279
+for mutual funds  417, 427, 444
+for negotiated underwritings  155–
+156
+for options accounts  224
+for Rule 145 transactions  332
+for syndicate fees  127, 129
+for telemarketers  156
+for withdrawal plans  444
+for yield information  147
+Discount (below par)  46, 55–57, 142, 
+673
+Discount bond  673
+Discount rate  94, 673
+Discretion  674
+Discretionary account  154, 254, 
+263–264, 674
+Disintermediation  674
+Disposable income (DI)  674
+Disproportionate sharing  674
+Distribution  674
+Distribution stage  674
+Distributor of investment company  420
+Diversification  186, 581–582, 674
+Diversified common stock fund  674
+Diversified investment company  
+412–413, 674
+Diversified management company  674
+Divided account  674
+Dividend  674
+Dividend department  387, 674
+Dividend disbursing agent (DDA)  24, 
+674
+Dividend exclusion rule  674
+Dividend payout ratio  674
+Dividends  12, 18–19
+adjustable-rate  15–16
+cash  12, 18
+corporate tax exclusion for  597
+disbursement of  25–27
+fixed-rate  15
+property  12
+selling of, prohibited  440
+stock  11, 17–18, 27
+suspension of payments  16
+taxation of  12–13, 438–442
+yield  18
+Dividends per share  674
+Dividend yield  674
+DJIA  674
+DK  674
+DNR  674
+Doctrine of mutual reciprocity  674
+Documentation requirements
+for accounts of employees of other 
+firms  258–259
+for advertising  148–149
+for associated persons  152
+for confirmations of trades  147, 153
+for customer complaints  152
+for direct participation programs  
+499–500
+for discretionary trades  263–264
+for final prospectus  314–316
+for financial reports (annual/
+semiannual)  421–422
+for IPO sales  333
+for municipal securities trades  144
+for options accounts  224
+for release of account frozen on death  
+266
+statements  612
+written supervisory procedures  
+610–611
+Dollar bonds  674
+Dollar cost averaging  443, 582, 674
+Donor  674
+Donor to UGMA/UTMA account  267
+Do not reduce order (DNR)  359, 675
+Don’t know (DK)  675
+Dont know procedure  397
+Double-auction markets  345, 349
+Double-barreled bond  112, 675
+Dow Jones averages  675
+Dow Jones Composite Average (DJCA)  
+675
+Dow Jones Industrial Average (DJIA)  
+675
+Dow Jones Transportation Average 
+(DJTA)  675
+Dow Jones Utilities Average (DJUA)  
+675
+Down tick  675
+Dow theory  675
+DPP  675
+DR  675
+Dry hole  675
+Dual-purpose fund  426, 675
+Due bill  27, 675
+Due diligence  314, 675
+Due diligence meeting  675
+Duplicate confirmation  675
+Duration of bond  579
+Dutch auction  79
+DVP  675
+
+720
+Index
+E
+Earned income  460, 675
+Earned surplus  675
+Earnings per share (EPS)  675
+Earnings per share fully diluted  675
+Eastern account  675
+Eastern syndicate account  126–127
+Economic concepts  521–553
+balance of payments, international  
+530–531
+business cycle  521–522
+economic indicators  522–525
+fiscal policy  529–530
+fundamental analysis  537–552
+Keynesian theory  525–526
+monetarist theory  526
+monetary policy  527–529
+supply-side theory  526
+technical analysis  532–537
+Economic risk  675
+Education IRAs. See Coverdell 
+Education Savings Accounts
+EE savings bond  675
+Effective date  675
+Effective date of new underwriting  313, 
+320
+Efficient market theory  675
+Electronic Communications Networks 
+(ECNs)  344
+Employee Retirement Income Security 
+Act of 1974 (ERISA)  470–471, 676
+Endorsement  676
+EPS  676
+EQ  676
+Equipment bond  676
+Equipment-leasing limited partnership  
+676
+Equipment leasing programs  508
+Equipment trust certificate (ETC)  61, 
+676
+Equity  1, 3, 282, 295, 676
+Equity financing  676
+Equity-linked notes (ELNs)  99
+Equity option  676
+Equity security  14, 676
+listings (quotes) of  21–24
+ERISA  676
+Escrow agreement  676
+Established customer  613
+Estate taxes  595
+Ethical business practices  565–571. See 
+also Prohibited practices
+Eurobond  95–96, 676
+Eurodollar  95, 676
+Eurodollar bonds  95
+European-style options  171
+Euroyen  95
+Even split  226
+Excess equity (EE)  286, 297, 301, 676
+Excess margin securities  676
+Exchange  676
+Exchange Act  676. See Securities 
+Exchange Act of 1934
+Exchange (conversion) privileges within 
+a family of funds  436, 441
+Exchange-listed security  676
+Exchange market  3, 344, 345, 676
+Consolidated Tape reporting system  
+365–366
+floor trading in  348–352
+fundamental analysis of  537–552
+listing requirements  347
+technical analysis of  532–537
+Exchange privilege  676
+Exchange rate  676
+Exchange rates, currency  96–97
+Exchange traded funds  413, 676
+Ex-date  676
+Ex-dividend date (ex-date)  25–27, 359, 
+440, 676
+Execution  389
+Executor  676
+Exempt securities  79, 677
+Exempt transaction  677
+Exercise  677
+Exercise limits  223
+Exercise of option contract  173, 191, 
+192
+of index options  214–215
+tax consequences  229–230
+Exercise price  677. See Strike price
+Ex-legal  677
+Ex-legal bonds  121, 153
+Expansion  677
+Expansionary policy  677
+Expansion, economic  59, 418–419
+Expense ratio  677
+Expense ratio of mutual fund  428
+Expiration cycle  677
+Expiration date  677
+Expiration date of option contract  172
+of foreign currency options  218
+of index options  214
+tax consequences of  229–230
+Expiration of option contract  173, 191, 
+192
+Exploratory drilling program  677
+Exploratory well  677
+Ex-rights  28–29, 677
+Ex-rights date  677
+Extended maturity risk  76
+Extension  395
+F
+FAC  677
+Face-amount certificate company (FAC)  
+409, 677
+Face value  677. See Par value
+Fail to deliver  400, 677
+Fail to receive  677
+Family of funds  436, 441
+Fannie Mae  677
+Farm Credit Administration (FCA)  75, 
+677
+Farm Credit System (FCS)  76, 677
+FCA  677
+FCO  677
+FCS  677
+FDIC  677
+Fed  677
+Fed call  677
+Federal call  677
+Federal Deposit Insurance Corporation 
+(FDIC)  48, 151, 677
+Federal Farm Credit Bank securities 
+(FFCBs)  49, 76
+Federal funds  677
+Federal funds rate  93, 677
+Federal Home Loan Bank (FHLB)  678
+Federal Home Loan Mortgage 
+Corporation (FHLMC, Freddie Mac)  
+49, 75, 678
+Federal Intermediate Credit Bank 
+(FICB)  678
+Federal National Mortgage Association 
+(FNMA, Fannie Mae)  49, 75, 77–78, 
+678
+Federal Open Market Committee 
+(FOMC)  678
+Federal Reserve Board (FRB)  48, 79, 
+93, 95, 150, 279, 678
+and monetary policy  525
+Federal Reserve System  678
+FHLB  678
+FHLMC  678
+FICB  678
+Fictitious quotation  678
+Fidelity bond  152, 609, 678
+Fiduciary  678
+Fiduciary accounts  254, 262–263
+Filing  678
+Filing date  678
+Filing for blue-sky issues  615
+Filing requirement  641
+Fill-or-kill order (FOK)  362, 678
+Final prospectus  678
+Financial advisors  148–149, 154
+Financial and operations principal 
+(FinOp)  155
+Financial Guaranty Insurance 
+Corporation (FGIC)  678
+Financial Industry Regulatory Authority 
+(FINRA)  3
+Financial reports  421–422
+Financial risk  678
+Fingerprinting  625
+Firewall  610
+
+721
+Index
+Firm commitment underwriting  29, 
+127, 323, 678
+Firm element  629
+Firm quote  678. See Bona fide quote
+First in, first out (FIFO)  441, 589, 678
+Fiscal policy  678
+Fitch’s ratings  139
+Fixed annuity  477, 478, 678
+Fixed asset  678
+Fixed charge coverage ratio  678
+Fixed dollar annuity  678
+Fixed-dollar withdrawal plan, of mutual 
+fund  443
+Fixed-income security  14
+Fixed-percentage withdrawal plan, of 
+mutual fund  444
+Fixed-rate dividend  15
+Fixed-time withdrawal plan, of mutual 
+fund  444
+Fixed unit investment trust  678
+Fixing bids  320
+Flat  679
+Flat yield curve  679
+Floor broker  223, 679. See Commission 
+house broker (CHB)
+Floor trader  679
+Flow of funds  679
+Flow of funds in municipal debt service  
+136–137
+Flow-through  679
+Flow-through (pass-through) income  
+497. See also Conduit theory (taxation 
+of pass-through funds)
+FNMA  679
+FOK  679
+FOMC  679
+Forced conversion  69, 679
+Forced sell-out  679
+Foreign currency  95–97, 679
+inverse relation with U.S. dollar  530
+options on  218–220
+Foreign currency option (FCO)  679
+Foreign exchange rate  679
+Foreign fund  679
+Foreign securities, taxation of  587
+Foreign stock funds  425
+Form 10K  331, 343–344, 679
+Form 10Q  331, 343–344, 679
+Form U-4  152
+Form U-5  152
+Forward pricing  679
+Forward pricing of mutual fund shares  
+430
+Forward stock split  10–11
+Fourth market  344, 679
+Fractional share  679
+Fractional split. See Uneven split
+Fraud  679
+FRB  679
+Freddie Mac  679
+Free credit balance  679
+Freeriding  679
+Freeriding and withholding  679
+Freeriding and Withholding Rule. 
+See Rule 2790, NASD
+Front-end fee  679
+Front-end load  428, 431, 679
+Front running, prohibited  572
+Frozen account  258, 264, 282, 395, 680
+Full Disclosure Act  680. See Securities 
+Act of 1933
+Full faith and credit issues. See General 
+obligation bond (GO)
+Full power of attorney  680
+Full trading authorization  680
+Fully registered bond  680
+Functional allocation  680
+Fundamental analysis  680
+Fundamental analysis of markets and 
+prices  537–552
+corporate analysis  538–548
+financial ratios  549–553
+industry analysis  537–538
+Funded debt  680
+Funding  680
+Fund manager  680
+Funds of hedge funds  427
+Funds statement  680
+Fungible  680
+G
+Gains  190
+capital. see Capital gains and losses
+for call options  186, 187
+for put options  189, 191
+for spreads  207
+for straddles  211–212
+realized/unrealized  12, 439
+GAN  680
+GDP  680
+General account  680
+General obligation bond (GO)  49, 
+111–113, 680
+evaluating  134–137
+limited tax  112
+General partner (GP)  680
+General partnership (GP)  680
+General Securities Principal  680
+General securities principal license 
+(Series 24)  631
+General Securities Representative  680
+General securities representative license 
+(Series 7)  631
+Generic advertising  680
+Gifts and gratuities  154
+Gift taxes  595
+Ginnie Mae  680
+Give-up commission  65
+Glass-Steagall Act of 1933  680
+GNMA  680
+GNP  680
+GO  680
+Good delivery  153, 260, 397, 398, 680
+Good faith deposit  680
+Good-till-canceled order (GTC)  361, 
+680
+Goodwill  680
+Government National Mortgage 
+Association (GNMA, Ginnie Mae)  
+49, 75, 680
+Government security  681
+GP  681
+Grant anticipation notes (GANs)  681
+Green shoe option  681
+Gross domestic product (GDP)  521, 
+522–523, 681
+Gross income  681
+Gross proceeds  681
+Gross revenue pledge  137, 681
+Gross revenues  681
+Group net order  131, 681
+Growth and income (combination) 
+funds  424
+Growth development company  547, 
+681
+Growth fund  424, 681
+Growth industry  681
+Growth stock  681
+GTC  681
+Guaranteed bond  62, 681
+Guaranteed dollar annuity  681
+Guaranteed mortgage certificates 
+(GMCs)  77
+Guaranteed stock  681
+Guarantees against loss  155
+Guardian  681
+H
+HALT  681
+Head and shoulders  681
+Hearing  634
+Hedge  681
+Hedging strategies  196–201, 230
+summarized, using basic options chart  
+195
+using index options  215
+HH savings bond  681
+High  681
+Holder  681
+Holding company  681
+Holding period  681
+Hold in street name  681
+Horizontal spread  681. See Time spread
+Hot issue  681
+Hot issue rule. See Rule 2790, NASD
+House maintenance call  682
+
+722
+Index
+House maintenance requirement  682
+House minimum maintenance 
+requirements  285, 295
+Housing Authority bond  682
+HR-10 plan  682. See Keogh plans
+Hypothecation  301, 682
+Hypothecation agreement  278, 301
+I
+IDB  682
+IDC  682
+Identified security  682
+IDR  682
+Immediate annuity  682
+Immediate family  682
+Immediate-or-cancel (IOC) order  362, 
+682
+Income bond  62, 83, 682
+Income fund  424, 682
+Income program  682
+Income statement  682
+Incorrect trade report  389
+Indefeasible title  267
+Index  682
+Index funds  424–425
+index tracking funds  446–447
+Index option  214–217, 682
+Indication of interest (IOI)  682
+Indirect investment. See also commodity 
+pool operators (CPOs)
+Individual accounts  253
+Individual plans  459
+Individual retirement account (IRA)  
+460, 682
+contributions to  464
+distributions from  462–463
+eligible investments  461
+ineligible investments  461–462
+penalties  460–461
+rollovers  462–463
+Roth IRAs  463
+simplified employee pensions (SEP-
+IRAs)  465
+transfers  462
+withholding tax  462
+Industrial development bond (IDB)  682
+Industrial development revenue bonds 
+(IDRs or IDBs),  114
+Industrial revenue bond (IRB)  682
+Industry fund  682
+Inflation  523, 682
+Inflation risk  74, 477, 576, 682
+Information barrier. See Firewall
+Informer bounty  611
+Initial margin requirement  682
+Initial public offering (IPO)  315, 318, 
+333, 682
+Initiation of proceedings  635
+In-part call  682
+Inside information  610, 682
+Inside market  376, 683
+Insider  331, 334, 609, 683
+Insider Trading Act  683
+Insider Trading and Securities Fraud 
+Enforcement Act of 1988  609–610, 
+683
+Insider trading (tippers and tippees)  
+609, 610
+Institutional account  683
+Institutional communication  638, 639, 
+640, 683
+Institutional investor  683
+Insurance covenant  683
+Intangible asset  683
+Intangible drilling cost (IDC)  683
+Intangible drilling development expense  
+683
+Interbank market  95, 683
+Interest  683
+Interest coverage ratio  683
+Interest income, taxation of  586–587
+Interest-only CMOs (IOs)  85–86
+Interest rate option  217–218, 683
+Interest rate risk  76, 84, 85, 92, 577, 
+683
+Interest rates  93–95
+and bond market  66
+assumed of annuitization  483–484
+benchmark  93–94
+broker call rate  278
+inverse relationship with prices  16, 
+55–56, 58–60
+variable  117
+Internal Revenue Code (IRC)  683
+Internal Revenue Service (IRS)  683
+Interstate offering  683
+In the money  683
+In the money options contracts  178, 
+180
+Intrastate offering  683
+Intrinsic value  683
+Intrinsic value of options contract  178, 
+180, 183
+Inverted yield curve  58, 683
+Invested capital  683
+Investigation  632
+Investment adviser  683
+of investment company  419, 420
+registration of  607
+Investment Advisers Act of 1940  419, 
+607, 684
+Investment banker  684
+Investment banking  317
+Investment banking business  684
+Investment company  409, 640, 684. See 
+also Mutual fund
+listings (quotes) of  445–446
+management of  418–420
+registration of  415–418
+taxation of distributions from 
+(Subchapter M)  439–440
+types of  409–413
+Investment Company Act of 1940  409, 
+480, 607, 684
+Section 12b-1  432
+Investment-grade bonds  48
+Investment grade security  684
+Investment objective  684
+Investment pyramid  684
+Investment returns, taxation of  441
+Investment value  684
+Investor  684
+Invitation for bids  684
+In-whole call  684
+IOC  684
+IOI  684
+IPO  684
+IRA  684
+IRA rollover  684
+IRA transfer  684
+IRC  684
+Irrevocable stock power  684
+Issuance of securities  79–80, 122–125, 
+133–134, 311. See also Underwriting
+issuer, role of  317
+pricing of new issues  320–321
+types of offerings  318–320
+underwriter, role of  317–318, 
+320–321
+Issued stock  5–6, 684
+Issuer  684
+J
+Joint account  155, 253, 684
+Joint life with last survivor  684
+Joint tenants with right of survivorship 
+(JTWROS)  260, 684
+Joint venture  684
+JTWROS  266, 684
+Junior lien debt  684
+Junior securities  10. See also Liquidation 
+of firm; See also Senior security
+Junk bonds  50
+K
+Keogh (HR-10) plans  466, 685
+Keynesian economics  685
+Know your customer rule  685
+L
+Lagging indicator  685
+Last in, first out (LIFO)  685
+Last in, first out (LIFO) taxation  488
+Leading indicator  685
+
+723
+Index
+LEAP (Long-term Equity AnticiPation 
+Securities) option contract  229, 279
+LEAPS  685
+Lease rental bond  685
+Lease-rental (lease-back) bond  114
+Legal list  685
+Legal opinion (of bond)  121–122, 153
+Legal opinion of counsel  685
+Legal transfer  399
+Legend (private placement) stock  329
+Legislative risk  685
+Lettered (private placement) stock  329
+Letter of intent (LOI)  685
+mutual fund investor’s  434
+underwriter’s  323
+Level debt service  685
+Level load  685
+Level One  685
+Level Three  685
+Level Two  685
+Leverage  277, 685
+Liability  3, 685
+LIBOR  685
+Life annuity/straight life  685
+Life annuity with period certain  685
+Life contingency  685
+LIFO  685
+Limited liability  9, 686
+Limited partner (LP)  686
+Limited partnership agreement  686
+Limited partnership (LP)  686. 
+See Direct participation programs
+Limited power of attorney  686
+Limited tax bond  686
+Limited trading authorization  686
+Limited-voting common stock. 
+See Nonvoting (Class B) common 
+stock
+Limit order  353–354, 359, 686
+stop limit order  355, 359
+Limit order book  686
+Liquidation
+by SIPC  608
+of firm, priority of claims under  10, 
+43, 60, 62–63, 66. see also Junior 
+securities; See also Senior security
+of shares, accounting methods for  
+441
+Liquidation priority  686
+Liquidity  50, 86, 90, 686
+Liquidity ratio  686
+Liquidity risk  686
+Listed option  686
+Listed security  344, 345, 346–347, 686
+LMV  686
+Loan consent agreement  686
+Loan consent form  278
+Locked market  686
+Locking in profits  187
+LOI  686
+London Interbank Offered Rate 
+(LIBOR)  95, 686
+Long  686
+Long hedge  686
+Long margin accounts  277
+basic terminology for  282–283
+main concepts of  290
+maintenance requirements for  283
+Long market value (LMV)  282, 686
+Long position  11, 13, 171, 172, 187, 
+189, 203, 206
+hedging of  195, 196
+Long straddle  211, 686
+Long-term equity option  686
+Long-term gain  687
+Long-term loss  687
+Loss carryover  687
+Losses  191
+capital. see Capital gains and losses
+for call options  186, 187
+for put options  189, 190
+for spreads  208
+for straddles  211–212
+realized/unrealized  12, 439
+Low  687
+LP  687
+M
+M1  687
+M2  687
+M3  687
+Maintenance call  284–286, 687
+Maintenance covenant  687
+Maintenance requirement  687
+for day traders  294
+for long margin accounts  283–284
+for short margin accounts  296, 298
+Major Market Index (MMI)  687
+Make a market  687
+Maloney Act of 1938  311, 606
+Managed underwriting  687
+Management company  687
+Management fee  687
+Management investment companies  
+411–413. See also Mutual fund
+Manager of the syndicate  687
+Managing partner  687
+Managing underwriter  687
+Mandatory call  687
+Margin  687
+Marginable, defined  279
+Margin account  256, 687
+Margin agreement
+parts of  278
+Margin call  284–286, 687
+Margin deficiency  687
+Margin, defined  279, 417
+Margin department  387, 687
+Margin excess  687
+Margin interest  595–596
+Margin maintenance call  687
+Margin maintenance requirement  687
+Margin requirements
+for day traders  293
+Margin risk  688
+Margin security  688
+Margin trading
+accounting procedures for long 
+accounts  282–291
+accounting procedures for short 
+accounts  295–298
+day traders, treatment of  293
+excess account equity  286–287. see 
+also Special memorandum account
+initial purchase requirements  281
+purchase of mutual fund shares 
+prohibited  417
+Regulation T requirements for  
+279–282
+securities exempt from Regulation T 
+requirements  280–281
+types of margin accounts  277, 
+299–300
+Markdown  688
+Marketability  688. See Liquidity
+Market attitude, investor’s  174, 208. See 
+also Bearish position; See also Bullish 
+position; See also Bullish position; See 
+also Bullish position; See also Market 
+attitude, investor’s; See also Market 
+attitude, investor’s
+Market indices  214. See also Index 
+funds; See also Index options; See 
+also Index options; See also Index 
+options; See also Market indices; See 
+also Market indices
+Market letter  688
+Market maker  344, 351, 368, 688
+for options markets  223
+reports of sales by  375–376
+Market NH  688
+Market not held order  688
+Market-on-close order  361–362, 688
+Market order  352, 359, 688
+Market-out clause  688
+Market-out clause of underwriting 
+agreement  323
+Market price of stock  6–7
+Market risk  12, 688
+Markets, securities  344–346
+Market value  688
+Mark to market  282, 283–284, 688
+Markup  688
+Markup policy  688
+Markups and markdowns  346, 371, 431. 
+See also Sales charge
+5% markup policy, NASD  371–373
+Married put  688
+
+724
+Index
+Master limited partnerships (MLPs)  497
+Material information  688
+Maturity date  688
+Maturity structures of municipal debt 
+instruments  110–111
+Maximum loan value  688
+Maximum market value  688
+Mediation  636
+Member-at-the-takedown order  688
+Member firm  638, 688
+Member order  688
+Mini-max underwriting  324, 688
+Minimum increment price rule  688
+Minimum margin requirement  688
+Mini-options  172, 688
+Minor rule violation (MRV)  633, 689
+Minus tick  689
+Modern portfolio theory (MPT)  689
+Monetarist theory  689
+Monetary policy  689
+Money laundering  613–614, 689
+Money market  90–91, 689
+Money-market financing  317
+Money market fund  426–427, 689
+Money market instruments  91–93
+Money supply  689
+Moody’s Investors Service  689
+Moody’s ratings  47–48, 139
+Moral obligation bond  116, 689
+Mortgage-backed securities  76
+agency issues (GNMA, FNMA, 
+FHLMC)  75–78
+collateralized mortgage obligations  
+84–87
+Mortgage bond  60, 689
+Mortgage participation certificates (PCs)  
+77
+Moving average chart  689
+MSRB  689
+Multiple accounts  257
+Multiplier effect  689
+Municipal bond  109–119, 689
+categories of  111
+double-barreled  112
+evaluating  134–140
+exemption of, from Act of 1933  109
+exemption of, from Trust Indenture 
+Act  115
+issuance of  121–124, 133–134
+listings (quotations) of  141–143, 
+153, 156–157
+maturity schedules of  110
+revenue bonds  113–116
+taxation of  109, 115, 149–150, 
+586–587, 591–592
+Municipal bond fund  689
+Municipal Bond Investors Assurance 
+Corporation (MBIA)  139
+Municipal debt ratios  138
+Municipality, debt statement of  135–
+136
+Municipal note  689
+Municipal securities  43, 49, 689
+commercial paper  91
+exempted from Regulation T 
+requirements  281
+notes  117
+Municipal Securities Rulemaking Board 
+(MSRB)  130, 150–156, 251, 609, 689
+rule enforcement  150, 154
+Mutilated certificates  153
+Mutual fund  412, 416, 689
+accumulation (purchase) plans of  
+442
+asset allocation funds  425–426
+balanced funds  425
+bond funds  426
+characteristics and objectives of  
+422–428
+classes of shares  436–437
+comparing  427–428
+dual-purpose funds  426
+expense ratio of  428
+family of  435, 441
+marketing of shares  429
+money market funds  426–427
+performance, disclosure of  428
+redemption of shares  436–437
+registration of  415–418
+sales charge percentage of, computing  
+432–433
+shares of, compared with common 
+stock  425
+stock funds  424–425
+taxation of distributions from  
+438–442
+turnover rate of  429
+types of accounts  442–444
+withdrawal plans of  443
+Mutual fund custodian  689
+Mutual reciprocity, doctrine of  109
+N
+N1-A prospectus  416–417
+Naked  689
+Naked call writer  690
+Naked put writer  690
+Narrow-based index  214, 690
+Nasdaq  690
+Nasdaq 100  690
+Nasdaq Capital Market  690
+Nasdaq Global Market  690
+Nasdaq Global Select Market  690
+Nasdaq Intermarket (third market)  344
+Nasdaq (NASD Automated Quotation 
+system)  367
+levels of service  375–376, 376
+National Association of Securities 
+Dealers Automated Quotation system  
+690
+National Association of Securities 
+Dealers (NASD)  626
+5% markup policy  371–373
+accounts for other firms’ employees, 
+rules for  258
+initial margin trade requirements  
+280–281
+minimum maintenance requirements 
+for margin accounts  283–284, 293, 
+296
+National Market System (Regulation 
+NMS)  690
+National Securities Clearing 
+Corporation (NSCC)  144, 690
+NAV  690
+NAV of fund  690
+NAV per share  690
+Negotiability  690
+Negotiable CDs (time deposits)  92
+Negotiable certificate of deposit (CD)  
+690
+Negotiated underwriting  121, 125, 320, 
+322, 690
+disclosure requirements for  155–156
+Net amount  390
+Net asset value (NAV)  411, 445, 690
+calculating  430
+Net change  690
+Net current asset value per share  690
+Net debt per capita  690
+Net debt to assessed valuation  690
+Net debt to estimated valuation  690
+Net direct debt  690
+Net domestic product  690
+Net fixed assets per bond  691
+Net income to net sales  691
+Net interest cost (NIC)  128, 691
+Net investment income  691
+Net investment return  691
+Net operating profits interest  691
+Net proceeds  691
+Net profit margin  691
+Net profit ratio  691
+Net profits to sales  691
+Net revenue pledge  137–138, 691
+Net tangible assets per share  691
+Net total debt  691
+(net overall debt), of municipality  
+136
+Network A  691
+Network B  691
+Net worth  3, 691
+New account form  691
+New construction program  691
+New Housing Authority bond (NHA)  
+115, 691
+New issue market  691
+
+725
+Index
+New Issues Act  691
+New securities issues  318
+pricing of  320–321
+New York Stock Exchange Composite 
+Index  691
+New York Stock Exchange (NYSE)  65, 
+637, 691
+initial margin trade requirements  
+281–282
+minimum maintenance requirements 
+for margin accounts  283–284, 294, 
+295
+NH  691
+NHA  691
+NIC  691
+No-load fund  426–427, 691
+Nominal (named) owner  278
+Nominal owner  691
+Nominal quotations  143, 153, 370–371, 
+371, 691
+Nominal yield  54, 691
+Nonaccredited investor  691
+Nonaffiliate  692
+Noncompetitive bid  79, 692
+Noncumulative preferred stock  692
+Nondiscrimination  692
+Nondiversified investment company  
+412, 692
+Nonequity option  692
+foreign currency options  218–220
+index options  214–217
+interest rate options  217–218
+Noninterested persons  419
+Nonmargin security  692
+Nonnegotiable CDs  92
+Nonqualified retirement plan  692
+Nonrecourse financing  692
+Nonrecourse loans  501
+Nonsystematic risk  692
+Nonvoting (Class B) common stock  9
+Normal yield curve  58–59, 692
+Note  692
+Not held order (NH)  361, 692
+Notice of sale for new issues  328
+Notification  692
+NSCC  692
+Numbered account  257, 692
+NYSE  692
+NYSE Bonds  65
+NYSE Composite Index  692
+NYSE maintenance call  692
+NYSE maintenance requirement  692
+O
+Obligations of options sellers  173
+OBO  692
+OCC  692
+OCC Disclosure Document  692
+Odd lot  19, 692
+Odd-lot theory  692
+OEX 100 index  214
+Offer  692
+Offering circular  692
+Offering circular for new issues  328
+Offer of settlement  633
+Official notice of sale  692
+Official statement (OS)  120–121, 135, 
+155–156, 692
+financial adviser’s role in preparing  
+149
+preliminary  121
+OID  692
+Oil and gas direct participation program  
+693
+Oil and gas partnerships  507–509
+Oil depletion allowance  693
+Omnibus account  693
+One cancels the other (OCO) orders  
+362
+Open-end covenant  693
+Open-end investment company  411, 
+480, 693
+Opening purchase  693
+Opening sale  693
+Opening transaction  226
+Open interest, in option  227
+Open-market operations  693
+Open order  693
+Operating expenses  693
+Operating income  693
+Operating ratio  693
+Operations and maintenance fund  693
+Operator  693
+Option agreement  693
+Option contract adjustment  693
+Options  641, 693
+descriptive rotation for  173–177
+expiration/exercise of  173, 191–194
+index options  214–217
+index options strategies  215
+interest rate options  217–218
+listings (quotations of)  183–185
+nonequity  214–220
+open interest in  227
+premium of, factors affecting  
+183–185
+selling, before expiration date  191, 
+194–195, 227
+strategies, for single options  173–
+177, 185–193
+taxation of  229–231
+T-chart for profit/loss  192–193
+Options account  693
+Options agreement  224
+Options Clearing Corporation (OCC)  
+224–225, 693
+Options Disclosure Document  224
+Options contract(s)
+adjustments to  226–227
+basic definitions for  171–173, 
+178–183
+basic options chart describing  
+182–183, 195, 200
+Options disclosure document  224, 693
+Order book official (OBO)  693
+Order department  387, 693
+Order memorandum  388, 693
+Order protection rule  693
+Order room  387, 693
+Order routing systems  224
+Order ticket  388, 693
+Ordinary income  693
+Organization and offering expense  693
+Original issue discount bond (OID)  694
+OTC Bulletin Board  694
+OTC margin security  694
+OTC market  694
+OTC Market Group, Inc.  694
+OTC option  694
+Out-firm quote  143
+Out of the money  694
+Out of the money option contract  178, 
+180
+Outstanding stock  5–6, 694
+Overbought  694
+Overdelivery  398
+Overlapping debt  136, 694
+Overriding royalty interest  694
+Oversold  694
+Over-the-counter (OTC) market  3, 24, 
+344, 345
+P
+Paid-in capital  694
+Paid-in surplus  694
+Paid-in surplus (paid-in capital)  6
+Par  694
+Parity  67–68, 178, 694
+Parity price of common  694
+Parity price of convertible  694
+Partial call  153, 694
+Partial delivery  398
+Participant  694
+Participating preferred stock  17, 694
+Participation  694
+Partners, general and limited  503–504
+Partnership  694
+Partnership account  253, 261, 266, 694
+Partnership agreement of limited 
+partnership  500
+Partnership management fee  695
+Par value  695
+of bonds  43, 46
+of stocks  6–7
+Passive income  695
+Passive investor  695
+Passive loss  695
+Pass-through certificate  695
+
+726
+Index
+Pass-through (flow-through) income  
+497
+Pass-through security  77
+PATRIOT Act  252–253
+Pattern  695
+Pattern day trader  293
+Payable date of dividend  25–27
+Payment date  695
+Payment period  695
+Payout stage  695
+Payroll deduction plan  459–460, 695
+P/E  695
+Peak  695
+Pegging  320
+Penny stock cold calling rules (SEC)  
+612–613
+Pension plan  695
+P/E ratio  695
+Percentage depletion  695
+Performance histories  428
+Personal income (PI)  695
+Person(s)  695
+control  330
+definition of  433
+noninterested  419
+Phantom income  695
+Pink Sheets  695
+Pipeline theory  695
+Placement ratio  695
+Plain vanilla CMO  84
+Plan custodian  695
+Planned amortization class CMOs 
+(PACs)  85
+Pledging of customer securities as 
+collateral  301
+Plus tick  695
+Point  21, 46, 695
+Point-and-figure chart  695
+Political Action Committees  156
+POP  695
+Portfolio  580–582. See also Customer 
+and portfolio management
+insurance  215
+Portfolio income  695
+Portfolio manager  695
+Position  696
+Position limit  222–223, 696
+Position trading  346
+Positive yield curve  696
+Power of substitution  696
+Precedence  696
+Preemptive right  9–10, 27, 696
+Preferred dividend coverage ratio  696
+Preferred stock  4, 14–17, 696
+categories of  16–18
+listings (quotes) of  21–24, 368–372
+Preferred stock fund  696
+Preliminary prospectus  696
+Premium  696
+Premium (above par)  46, 51, 55–57, 
+142
+Premium bond  696
+Premium, of options contract  183
+of foreign currency options  218
+Prepaid tuition plans  464
+Pre-payment risk  76, 83, 85
+Pre-refunding  696
+Prerefunding of bond issue  53–54, 118
+Presale order  131, 696
+Price  390
+Price/earnings (P/E) ratios  320
+Price restricted orders  352–357, 359
+Price risk  696
+Price spread  201, 696
+Price-to-earnings ratio (P/E)  696
+Primary dealer  696
+Primary distribution  696
+Primary earnings per share  696
+Primary market  696
+Primary offering  696
+Primary offering of new securities  318, 
+319
+Prime paper  92
+Prime rate  93, 696
+Principal  696
+Principal (dealer)  346, 351, 368
+Principal (of firm)  155
+Principal-only CMOs (POs)  85
+Principal protected notes (PPNs)  99
+Principal transaction  146, 696
+Priority  696
+Prior lien bond  61, 696
+Private label CMO  87, 696
+Private placement  696
+Private placements of new securities  
+319
+exempted from Act of 1933  328–329
+of limited partnerships  499
+Processing orders  387
+Production of municipal issue  129
+Productive well  696
+Profitability  696
+Profit ratio  697
+Profit-sharing plan  697
+Profit-sharing retirement plans  469
+Progressive tax  697
+Prohibited practices  566–572
+backing away from firm quote  369
+breakpoint sales  435–436
+churning  264, 567
+excessive sales charges  431
+false quotes  371
+front running  572
+guarantees against loss  114, 570
+insider trading  609–610
+margin purchase of mutual fund 
+shares  417
+pegging (fixing) bids  320
+selling dividends  440
+shorting by insiders  331, 364
+spinning  334
+Property dividend  12, 697
+Property taxes  111, 112, 135
+Prospectus  312, 421, 697
+delivery requirement period  315–316
+final  313–315
+preliminary  313
+sales by, in secondary market  315
+SEC disclaimer clause for  315, 416
+summary (N1-A)  416–417
+Prospectus Act  697
+Proxy  8, 387, 396, 697
+Proxy contest  9
+Proxy department  697
+Proxy solicitation  8
+Prudent investor rule  263, 697
+Public Housing Authority bond (PHA)  
+697
+Publicly traded fund  697
+Public offering  697
+Public offering of new securities  319
+Public offering price (POP)  325, 411, 
+445, 697
+mutual fund shares sold at  431
+Public purpose bond  697
+Public Securities Association (PSA)  84, 
+697
+Purchases and sales department  387
+Purchasing power risk  697
+of fixed annuities  477
+Put  697
+Putable bonds  54
+Put bond  697
+Put buyer  697
+Put options  173, 176–177
+basic terminology for  179–180, 182
+buying  188–189
+gains and losses for  190, 191
+married to stock  230
+writing  189–190
+Put spread  201, 206–207, 697
+Put writer  697
+Pyramiding  697
+Q
+Qualification  697
+Qualification for  blue-sky issues  616
+Qualified institutional buyer (QIB)  
+332–333
+Qualified legal opinion  121, 697
+Qualified quotes  370
+Qualified retirement plan  697
+Quantity  390
+Quick assets  697
+Quick ratio  697
+Quotation  697
+Quote  697
+
+727
+Index
+R
+RAN  697
+Random walk theory  698
+Range  698
+Rate covenant  698
+Rating  698
+Rating service  698
+Ratio writing  198, 698
+Raw land program  698
+Real estate investment trust (REIT)  31, 
+698
+Real estate limited partnership  698
+Real estate partnerships  505–507
+Realized gain  698
+Realized gain/loss  12, 439
+Reallowance  130, 698
+Recapitalization  698
+Recapture  698
+Receipt  388
+Recession  59, 521, 698
+Reciprocal immunity  698
+Reciprocal immunity, doctrine of  109
+Reclamation  698
+Reclassification  698
+Recognized quotation  369
+Record date  698
+Record date of dividend  25–28
+Recourse financing  698
+Recourse loans  501
+Recovery  698
+Redeemable security  698
+Redemption  698
+Redemption notice  698
+Redemption of securities  50–54, 436
+Red flags for money laundering activity  
+614
+Red herring  698
+Reduced orders  359–360
+Refinancing  698
+Refunding  698
+Refunding of bond issue  53, 72
+Regional exchange  698
+Regional fund  698
+Registered  698
+Registered as to principal only  698
+Registered bond  45
+Registered Options Principal (ROP)  
+699
+Registered principal  631, 699
+Registered representative (RR)  630, 699
+Registered traders  348
+Registrar  21, 699
+Registration
+issuers and issues exempt from, under 
+Act of 1933  327–332
+of bonds  44–45
+of exchanges and firms  343–344
+of investment advisers  607
+of investment companies  415–418
+of new accounts  260–265
+of new securities issues  311–316
+of stock certificates  19, 20
+Registration: associated person  628
+Registration by coordination  699
+Registration by filing  699
+Registration by notification  699
+Registration by qualification  699
+Registration statement, SEC  312
+Regressive tax  699
+Reg T  699
+Reg T call  699
+Reg T payment  394
+Regular way  699
+Regular way settlement  393
+Regular way (T+3) settlement  153, 222
+Regulated investment company  699
+Regulation A  699
+Regulation A (offerings of less than $5 
+million exempt from 1933 Act)  328
+Regulation D  699
+Regulation D (private placements 
+exempt from 1933 Act)  328–329
+Regulation NMS (National Market 
+System)  699
+Regulation SP  699
+Regulation T  700
+Regulation T (margin trades and 
+settlement rules)  279–282, 417
+Regulation U  700
+Regulatory element  629
+Rehypothecation  301, 700
+Reinstatement privilege  700
+Reinvestment risk  64, 76–77, 577
+REIT  700
+Rejection  700
+Renewal and replacement fund  700
+Reoffering price  700
+reoffering yield  128
+Reorganization department  387, 700
+Repo  700
+Repurchase agreement (repo)  91, 700
+Reserve maintenance fund  700
+Reserve requirement  700
+Reset date  15
+Residual claim  700
+Residual rights and claims  10, 13
+Resistance level  700
+Restricted account  284, 291–292, 700
+Restricted (private placement) stock  
+329
+Restricted security  330, 700
+Retail communications  638, 639, 700
+Retained earnings  700
+Retention requirement  700
+Retirement account  700
+Retirement plans  459, 469
+Employee Retirement Income 
+Security Act of 1974 (ERISA)  
+470–471
+nonqualified  459
+penalties under  462, 463, 488
+qualified  459
+taxation of  459, 462, 464, 481, 487
+Retiring bonds  700
+Return on common equity  700
+Return on equity  700
+Return on investment (ROI)  700
+Revdex 25  123
+Revenue anticipation note (RAN)  700
+municipal  117
+Revenue bond  113–116, 701
+evaluation of  136–137
+Reverse churning  568, 701
+Reverse repo  701
+Reverse repurchase agreement (reverse 
+repo)  91, 701
+Reverse split  701
+Reverse stock split  11
+Reversionary working interest  701
+Right  701
+Right of accumulation  701
+Rights agent  701
+Rights of accumulation and mutual fund 
+investor  435
+Rights offerings  27, 701
+effect on options contracts of  
+226–227
+valuation of rights  28
+Rights of options buyers  173
+Rights of shareholders  7
+preemptive rights  9–10
+residual rights  10
+subscription right issuance and 
+trading of  27–30
+voting rights  7–10, 418–419
+Risk arbitrage  350, 701
+Risk disclosure document  278–279, 294
+Riskless and simultaneous transaction  
+701
+Risks  576–578. See also hedging
+call  51, 93, 577
+currency  31
+extended maturity  76
+extension  84, 85
+inflation  74, 477, 576
+interest rate  76, 83, 84, 85, 92, 577
+in underwriting new issues  323, 
+324–325
+market  12, 215, 578
+measurement of  578–580
+nonsystematic  578, 579
+of limit orders  353
+of margin trading  278
+of stock ownership  11–12
+prepayment  76, 84, 85
+reinvestment  64, 76–77, 577
+selection  578
+systematic (systemic)  12, 215, 578
+unlimited  12
+
+728
+Index
+ROI  701
+Rollover  701
+ROP  701
+Roth IRAs  463
+Round lot  19, 22, 369, 370, 371, 701
+Royalty interest  701
+Rule 15c2-1  701
+Rule 144a (qualified institutional buyers 
+exempt from holding period)  332
+Rule 144 (sale of control and restricted 
+securities)  330, 701
+Rule 145 (shareholder approval for 
+reorganization)  332, 701
+Rule 147 (intrastate issues exempt from 
+1933 Act)  328, 330, 701
+Rule 405  701
+Rule 415  701
+Rule 504  701
+Rule 505  702
+Rule 506  702
+Rule G-1, MSRB (separately identifiable 
+muni department)  151, 702
+Rule G-2, MSRB (qualification as 
+representative)  152–153, 702
+Rule G-3, MSRB (qualification as 
+representative)  152–153, 702
+Rule G-6, MSRB (fidelity board 
+requirement)  152, 702
+Rule G-7, MSRB (associated persons 
+recordkeeping)  152, 702
+Rule G-10, MSRB (customer 
+complaints)  152, 702
+Rule G-11, MSRB (order allocation by 
+syndicate)  152, 702
+Rule G-12, MSRB (uniform trading 
+practices)  152, 702
+Rule G-13, MSRB (quotations)  153, 
+702
+Rule G-15, MSRB (confirmations of 
+trades)  153, 702
+Rule G-16, MSRB (rule enforcement)  
+154, 702
+Rule G-17, MSRB (ethical business 
+practices)  154, 702
+Rule G-18, MSRB (ethical business 
+practices)  154, 702
+Rule G-19, MSRB (knowing the 
+customer/suitability issues)  154, 702
+Rule G-20, MSRB (gifts and gratuities)  
+154, 702
+Rule G-21, MSRB (advertising)  154, 
+702
+Rule G-22, MSRB (control 
+relationships)  154, 702
+Rule G-23, MSRB (financial advisory 
+relationships)  154, 702
+Rule G-24, MSRB (customer 
+confidentiality)  155, 702
+Rule G-25, MSRB (ethical business 
+practices)  155, 702
+Rule G-27, MSRB (principals)  155, 702
+Rule G-28, MSRB (accounts for 
+employees of other firms)  155, 702
+Rule G-29, MSRB (availability of rule 
+book)  155, 702
+Rule G-30, MSRB (reasonable sales 
+charges)  155, 702
+Rule G-31, MSRB (use of performance 
+history)  155, 702
+Rule G-32, MSRB (delivery of official 
+statement)  155, 702
+Rule G-33, MSRB (accrued interest)  
+155, 702
+Rule G-37, MSRB (political 
+contributions to issuers)  156, 702
+Rule G-39, MSRB (telemarketing)  156, 
+702
+Rule G-41  702
+S
+Sale  702
+Sales charge  146–147, 155, 426–427, 
+431–436, 702
+back-end loads  428
+excessive  431
+for mutual funds  431–436
+front-end loads  428
+no-load  426–427
+redemption fees  436
+reductions in  433–436
+sales charge percentage  432–433
+Section 12b-1  432
+Sales literature  313, 702
+Sales load  702
+Sallie Mae  702
+Sanctions  634
+Savings bond  703
+Scale  127, 703
+SEC  703
+Secondary distribution  703
+Secondary market  344, 703
+sales in, by prospectus  315
+Secondary offering  703
+Secondary offering of new securities  318
+Second market  344
+Section 529 plans  464
+Sector fund  413, 424, 703
+Secured bond  60–61, 703
+Securities
+American depository receipts  30–31
+blue-sky laws  615
+control  330–331
+defined  3
+derivative  172
+exempt from Regulation T 
+requirements  280–281
+foreign  31–32
+issuance of. see Issuance of securities
+listed  344
+marginable  279
+margin purchase of  279
+negotiability of  20
+restricted  330–331
+rights  27–29
+state registration of  615
+stocks  4
+transfer of ownership  19–21
+variable annuity, qualification of  477
+warrants  30–31
+Securities Act of 1933  311, 343–344, 
+605, 703
+antifraud provisions of  333–334
+exemption of municipal bonds from  
+109
+issuers and issues exempt from  
+327–332
+Securities Act of 1934  279
+Securities Acts Amendments of 1975  
+609, 703
+Securities and Exchange Commission 
+(SEC)  9, 311, 343–344, 625, 703
+disclaimer clause, for prospectuses  
+315, 416
+Securities Exchange Act of 1934  109, 
+311, 605–606, 703
+antifraud provisions of  333–334
+Securities Investor Protection Act 
+(SIPA) of 1970  607–608
+Securities Investor Protection 
+Corporation (SIPC)  607–608, 703
+required membership of broker/
+dealers in  608
+Securities markets  344–346
+Securitization  703
+Security  703
+Segregation  703
+Selection risk  578, 703
+Self-regulatory organization (SRO)  367, 
+606, 626, 703
+Self-supporting debt  135
+Sell  704
+Seller  704
+Seller’s option  704
+Sellers option contract  394
+Selling away  704
+Selling concession  325, 704
+Selling dividends  704
+Selling dividends, prohibited  440
+Selling group  704
+Selling group for new securities issue  
+322–323
+Sell out  704
+Sell stop order  354, 704
+Senior lien bonds  65
+Senior lien debt  704
+Senior security  13, 704
+SEP  704
+Separate account  704
+
+729
+Index
+Separately identifiable department or 
+division  704
+Separate Trading of Registered Interest 
+and Principal of Securities (STRIPS)  
+74, 704
+SEP-IRA  704
+Serial and balloon maturity  44
+Serial bond  44, 52, 704
+Serial maturity  110–111
+Series  704
+Series 6  704
+Series 7  704
+Series 24  704
+Series 63  704
+Series bond  704
+Series EE bond  88–89, 704
+Series HH bond  704
+Series I bonds  89
+Settlement  633, 705
+Settlement date  705
+Settlement dates and terms  393
+Settlement dates of transactions  
+133–134, 153
+Share identification  705
+Share identification accounting  441, 
+589
+Shares of beneficial interest  409
+Sharing arrangement  705
+Shelf offering  319, 705
+Short  705
+Short against the box  705
+Short-interest theory  705
+Short margin accounts  277
+basic terminology for  294
+Short market value (SMV)  294
+at maintenance  298
+Short positions  11, 13, 171, 173, 186, 
+204, 206
+hedging of  196
+Short sale  705
+Short sales and short-selling  11, 12, 
+277, 294–297, 596
+by insiders, prohibited  331, 363
+Short straddle  705
+Short-term capital gain  705
+Short-term capital loss  705
+Signature  400
+Signature guarantee  399
+Signature requirement  399
+Simplified arbitration  636, 705
+Simplified employee pension plan (SEP)  
+705
+Simplified employee pensions (SEP-
+IRAs)  465
+Single account  705
+Sinking fund  51, 110, 114, 705
+SIPC  705
+SLD  705
+SLMA  705
+SMA  705
+Sold  390
+Solvency  705
+S&P  703
+S&P 100  703
+S&P 100 (OEX)  214
+S&P 500  214, 703
+Special assessment bond  705
+Specialist  348, 705
+role of  350–351
+Specialist’s book  705
+Specialized fund  412, 424, 705
+Special memorandum account (SMA)  
+287–291, 297, 706
+defined  287
+effect of various events on  301
+use of  290–291
+Special revenue bond  706
+Special situation fund  424, 706
+Special tax bond  115, 706
+Speculation  186, 188, 189, 215, 575, 
+706
+Speculator  706
+Spinning  334
+Spin-off  706
+Split offering  706
+Split offering of new securities  319
+Split-rate bids  128
+Sponsor  706
+Sponsor of investment company  420
+Spot check  641
+Spousal account  706
+Spread (difference between bid and ask 
+price)  128, 345, 368, 370, 706
+of underwriting  325
+Spread order  706
+Spread (simultaneous option contracts)
+and market attitude  208
+summarized, using basic options chart  
+201
+types of  201
+SRO  706
+Stabilizing  706
+Stabilizing bids  320–321
+Stagflation  706
+Standard & Poor’s 100 Stock Index 
+(S&P 100)  706
+Standard & Poor’s Composite Index of 
+500 Stocks (S&P 500)  706
+Standard & Poor’s Corporation (S&P)  
+706
+Standard & Poor’s (S&P) ratings  
+47–48, 139
+Standby underwriter  706
+Standby underwriting  29, 323–324
+State and Local Government Securities 
+Series (SLGS)  118
+Stated yield  706
+Statement of additional information 
+(SAI)  416, 421
+Statements  257, 612
+State securities regulations. See Blue-sky 
+laws
+Statute of limitations  637
+Statute of limitations: arbitration  637
+Statutory disqualification  631, 706
+Statutory voting  7, 706
+Step-out well  706
+Stock ahead  707
+Stockbroker  707
+Stock certificate  19, 707
+Stock dividend  12, 18–19, 27, 67, 707
+effect on options contracts of  
+226–227
+exempt from Rule 145  332
+Stock funds  424–425
+Stock loan agreement  707
+Stock positions  187, 189
+hedging, using options  195–200
+married to put option  230
+Stock power  20, 707
+Stock quote  707
+Stock record department  387
+Stocks  4
+benefits of ownership  11–12
+common  4–14
+fundamental analysis of prices and 
+markets  537–552
+holding periods for  230
+listings (quotes) of  21–24, 345, 
+368–372
+preferred  14–17
+private placement  329
+risks of ownership  11–12
+technical analysis of prices and 
+markets  532–537
+traded cum rights or ex-rights  28–29
+transfer of ownership  19–21
+Stock split  10, 27, 67, 707
+effect on options contracts of  
+226–227
+exempt from Rule 145  332
+forward  10–11
+reverse  11
+Stop limit order  355, 359, 707
+Stop orders (stop order losses)  313, 
+353–356, 359, 707
+Stop out price  79
+Straddle  210–212, 707
+long  211
+short  211
+summarized, using basic options chart  
+210–211
+Straight-line depreciation  707
+Straight preferred stock  16
+Street name  254, 278
+Strike price  172, 707
+Striking price  707
+Stripped bond  707
+Stripper well  707
+STRIPS  707
+
+730
+Index
+Student Loan Marketing Association 
+(SLMA, Sallie Mae)  75, 78, 707
+Subchapter M, Internal Revenue Code  
+439
+Subchapter S corporation  497
+Subject quote  707
+Subordinated debenture  62–63, 707
+Subordinated debt financing  707
+Subordinated interest  707
+Subordinated loan  707
+Subordinated reversionary working 
+interest  707
+Sub-penny pricing  707
+Subscription agreement  707
+Subscription agreement of limited 
+partnership  501
+Subscription amount  707
+Subscription right  707
+Subscription rights, issuance and trading 
+of  28–31
+Suitability  708. See Customer and 
+portfolio management
+Summary prospectus  416–417
+Super Display Book (SDBK)  365, 708
+Supplemental liquidity provider (SLP)  
+708
+Supply  708
+Supply-side theory  708
+Support level  708
+Suspicious activity reports  613–614
+Syndicate, investment  125–126, 
+316–317, 320, 321–322, 708
+allocation of orders by  130–131, 152
+bidding by  127–129
+management fees  127, 128, 325–326
+types of accounts  125–126
+Syndicate letter (syndicate agreement)  
+126, 321
+Syndicate manager  708
+Syndicator of limited partnership  500
+Systematic risk  708
+Systematic (systemic) risk  12, 215, 578
+T
+T  708
+Tade date  709
+Takedown  130, 131
+additional  129–130
+total  129–131
+TAN  708
+Tape  708
+Targeted amortization class CMOs 
+(TACs)  85
+Taxability  708
+Taxable gain  708
+Tax and revenue anticipation notes 
+(TRANs), municipal  117, 708
+Tax anticipation notes (TANs), 
+municipal  117, 708
+Taxation, concepts and principles of  
+584–596
+Tax basis  708
+Tax credit  708
+Tax-deferred annuity  708
+Tax-equivalent yield  109, 708
+of tax-exempt bonds  149–150
+Taxes per capita  708
+Taxes per person  708
+Tax-exempt bond fund  708
+Tax-exempt (commercial paper)  117
+Tax-free bond fund  708
+Tax liability  708
+Tax preference item  708
+Tax Reform Act of 1986  115, 149
+Tax-sheltered annuity (TSA) (403(b) 
+plans)  467, 708
+Tax shelters. See Direct participation 
+programs
+T-bill  708
+T-bond  709
+T-call  709
+TDA  709
+Technical analysis  709
+Technical analysis of markets and prices  
+532–537
+charting of stocks  533–535
+Dow theory  535
+modern portfolio theory  536
+odd-lot theory  536–537
+random walk theory  536
+short interest theory  536
+technical traders (technicians)  354, 
+355
+Technician  709
+Telemarketing  156
+cold calling  612–613
+Telephone Consumer Protection Act of 
+1991 (TCPA)  709
+Tenants in common (TIC)  261, 266, 
+709
+Tendering  52, 54
+limits on  606
+Tender offer  709
+Term bond  44, 52, 709
+Termination  630
+Term maturity (term bonds)  110, 709
+Testimonial  643, 709
+The Bond Buyer  122, 130, 156
+The Wall Street Journal  156
+Third market  344, 709
+Third-party account  709
+Thomson Muni Market Monitor  124
+Tick  709
+Ticker Tape  709
+TIGR  709
+TIGRS (Treasury Income Growth 
+Receipts)  74
+Time deposit  709
+Time-sensitive orders  361–362
+Times interest earned ratio. 
+See Coverage ratio
+Time spread  202, 709
+Time value  709
+Time value of options contract  183
+Timing risk  709
+Tippers and Tippees (insider trading)  
+610
+T-note  709
+Tombstone  709
+Tombstone advertisements  313–314
+Total capitalization  709
+TRACE (Trade Reporting and 
+Compliance Engine)  709
+Trade confirmation  389, 709
+Trade date  390
+Trade Reporting and Compliance 
+Engine (TRACE)  709
+Trade settlement  388
+Trade-through  709
+Trading authorization  254, 709
+full  263
+limited  263
+Trading flat  83
+Trading halt  221, 348–349, 709
+Trading of securities. See also Customer 
+orders
+arbitrage  350
+discretionary  264–265
+municipal securities transactions, 
+reporting of  144
+options trading  221–226
+order routing systems  224
+position limits  223–224
+quotations of municipal bonds  
+141–143, 154
+regulation of  343–344
+settlement of transactions. see 
+also Settlement dates of transactions
+uniform practices for  152
+Trading posts  352
+TRAN  709
+Tranche  84, 709
+Transaction  388
+Transfer agent  20, 24, 709
+of investment company  420
+Transfer and hold in safekeeping  710
+Transfer and ship  710
+Transportation Average  710
+Treasury bill  710
+Treasury bond  710
+Treasury Bond Receipt (TBR)  710
+Treasury Inflation Protection Securities 
+(TIPS)  74
+Treasury Investors Growth Receipt 
+(TIGR)  710
+Treasury note  710
+Treasury receipt  73, 73–74, 710
+
+731
+Index
+Treasury securities  49, 71–74
+exempted from Regulation T 
+requirements  281
+issuance of  79–80
+listings (quotes) of  98
+non-marketable  88
+Treasury stock  5–6, 710
+Trendline  710
+Triangle  710
+Trough  710
+True interest cost (TIC)  128, 710
+Trust account  262
+Trust agreement  262, 710
+Trustee  710
+Trust indenture  64–65, 114–115, 120, 
+607, 710
+anti-dilution covenant  68
+call provision  51–52
+closed-end  61, 64, 114
+open-end  61, 64, 114
+protective covenants of  114–115
+Trust Indenture Act of 1939  64, 
+606–607, 710
+exemption of municipal bonds from  
+114
+Trust in Securities Act  710
+Truth in Securities Act  710. 
+See Securities Act of 1933
+TSA  710
+Turnover rate of mutual fund portfolio  
+429
+Two-dollar broker  348, 710
+Type  710
+U
+UGMA  710
+UGMA/UTMA accounts  262, 266–269
+registration of  267
+taxation of  268–269
+UIT  710
+Umbrella names. See Generic names
+Uncontested offer  633
+Uncovered  710
+Uncovered call writer  710
+Uncovered put writer  710
+Underdelivery  398
+Underlying instrument of option 
+contract  172
+Underlying securities  710
+Underwriter  316–317, 710
+of investment company  420
+Underwriting  322–325, 710. See 
+also Issuance of securities
+best–efforts  324
+fees and proceeds of  325–326
+firm commitment  29, 127, 323
+of municipal securities  122–129
+order allocation priorities, of 
+syndicate  131–132, 152
+phases of  311–316
+standby  323–324
+syndicate  125–129, 130–131, 
+316–317, 320, 321–322. see 
+also Syndicate, investment
+Underwriting compensation  710
+Underwriting discount  710
+Underwriting manager  711
+Underwriting spread  711
+Underwriting syndicate  711
+Undivided account  711
+Unearned income  711
+Uneven split  226
+Uniform Gift to Minors Act (UGMA)  
+266, 711
+Uniform practice code  627
+Uniform Securities Act (USA)  615, 
+711
+Uniform Transfers to Minors Act 
+(UTMA)  266, 711
+Unissued stock  5
+Unit  711
+Unit investment trust (UIT)  409–410, 
+711
+Unit of beneficial interest  711
+Unit refund annuity  711
+Units  30, 409
+Unlisted securities  344
+Unqualified legal opinion  121, 711
+Unrealized gain  711
+Unrealized gain/loss  12, 439
+Unregistered (private placement) stock  
+329
+Unsecured bond  61–62, 711
+Uptick  711
+USA  711
+U.S. government and agency bond fund  
+711
+U.S. government securities. See Agency 
+issue; See Treasury securities
+Utilities Average  711
+UTMA  711
+V
+Value Line  711
+Value Line Composite Index  711
+Variable annuity  477, 711
+accumulation phase of  482
+annuitization of  482–483
+annuity phase of  482
+management and registration of  480
+separate account of insurer  478–479, 
+482
+similarity to mutual funds  479–480
+taxation of  481
+versus fixed annuity  478
+Variable-rate demand note  117, 711
+Variable-rate dividend. See Adjustable-
+rate dividend
+Variable-rate municipal bonds (variable-
+rate demand obligations)  117
+Variable-rate municipal security  711
+Vertical spread  712. See Price spread
+Vesting  712
+Visible supply  712
+VIX  712
+Volatility  183, 216, 579, 712
+beta value measure of  216, 579
+Volume of trading theory  712
+Voluntary accumulation plan  712
+Voluntary accumulation plan, of mutual 
+fund  442
+Voting (Class A) common stock  9
+Voting right  7–10, 418–419, 712
+W
+Wall Street Journal, The  156
+Warrant  30–31, 712
+Wash sale  589–590, 712
+Western account  712
+Western syndicate account  125–126
+When-, as- and if-issued contracts  394
+When-, as-, and if-issued security  712
+When-issued contract  712
+When-issued security (WI)  712
+WI  712
+Wildcatting  712
+Wilshire 5000 Equity Index  712
+Wire room  712
+Withdrawal plans of mutual funds  443
+Withholding tax  441, 462
+Workable indication  712
+Workable indication quotations  143
+Working capital  712
+Working capital ratio  712
+Working interest  712
+Workout quote  370, 712
+Writer  712
+Writer (seller) of option  171
+Writing a scale  127, 712
+X
+XMI index  214
+Y
+Yield  390, 713
+current  55
+current dividend  18
+inverse relationship with price  
+55–56, 58–60
+nominal  54
+of bonds  49, 54–58, 141
+tax equivalent  109
+to call (YTC)  55, 57, 142
+to maturity (YTM)  55, 56–57, 111, 
+141
+
+732
+Index
+Yield-based option  217–218, 713
+Yield curve  58–60, 713
+Yield to call (YTC)  713
+Yield to maturity (YTM)  713
+YTC  713
+YTM  713
+Z
+Zero-coupon bond  63–64, 74, 83, 713
+taxation of  63
+Zero-minus tick  713
+Zero-plus tick  713
+Zero-tranche CMO (Z-Tranche)  86
+

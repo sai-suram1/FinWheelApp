@@ -78,7 +78,7 @@ def find_and_make_trade(user, history):
         
 
         TICKER: <TICKER>
-        ORDER SIDE: <BUY, SELL>
+        ORDER SIDE: <buy, sell>
         TIME IN FORCE: <day, gtc, otp>
         TYPE: <market, limit, stop_limit, trailing_stop>
         (gtc means "Good until Canceled" and otp means "Official Opening Price")
@@ -103,23 +103,25 @@ def find_and_make_trade(user, history):
     """
     print(x.text)
     lk = x.text.split("\n")
-    print(lk)
+    print("List: "+str(lk))
     info = []
     for p in lk:
         if p == '':
             continue
         else:
             s = p.split(":")
-            info.append({s[0]:s[1].strip()})
-    print(info)
+            print(s)
+            info.append({s[0].strip():s[1].strip()})
+    print("Dict: "+str(info))
+    print("processing order")
     if "QUANTITY OF SHARES" in x.text and "PRICEPOINT" in x.text:
-        xy = process_order(ticker=info[0]["TICKER"], side=info[1]["ORDER SIDE"], type=info[2]["TYPE"], time=info[3]["TIME IN FORCE"], qty=info[4]["QUANTITY OF SHARES"], cash_account=CashAccount.objects.get(for_user=user), pricept=info[5]["PRICEPOINT"])
+        xy = process_order(ticker=info[0]["TICKER"], side=info[1]["ORDER SIDE"], type=info[3]["TYPE"], time=info[2]["TIME IN FORCE"], qty=info[4]["QUANTITY OF SHARES"], cash_account=CashAccount.objects.get(for_user=user), pricept=info[5]["PRICEPOINT"])
     elif "AMOUNT TO INVEST" in x.text and "PRICEPOINT" in x.text:
-        xy = process_order(ticker=info[0]["TICKER"], side=info[1]["ORDER SIDE"], type=info[2]["TYPE"], time=info[3]["TIME IN FORCE"], cash_amt=info[4]["AMOUNT TO INVEST"], cash_account=CashAccount.objects.get(for_user=user),pricept=info[5]["PRICEPOINT"])
+        xy = process_order(ticker=info[0]["TICKER"], side=info[1]["ORDER SIDE"], type=info[3]["TYPE"], time=info[2]["TIME IN FORCE"], cash_amt=info[4]["AMOUNT TO INVEST"], cash_account=CashAccount.objects.get(for_user=user),pricept=info[5]["PRICEPOINT"])
     elif "QUANTITY OF SHARES" in x.text and "PRICEPOINT" not in x.text:
-        xy = process_order(ticker=info[0]["TICKER"], side=info[1]["ORDER SIDE"], type=info[2]["TYPE"], time=info[3]["TIME IN FORCE"], qty=info[4]["QUANTITY OF SHARES"], cash_account=CashAccount.objects.get(for_user=user))
+        xy = process_order(ticker=info[0]["TICKER"], side=info[1]["ORDER SIDE"], type=info[3]["TYPE"], time=info[2]["TIME IN FORCE"], qty=info[4]["QUANTITY OF SHARES"], cash_account=CashAccount.objects.get(for_user=user),cash_amt = None, pricept=None)
     elif "AMOUNT TO INVEST" in x.text and "PRICEPOINT" not in x.text:
-        xy = process_order(ticker=info[0]["TICKER"], side=info[1]["ORDER SIDE"], type=info[2]["TYPE"], time=info[3]["TIME IN FORCE"], cash_amt=info[4]["AMOUNT TO INVEST"], cash_account=CashAccount.objects.get(for_user=user))
+        xy = process_order(ticker=info[0]["TICKER"], side=info[1]["ORDER SIDE"], type=info[3]["TYPE"], time=info[2]["TIME IN FORCE"], cash_amt=info[4]["AMOUNT TO INVEST"], cash_account=CashAccount.objects.get(for_user=user), qty=None, pricept=None)
 
     return "Order had been made."
 
