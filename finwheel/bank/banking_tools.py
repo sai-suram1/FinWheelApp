@@ -430,4 +430,5 @@ def process_order(ticker, side, type, time, qty, cash_amt, pricept: int, cash_ac
         return response.json()["message"]
     else: 
         print(response.text)
+        return response.json()["id"]
 
