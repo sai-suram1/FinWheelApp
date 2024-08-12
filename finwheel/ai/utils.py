@@ -11,7 +11,7 @@ import os
 from google.generativeai.types import HarmCategory, HarmBlockThreshold
 import google.generativeai as genai
 from dotenv import load_dotenv,dotenv_values
-from bank.banking_tools import process_order
+from bank.banking_tools import *
 from bank.models import CashAccount
 from user.models import *
 from ai.models import model_parameters
@@ -33,7 +33,7 @@ generation_config = {
     #"Content-Type": "application/json",
 }
 
-def refine_chat_history(history):
+def refine_chat_history(history, user):
     hist=[]
     lk = model_parameters.objects.all()
     for d in lk:
@@ -62,6 +62,34 @@ def refine_chat_history(history):
             x.chatbot_response
         ],
         })
+    #assets and cash info
+    cash = dict(get_account_info(acct=CashAccount.objects.get(for_user=user)))["cash"]
+    hist.append({
+        "role": "user",
+        "parts": [
+            f"THE USER'S ACCOUNT HAS ${float(cash)} in cash",
+        ],
+    })
+    hist.append({
+        "role": "model",
+        "parts": [
+            "I understand that the user only has this much in cash and I will ensure that his balance stays above $0.01 with any transaction he does."
+        ],
+    })
+    assets = get_positions_from_account(user=CashAccount.objects.get(for_user=user))
+    for p in assets:
+        hist.append({
+            "role": "user",
+            "parts": [
+                f"Please process this. This is one of the user's assets: {p}. \n Find the proper name of the company of which the asset is held. USE BOTH THE TICKER AND THE EXCHANGE NAME TO HELP YOU. ",
+            ],
+        })
+        hist.append({
+            "role": "model",
+            "parts": [
+                "I understand that the user has that asset in his portfolio. I WILL USE BOTH THE TICKER AND THE EXCHANGE NAME TO FIND THE COMPANY NAME. "
+            ],
+        })
     return hist
 
 
@@ -71,7 +99,7 @@ model = genai.GenerativeModel(model_name="gemini-1.5-flash-latest")
 
 
 def find_and_make_trade(user, history):
-    ana = model.start_chat(history = refine_chat_history(history))
+    ana = model.start_chat(history = refine_chat_history(history, user))
     x = ana.send_message("""What is the trade that needs to be made? DO NOT USE ANY MARKDOWN OR OTHER TEXTUAL ADJUSTMENTS. 
         WHEN I ASK FOR THE TRADE THAT IS NEEDED TO BE MADE
         I want the following returned in this exact order:
@@ -126,7 +154,7 @@ def find_and_make_trade(user, history):
     return f"Order had been made. Order ID is: {xy}"
 
 def create_financial_plan(user, history):
-    analyzer = model.start_chat(history = refine_chat_history(history))
+    analyzer = model.start_chat(history = refine_chat_history(history, user))
     xt = analyzer.send_message("What should be done for the financial plan")
     """
     PLAN TO TRAIN
@@ -193,8 +221,32 @@ def create_financial_plan(user, history):
     
     return True
 
-def make_action(history):
-    analyzer = model.start_chat(history = refine_chat_history(history))
+def get_asset_data(history, user):
+    analyzer = model.start_chat(history = refine_chat_history(history, user))
+    xt = analyzer.send_message(""" look at the history of the conversation and make a decision on which of the following to return: 
+
+DO NOT ADD ANY TEXTUAL CHANGES. 
+
+EARNINGS
+INCOME_STATEMENT
+BALANCE_SHEET
+CASH_FLOW
+LISTING_STATUS
+
+After returning that first line, return the Stock Ticker of the stock to be analyzed. 
+DO NOT ADD ANY TEXTUAL CHANGES.""")
+    import requests
+    texts = xt.text.split("\n")
+    # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
+    url = f'https://www.alphavantage.co/query?function={texts[0].strip()}&symbol={texts[1].strip()}&apikey={config["alpha-vantage-api"]}'
+    r = requests.get(url)
+    data = r.json()
+
+    print(data)
+    return data
+
+def make_action(history, user):
+    analyzer = model.start_chat(history = refine_chat_history(history, user))
     sol_finder = analyzer.send_message("From this chat, what action should be executed currently?\n DO NOT USE MARKDOWN OR OTHER TEXTUAL EDITS \n - creating investment plans/portfolios \n - trading stocks/assets directly.\n- changing user settings\n- ordering money transfers between accounts.\n- analysis of SEC and Earnings Data of Assets.\n - Rebalancing Portfolios and Making changes to investment plans.")
     print(sol_finder.text)
     return sol_finder.text
@@ -211,7 +263,7 @@ def send_message_and_get_response(input, history, user):
         if ("yes" in input or "y" in input or "Yes" in input or "Y" in input):
             if ("confirm" in history.last().chatbot_response or "agree" in history.last().chatbot_response) and history.count() > 0:
                 print("review past plan and make a solution.")
-                plan = make_action(history)
+                plan = make_action(history, user)
                 if "creating investment plans/portfolios" in plan:
                     lk = create_financial_plan(user, history) 
                     if lk:
@@ -220,6 +272,9 @@ def send_message_and_get_response(input, history, user):
                     d = find_and_make_trade(user, history)
                     if type(d) == str:
                         return d
+                elif "analysis of SEC and Earnings Data of Assets" in plan:
+                    ana = get_asset_data(history, user)
+                    return ana
                 # we have covered financial plans. We need to cover the following:
                 # trading stocks/assets directly. 
                 # changing user settings
@@ -230,21 +285,21 @@ def send_message_and_get_response(input, history, user):
             else:
                 print(history.count())
                 print("processing")        
-                response = model.start_chat(history=refine_chat_history(history))
+                response = model.start_chat(history=refine_chat_history(history, user))
                 xt = response.send_message(input)
                 print(xt.text)
                 return xt.text
         else:
             print(history.count())
             print("processing")        
-            response = model.start_chat(history=refine_chat_history(history))
+            response = model.start_chat(history=refine_chat_history(history, user))
             xt = response.send_message(input)
             print(xt.text)
             return xt.text
     else:
         print(history.count())
         print("processing")
-        response = model.start_chat(history=refine_chat_history(history))        
+        response = model.start_chat(history=refine_chat_history(history, user))        
         xt = response.send_message(input)
         print(xt.text)
         return xt.text

@@ -301,6 +301,19 @@ def make_transaction(account: CashAccount,acc_num, amount, order):
         return True
 
 
+def get_news(asset):
+    import requests
+
+    url = f"https://data.alpaca.markets/v1beta1/news?sort=desc&symbols={asset}&include_content=true"
+
+    headers = {"accept": "application/json","APCA-API-KEY-ID": "PKGFLKPMUCPMK13R0UQW","APCA-API-SECRET-KEY": "rWg3Ho4fnC3niaEuejw1nLgaOezN7Ve0c3ZzBMUf"}
+
+    response = requests.get(url, headers=headers)
+
+    print(response.text)
+    return response.json()
+
+
 def get_positions_from_account(user: CashAccount):
     import requests
 
