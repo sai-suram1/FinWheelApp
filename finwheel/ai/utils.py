@@ -243,7 +243,8 @@ DO NOT ADD ANY TEXTUAL CHANGES.""")
     data = r.json()
 
     print(data)
-    return data
+    final_table = analyzer.send_message(f"""Turn the data below into an HTML TABLE. ONLY RETURN THE HTML FOR THIS: \n {data}""")
+    return final_table
 
 def make_action(history, user):
     analyzer = model.start_chat(history = refine_chat_history(history, user))
