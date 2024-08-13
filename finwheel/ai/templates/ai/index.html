@@ -62,8 +62,8 @@
                         {% if chatHistory.0 != None %}
                             {% for x in chatHistory.0 %} 
                                 <hr>
-                                <h4>user:</h4> {{x.user_message | markdownify}} | {{x.date_created}}<br><hr>
-                                <h4>bot:</h4> {{x.chatbot_response | markdownify}}<br>
+                                <h4>user:</h4> {{x.user_message | markdownify }} | {{x.date_created}}<br><hr>
+                                <h4>bot:</h4> {{x.chatbot_response | safe }}<br>
                             {% endfor %}
                         {% endif %}
                         <!-- Chat messages will be dynamically added here -->

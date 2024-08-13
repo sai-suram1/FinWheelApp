@@ -226,3 +226,7 @@ body {
     margin-left: 270px; /* Same width as the sidebar plus padding */
     padding: 20px;
 }
+
+table, th, td, tr {
+    border: 2px solid black;
+}

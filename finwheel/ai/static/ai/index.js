@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const messageDiv = document.createElement('div');
         messageDiv.classList.add('message', sender);
         //console.log(message)
-        messageDiv.innerHTML = `<hr><h4>${sender}:</h4> ${message}<hr>`;
+        messageDiv.innerHTML = `<hr><h4>${sender}:</h4> ${message}<hr> `;
         chatBox.appendChild(messageDiv);
         chatBox.scrollTop = chatBox.scrollHeight;
     }

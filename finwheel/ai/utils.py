@@ -26,10 +26,10 @@ genai.configure(api_key=config["api-key"])
     # Create the model
     # See https://ai.google.dev/api/python/google/generativeai/GenerativeModel
 generation_config = {
-    "temperature": 0.9,
+    "temperature": 1.8,
     "top_p": 1,
     "top_k": 0,
-    "max_output_tokens": 10000000,
+    "max_output_tokens": 8192,
     #"Content-Type": "application/json",
 }
 
@@ -95,7 +95,7 @@ def refine_chat_history(history, user):
 
 
 #print('Available base models:', [m.name for m in genai.list_models()])
-model = genai.GenerativeModel(model_name="gemini-1.5-flash-latest")
+model = genai.GenerativeModel(model_name="gemini-1.5-pro", generation_config=generation_config)
 
 
 def find_and_make_trade(user, history):
@@ -223,28 +223,91 @@ def create_financial_plan(user, history):
 
 def get_asset_data(history, user):
     analyzer = model.start_chat(history = refine_chat_history(history, user))
-    xt = analyzer.send_message(""" look at the history of the conversation and make a decision on which of the following to return: 
+    
+    texts = []
+    xt = ""
+    while len(texts) != 2:
+        xt = analyzer.send_message(""" look at the history of the conversation and return one of the following: 
 
-DO NOT ADD ANY TEXTUAL CHANGES. 
+        DO NOT ADD ANY TEXTUAL CHANGES. 
 
-EARNINGS
-INCOME_STATEMENT
-BALANCE_SHEET
-CASH_FLOW
-LISTING_STATUS
+        EARNINGS
+        INCOME_STATEMENT
+        BALANCE_SHEET
+        CASH_FLOW
+        CURRENT_PRICE
+        QUOTE
 
-After returning that first line, return the Stock Ticker of the stock to be analyzed. 
-DO NOT ADD ANY TEXTUAL CHANGES.""")
-    import requests
-    texts = xt.text.split("\n")
+        After returning that first line, return the Stock Ticker of the stock to be analyzed. 
+        DO NOT ADD ANY TEXTUAL CHANGES.""")
+        print(xt.text)
+        if "I understand" in xt.text:
+            continue
+        texts = xt.text.split("\n")
+        for v in texts:
+            if v == '' or v == "":
+                texts.remove(v)
+        print(texts)
+        if len(texts) != 2:
+            continue
+    print(texts)
+    """
     # replace the "demo" apikey below with your own key from https://www.alphavantage.co/support/#api-key
-    url = f'https://www.alphavantage.co/query?function={texts[0].strip()}&symbol={texts[1].strip()}&apikey={config["alpha-vantage-api"]}'
+    url = f'https://www.alphavantage.co/query?function={str(texts[0]).strip()}&symbol={str(texts[1]).strip()}&apikey={config["alpha-vantage-api"]}'
+    print(url)
     r = requests.get(url)
+    print(r.status_code)
     data = r.json()
 
     print(data)
-    final_table = analyzer.send_message(f"""Turn the data below into an HTML TABLE. ONLY RETURN THE HTML FOR THIS: \n {data}""")
-    return final_table
+    for x in range(5):
+        try:
+            final_table = analyzer.send_message(f"Within the data given, find the report the user is looking for and return that specific data. Turn that said data into a HTML table. ONLY RETURN THE HTML TABLE FOR THIS: \n {data}")
+            break
+        except Exception:
+            continue
+    """
+    import yfinance as yf
+
+    stock = yf.Ticker(str(texts[1]).strip())
+    final_info = ""
+
+    if str(texts[0]).strip() == "BALANCE_SHEET":
+        final_info = stock.quarterly_balance_sheet.to_html()
+    elif str(texts[0]).strip() == "CASH_FLOW":
+        final_info = stock.quarterly_cashflow.to_html()
+    elif str(texts[0]).strip() == "INCOME_STATEMENT":
+        final_info = stock.quarterly_cashflow.to_html()
+    elif str(texts[0]).strip() == "EARNINGS":
+        #print(stock.get_earnings_trend())
+        final_info = stock.get_earnings_dates().to_html()
+    else:
+        final_info = stock.info
+    return final_info
+
+def FinChatReader(query):
+    import requests
+
+    url = "https://api.finchat.io/v1/query"
+
+    payload = {
+        "query": query,
+        "history": [],
+        "inlineSourcing": True,
+        "stream": False,
+        "generateChatTitle": True,
+        "generateFollowUpQuestions": True
+    }
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer 425c70b012164e65968182108f51df9c"
+    }
+
+    response = requests.post(url, json=payload, headers=headers)
+
+    print(response.json())
+
+
 
 def make_action(history, user):
     analyzer = model.start_chat(history = refine_chat_history(history, user))

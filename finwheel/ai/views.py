@@ -12,6 +12,7 @@ import uuid
 import markdown2
 from markdown2 import Markdown
 import ai.train
+import markdown
 
 
 #thread1 = threading.Thread(target=ai.train.read_input_output,args=['finwheel/ai/training_data_finance_50000.csv'])
@@ -30,6 +31,10 @@ def dashboard(request):
         chat = False
     for k in ch:
         lk = Chat_History.objects.filter(for_chat=k).order_by('order')
+        for l in lk:
+            l.user_message = markdown.markdown(l.user_message,extensions=['markdown.extensions.tables'])
+            l.chatbot_response = markdown.markdown(l.chatbot_response,extensions=['markdown.extensions.tables'])
+            l.save()
         chat_history.append(lk)
     print(ch.count())
     return render(request, "ai/index.html", {
@@ -71,12 +76,12 @@ def bot_operate(request):
                 new_register = Chat_History(for_chat=ch, order=last_message_number+1, user_message=data[f"message"], chatbot_response=processed_data, date_created=datetime.datetime.now())
                 new_register.save()
             print("sending data back")
-            markdowner = Markdown()
+            #markdowner = Markdown()
             if data["chat"] == "":
                 return HttpResponseRedirect(reverse("ai:dashboard"))
             # Return a JSON response with the processed data
             else:
-                x = HttpResponse(markdowner.convert(processed_data))
+                x = HttpResponse(markdown.markdown(processed_data,extensions=['markdown.extensions.tables']))
                 return x
         except json.JSONDecodeError:
             return JsonResponse({'error': "Invalid JSON"}, status=400)
