@@ -30,7 +30,7 @@
                 
                 <div class="summary">
                     <h3>Summary</h3>
-                    <h4 id="sumBalBefore">Current Cash Balance: {{cash.cash_balance}}</h4>
+                    <h4 id="sumBalBefore">Current Cash Balance: ${{cash.cash_withdrawable}}</h4>
                     <h4 id="sumOrder">Order Type: ----</h4>
                     <h4 id="sumAmt">Amount: ----</h4>
                     <h4 id="sumAcct">From/To: ----</h4>
@@ -45,7 +45,7 @@
             const order = document.getElementById('order_t');
             const acct = document.getElementById('bank_accounts');
             const newB = document.getElementById('sumNewBalance');
-            const oamt = {{cash.cash_balance}};
+            const oamt = {{cash.cash_withdrawable}};
             // Add event listener to detect changes in input value
             amt.addEventListener('input', function() {
                 const newAmtText = amt.value;

@@ -100,8 +100,7 @@ model = genai.GenerativeModel(model_name="gemini-1.5-pro", generation_config=gen
 
 def find_and_make_trade(user, history):
     ana = model.start_chat(history = refine_chat_history(history, user))
-    x = ana.send_message("""What is the trade that needs to be made? DO NOT USE ANY MARKDOWN OR OTHER TEXTUAL ADJUSTMENTS. 
-        WHEN I ASK FOR THE TRADE THAT IS NEEDED TO BE MADE
+    x = ana.send_message("""What is the trade that needs to be made after looking at the history of the conversation?
         I want the following returned in this exact order:
         
 
@@ -129,9 +128,10 @@ def find_and_make_trade(user, history):
         OR 
         AMOUNT TO INVEST: <cash_amt>
     """
+    
     print(x.text)
     lk = x.text.split("\n")
-    print("List: "+str(lk))
+    #print("List: "+str(lk))
     info = []
     for p in lk:
         if p == '':
@@ -140,7 +140,7 @@ def find_and_make_trade(user, history):
             s = p.split(":")
             print(s)
             info.append({s[0].strip():s[1].strip()})
-    print("Dict: "+str(info))
+    #print("Dict: "+str(info))
     print("processing order")
     if "QUANTITY OF SHARES" in x.text and "PRICEPOINT" in x.text:
         xy = process_order(ticker=info[0]["TICKER"], side=info[1]["ORDER SIDE"], type=info[3]["TYPE"], time=info[2]["TIME IN FORCE"], qty=info[4]["QUANTITY OF SHARES"], cash_account=CashAccount.objects.get(for_user=user), pricept=info[5]["PRICEPOINT"])
@@ -333,9 +333,15 @@ def send_message_and_get_response(input, history, user):
                     if lk:
                         return "Financial Plan Created Successfully"
                 elif "trading stocks/assets directly" in plan:
-                    d = find_and_make_trade(user, history)
-                    if type(d) == str:
-                        return d
+                    d = "None"
+                    while True:
+                        try:
+                            d = find_and_make_trade(user, history)
+                            if type(d) == str:
+                                break    
+                        except Exception:
+                            continue
+                    return d
                 elif "analysis of SEC and Earnings Data of Assets" in plan:
                     ana = get_asset_data(history, user)
                     return ana

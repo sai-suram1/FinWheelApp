@@ -2,7 +2,7 @@
 
 {% extends 'home/layout.html' %}
 
-{% block title %}Home - Fin{% endblock %}
+{% block title %}Documents and Statements{% endblock %}
 
 {% block content %}
         <div class="container">
@@ -13,7 +13,7 @@
                 .tab {
                   overflow: hidden;
                   border: 1px solid #ccc;
-                  background-color: #f1f1f1;
+                  background-color: #5cbadc;
                 }
                 
                 /* Style the buttons inside the tab */
@@ -30,12 +30,12 @@
                 
                 /* Change background color of buttons on hover */
                 .tab button:hover {
-                  background-color: #ddd;
+                  background-color: #369fd7;
                 }
                 
                 /* Create an active/current tablink class */
                 .tab button.active {
-                  background-color: #ccc;
+                  background-color: #3db4bf;
                 }
                 
                 /* Style the tab content */
@@ -49,29 +49,19 @@
                 </head>
                 <body>
                 
-                <h2>Account Information</h2>
+                <h2>Tax Documents</h2>
+                {% if tax_doc_count == 0 %} 
+                  <h4>No Tax Documents</h4>
                 
-                <div class="tab">
-                  <button class="tablinks" onclick="openTab(event, 'transactions')">Transactions</button>
-                  <button class="tablinks" onclick="openTab(event, 'documents')">Documents</button>
-                  <button class="tablinks" onclick="openTab(event, 'trades')">Trades</button>
-                </div>
-                
-                <div id="transactions" class="tabcontent">
-                  <h3>Transactions in last 30 days</h3>
-                  <p>London is the capital city of England.</p>
-                </div>
-                
-                <div id="documents" class="tabcontent">
-                  <h3>Documents</h3>
-                  <p>Paris is the capital of France.</p> 
-                </div>
-                
-                <div id="trades" class="tabcontent">
-                  <h3>Tokyo</h3>
-                  <p>Tokyo is the capital of Japan.</p>
-                </div>
-                
+                {% else %}
+                  {% for x in tax_documents %} 
+                      {% for key, value in x %} 
+                        <h2>{{key}} - {{value}}</h2>
+                      {% endfor %}
+                  {% endfor %}
+
+                {% endif %}
+                </body>
                 <script>
                 function openTab(evt, cityName) {
                   var i, tabcontent, tablinks;
@@ -88,5 +78,175 @@
                 }
                 </script>
         </div>
+        <div class="container">
+          <style>
+              body {font-family: Arial;}
+              
+              /* Style the tab */
+              .tab {
+                overflow: hidden;
+                border: 1px solid #ccc;
+                background-color: #f1f1f1;
+              }
+              
+              /* Style the buttons inside the tab */
+              .tab button {
+                background-color: inherit;
+                float: left;
+                border: none;
+                outline: none;
+                cursor: pointer;
+                padding: 14px 16px;
+                transition: 0.3s;
+                font-size: 17px;
+              }
+              
+              /* Change background color of buttons on hover */
+              .tab button:hover {
+                background-color: #ddd;
+              }
+              
+              /* Create an active/current tablink class */
+              .tab button.active {
+                background-color: #ccc;
+              }
+              
+              /* Style the tab content */
+              .tabcontent {
+                display: none;
+                padding: 6px 12px;
+                border: 1px solid #ccc;
+                border-top: none;
+              }
+              </style>
+              </head>
+              <body>
+                
+                <h2>Trade Confirmations</h2>
+                {% if trade_confirmations_count == 0 %} 
+                  <h4>No Trade Confirmations</h4>
+                
+                {% else %}
+                <table>
+                  <tr>
+                    <th>
+                      Type
+                    </th>
+                    <th>ID</th>
+                    <th>Date</th>
+                    <th>Download Link</th>
+                  </tr>
+                
+                  {% for xt in trade_confirmations %} 
+                    <tr>
+                      <td>{{xt.type}}</td>
+                      <td>{{xt.id}}</td>
+                      <td>{{xt.date}}</td>
+                      <td><a href="{% url 'bank:view_document' xt.id %}">Download/View PDF</a></td>
+                    </tr>
+                  {% endfor %}
+                </table>
+                {% endif %}
+              </body>
+              
+              <script>
+              function openTab(evt, cityName) {
+                var i, tabcontent, tablinks;
+                tabcontent = document.getElementsByClassName("tabcontent");
+                for (i = 0; i < tabcontent.length; i++) {
+                  tabcontent[i].style.display = "none";
+                }
+                tablinks = document.getElementsByClassName("tablinks");
+                for (i = 0; i < tablinks.length; i++) {
+                  tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }
+                document.getElementById(cityName).style.display = "block";
+                evt.currentTarget.className += " active";
+              }
+              </script>
+      </div>
+      <div class="container">
+        <style>
+            body {font-family: Arial;}
+            
+            /* Style the tab */
+            .tab {
+              overflow: hidden;
+              border: 1px solid #ccc;
+              background-color: #f1f1f1;
+            }
+            
+            /* Style the buttons inside the tab */
+            .tab button {
+              background-color: inherit;
+              float: left;
+              border: none;
+              outline: none;
+              cursor: pointer;
+              padding: 14px 16px;
+              transition: 0.3s;
+              font-size: 17px;
+            }
+            
+            /* Change background color of buttons on hover */
+            .tab button:hover {
+              background-color: #ddd;
+            }
+            
+            /* Create an active/current tablink class */
+            .tab button.active {
+              background-color: #ccc;
+            }
+            
+            /* Style the tab content */
+            .tabcontent {
+              display: none;
+              padding: 6px 12px;
+              border: 1px solid #ccc;
+              border-top: none;
+            }
+            </style>
+            </head>
+            <body>
+            
+            <h2>Account Information</h2>
+            
+            <div class="tab">
+              <button class="tablinks" onclick="openTab(event, 'transactions')">Transactions</button>
+              <button class="tablinks" onclick="openTab(event, 'documents')">Documents</button>
+              <button class="tablinks" onclick="openTab(event, 'trades')">Trades</button>
+            </div>
+            
+            <div id="transactions" class="tabcontent">
+              <h3>Transactions in last 30 days</h3>
+              <p>London is the capital city of England.</p>
+            </div>
+            
+            <div id="documents" class="tabcontent">
+              <h3>Documents</h3>
+              <p>Paris is the capital of France.</p> 
+            </div>
+            
+            <div id="trades" class="tabcontent">
+              <h3>Tokyo</h3>
+              <p>Tokyo is the capital of Japan.</p>
+            </div>
+            
+            <script>
+            function openTab(evt, cityName) {
+              var i, tabcontent, tablinks;
+              tabcontent = document.getElementsByClassName("tabcontent");
+              for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+              }
+              tablinks = document.getElementsByClassName("tablinks");
+              for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+              }
+              document.getElementById(cityName).style.display = "block";
+              evt.currentTarget.className += " active";
+            }
+            </script>
+    </div>
 
 {% endblock %}

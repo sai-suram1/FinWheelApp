@@ -39,6 +39,7 @@ secret = stuff['SECRET']
 @login_required(login_url='/user/login')
 def index(request):
     config_bank = False
+    #print(get_user_portfolio_history(CashAccount.objects.get(for_user=request.user)))
     if request.method == "GET":
         if CashAccount.objects.filter(for_user=request.user).count() < 1 or ExternalBankAccount.objects.filter(for_user=request.user).count() < 1:
             config_bank = True
@@ -65,9 +66,28 @@ def index(request):
             else:
                 return render(request, "bank/index.html", {
                     "user_account": user_account,
+                    "account_info": get_account_info(acct=user_account),
                     "config_bank": config_bank,
-                    "transactions": Transaction.objects.filter(for_account=user_account).order_by('-date_executed')[0:5]
+                    "transactions": list(get_alpaca_transfers(CashAccount.objects.get(for_user=request.user)))
                 })
+
+@login_required(login_url='/user/login')
+def take_portfolio_data(request):
+    if request.method == "POST":
+        data = json.loads(request.body)
+        period = data["timePeriod"]
+        timeframe = "1D"
+        if "5D" in period:
+            timeframe = "1D"
+        elif "1D" in period:
+            timeframe = "1H"
+        elif "A" in period:
+            timeframe = "1D"
+        elif "M" in period:
+            timeframe = "1D"
+        new_stuff = get_user_portfolio_history(CashAccount.objects.get(for_user=request.user), period=period, timeframe=timeframe)
+        return JsonResponse(new_stuff)
+
 
 #keep for a moment -> modify to making it take SSN with the other info to create a new bank acct. 
 @login_required(login_url='/user/login')
@@ -132,8 +152,10 @@ def investment_view(request):
     user_account = CashAccount.objects.get(for_user=request.user)
     positions = get_positions_from_account(user_account)
     print(positions)
+    account_info = get_account_info(acct=user_account)
+    print(account_info)
     orders = get_open_orders(user_account)
-    return render(request, "bank/investments.html", {"positions": positions, "orders":orders, "acct":user_account})     
+    return render(request, "bank/investments.html", {"positions": positions, "orders":orders, "acct":account_info, "cash": account_info["cash"]})     
 
 @login_required(login_url='/user/login')
 def cancel_order_view(request, order_id):
@@ -143,7 +165,23 @@ def cancel_order_view(request, order_id):
 
 @login_required(login_url='/user/login')
 def transactions_view(request):
-    return render(request, "bank/account_stats.html")
+    all_documents = load_documents_and_transactions(acct=CashAccount.objects.get(for_user=request.user), type="")
+    tax_documents = load_documents_and_transactions(acct=CashAccount.objects.get(for_user=request.user), type="tax_statement")
+    trade_confirmations = load_documents_and_transactions(acct=CashAccount.objects.get(for_user=request.user), type="trade_confirmation")
+    print(trade_confirmations)
+    return render(request, "bank/account_stats.html", {
+        "tax_doc_count": len(tax_documents),
+        "tax_documents": tax_documents,
+        "trade_confirmations": trade_confirmations,
+        "trade_confirmations_count": len(trade_confirmations),
+        "account_id": CashAccount.objects.get(for_user=request.user).customer_id
+    })
+
+@login_required(login_url='/user/login')
+def view_document(request, doc_id):
+    if request.method == "GET":
+        return find_document(CashAccount.objects.get(for_user=request.user), doc_id)
+
 
 #transaction management
 @login_required(login_url="/user/login")
@@ -151,7 +189,8 @@ def start_transaction(request):
     l = ExternalBankAccount.objects.filter(for_user=request.user, verified=True, ach_authorized=True)
     if request.method == "GET":
         cash_account = CashAccount.objects.get(for_user=request.user)
-        return render(request, "bank/transaction.html", {"external_bank_accounts": l, "cash": cash_account})
+        alpaca_acct = get_account_info(acct=cash_account)
+        return render(request, "bank/transaction.html", {"external_bank_accounts": l, "cash": alpaca_acct})
     else:
         bank = request.POST["bank"]
         amount = request.POST["amount"]
@@ -169,7 +208,8 @@ def make_order(request):
     cash_account = CashAccount.objects.get(for_user=request.user)
     l = ExternalBankAccount.objects.filter(for_user=request.user, verified=True, ach_authorized=True)
     if request.method == "GET":
-        return render(request, "bank/order.html", {"external_bank_accounts": l, "cash": cash_account})
+        alpaca_acct = get_account_info(acct=cash_account)
+        return render(request, "bank/order.html", {"external_bank_accounts": l, "cash": alpaca_acct})
     else:
         ticker = request.POST["stock_tick"]
         side = request.POST["order_side"]
@@ -179,10 +219,13 @@ def make_order(request):
         pricept = 0
         if "price" in request.POST.keys():  
             pricept = request.POST["price"]
-        
-        xt = process_order(ticker, side, type, time, qty, pricept, cash_account)
-        if xt != None:
-             return render(request, "bank/order.html", {"external_bank_accounts": l, "cash": cash_account, "message": xt})
+        choice = request.POST["choice"]
+        if choice == "dollars":
+            xt = process_order(ticker, side, type, time, qty=None,cash_amt=qty, pricept=pricept, cash_account=cash_account)
+        elif choice == "shares":
+            xt = process_order(ticker, side, type, time, qty=qty, cash_amt=None, pricept=pricept, cash_account=cash_account)
+        if xt == None:
+            return render(request, "bank/order.html", {"external_bank_accounts": l, "cash": cash_account, "message": xt})
         else:
             print("order processed")
             return HttpResponseRedirect(reverse("bank:investments"))

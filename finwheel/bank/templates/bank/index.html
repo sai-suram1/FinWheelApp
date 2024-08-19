@@ -2,7 +2,7 @@
 
 {% extends 'home/layout.html' %}
 
-{% block title %}Home - Fin{% endblock %}
+{% block title %}Home - FinWheel{% endblock %}
 
 {% block content %}
     {% if config_bank %}
@@ -97,7 +97,7 @@
             <h1>Bank/Balance Information</h1><hr>
             <div style="margin:10px; border: 2px solid black;">
                 <h2>FinWheel</h2>
-                <h3>Cash: {{user_account.cash_balance}}</h3><br>
+                <h3>Cash: ${{account_info.cash}}</h3><br>
                 <a href="{% url 'bank:transaction' %}"><button>Add Money</button></a>
             </div>
             <hr>
@@ -115,20 +115,116 @@
             <p style="color: red;">{{message}}</p>
         </div>
         <div class="container">
-            <h1>Past Transactions</h1><hr>
-            {% for x in transactions %} 
-                <div style="margin: 10px; border: 2px solid black;">
-                    {% if x.transaction_type == "DEP" %} 
+            <h1>Past Transfers With FinWheel</h1><hr>
+            {% for xa in transactions %}
+                <div style="margin: 10px; padding: 10px; border: 2px solid black;">
+                    {% if xa.direction == "INCOMING" %} 
                         <h2>Deposit</h2>
-                    {% elif x.transaction_type == "WTH" %} 
+                    {% elif xa.direction == "OUTGOING" %} 
                         <h2>Withdrawl</h2>
                     {% endif %}
-                    <h3>Amount: {{x.amount}}</h3>
-                    <h4>Date: {{x.date_executed}}</h4>
+                    <h3>Amount: ${{xa.amount}}</h3>
+                    <h4>Date: {{xa.created_at}}</h4>
+                    <h4>Transaction Status: {{xa.status}}</h4>
                 </div>
             {% endfor %}
             
             <p style="color: red;">{{message}}</p>
+        </div>
+        <div class="container">
+            <h1>Your Portfolio Performance</h1><hr>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+            <canvas id="myChart" style="width:1000px;"></canvas>
+            <button onclick="getData('1D')">1D</button>
+            <button onclick="getData('5D')">5D</button>
+            <button onclick="getData('2W')">2W</button>
+            <button onclick="getData('1M')">1M</button>
+            <button onclick="getData('6M')">6M</button>
+            <button onclick="getData('1A')">1A</button>
+            <button onclick="getData('5A')">5A</button>
+            <button onclick="getData('10A')">10A</button>
+            <h2 id="p/l">Profit/Loss: ---</h2><br>
+            <h2 id="p/l/pct">Profit/Loss (%): ---</h2>
+            <script>
+                let xValues = [];
+                let yValues = [];
+
+                let chart = new Chart("myChart", {
+                    type: "line",
+                    data: {
+                        labels: xValues,
+                        datasets: [{
+                            fill: true,
+                            lineTension: 0,
+                            backgroundColor: "rgba(0,0,255,0.1)",
+                            borderColor: "rgba(0,0,255,0.1)",
+                            data: yValues,
+                            label: 'Portfolio Value'
+                        }]
+                    },
+                    options: {
+                        legend: {display: true},
+                        scales: {
+                            yAxes: [{ticks: {min: 50, max:51}}],
+                        }
+                    }
+                });
+
+                async function getData(period) {
+                    const url = "{% url 'bank:portfoliotracker' %}";
+                    try {
+                        const response = await fetch(url, {
+                            method: 'POST', 
+                            body: JSON.stringify({ timePeriod: period }), 
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRFToken': '{{csrf_token}}' 
+                            }
+                        })
+                        if (!response.ok) {
+                            throw new Error(`Response status: ${response.status}`);
+                        }
+
+                        const json = await response.json();
+                        console.log(json);
+
+                        profit = 0
+                        pct = 0
+                        for (var x = 0; x < json.profit_loss.length; x++){
+                            profit += json.profit_loss[x];
+                            pct += json.profit_loss_pct[x];
+                        }
+                        profit /= json.profit_loss.length;
+                        pct /= json.profit_loss.length;
+                        document.getElementById("p/l").innerText = `Profit/Loss: $${Math.round(profit*100)/100}`;
+                        document.getElementById("p/l/pct").innerText = `Profit/Loss (%): ${Math.round(pct*100*100)/100}%`;
+                        console.log(json.timestamp.length);
+                        var temp = []
+                        
+                        for (var x = 0; x < json.timestamp.length; x++){
+                            date = new Date(json.timestamp[x]*1000)
+                            if (json.timeframe == "1H"){
+                                temp[x] = `${date.getHours()}:${date.getMinutes()}`;
+                            } else {
+                                temp[x] = `${date.getFullYear()}/${date.getMonth()+1}/${date.getDate()}`;
+                            }
+                            
+                        }
+                        console.log(temp)
+                        chart.data.labels = temp;
+                        chart.data.datasets[0].data = json.equity;
+                        max_equity = Math.max.apply(null, json.equity);
+                        min_equity = Math.min.apply(null, json.equity);
+                        chart.options.scales.yAxes[0] = {ticks: {min: min_equity-1, max: max_equity+1}}
+                        chart.update();
+                        //console.log(chart);
+                    } catch (error) {
+                        console.error(error.message);
+                    }
+                }
+                getData("1D");
+            </script>
         </div>
     {% endif %}
     

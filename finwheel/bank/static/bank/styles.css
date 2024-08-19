@@ -56,10 +56,6 @@ main {
 }
 
 .container {
-    /*
-    max-width: 800px;
-    margin: 0 auto;
-    */
     margin: 10px;
     background-color: #fff; /* White */
     padding: 20px;

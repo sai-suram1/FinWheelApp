@@ -2,13 +2,13 @@
 {% load mathfilters %}
 
 
-{% block title %}Home - Fin{% endblock %}
+{% block title %}Investments{% endblock %}
 
 {% block content %}
     
         <div class="container">
             <h1>Current Investments and Holdings</h1>
-            <strong><p>Cash: {{acct.cash_balance}}</p></strong><hr><br>
+            <strong><p>Cash Available: ${{cash}}</p></strong><hr><br>
             <style>
                 table, th, td, tr {
                     border: 1px solid black;
@@ -64,7 +64,7 @@
             {% for x in orders %} 
                 <div class="container">
                     {% for key, value in x.items %} 
-                        {% if key == "symbol" or key == "qty" or key == "order_type" or key == "limit_price" or key == "stop_price" or key == "trail_price" or key == "id" %}
+                        {% if key == "symbol" or key == "qty" or key == "order_type" or key == "side" or key == "limit_price" or key == "stop_price" or key == "trail_price" or key == "id" %}
                             {% if value != None %}
                                 <p>{{key}} - <strong>{{value}}</strong></p>
                             {% endif %}
@@ -86,6 +86,12 @@
             <a href="{% url 'bank:order' %}" style="text-align: center;"><button>Make a Trade</button></a>
             <h3>Wanna make a new automated financial plan?</h3>
             <a href="{% url 'ai:dashboard' %}" style="text-align: center;"><button>Talk to Fin</button></a>
+            <h3>Check Out Your Dashboard</h3>
+            <a href="{% url 'bank:dashboard' %}" style="text-align: center;"><button>Go to Dashboard</button></a>
+            <h3>Make a Money Transfer</h3>
+            <a href="{% url 'bank:transaction' %}" style="text-align: center;"><button>Money Transfer</button></a>
+            <h3>Documents</h3>
+            <a href="{% url 'bank:account_info' %}" style="text-align: center;"><button>Check out your documents</button></a>
         </div>
         
 {% endblock %}

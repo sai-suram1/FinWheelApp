@@ -11,5 +11,7 @@ urlpatterns = [
     path("order", make_order, name="order"),
     path("quote", latest_quote, name="quote"),
     path("investments", investment_view, name="investments"),
-    path("cancelorder/<uuid:order_id>", cancel_order_view, name="cancel")
+    path("cancelorder/<uuid:order_id>", cancel_order_view, name="cancel"),
+    path("view_document/<str:doc_id>", view_document, name="view_document"),
+    path("getportfoliomovement", take_portfolio_data, name="portfoliotracker")
 ]

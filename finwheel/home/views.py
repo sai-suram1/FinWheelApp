@@ -12,7 +12,7 @@ def index(request):
                 "setup":xt,
             })
         elif xt[0] == True and xt[1] == True:
-            return HttpResponseRedirect(reverse("bank:investments"))
+            return HttpResponseRedirect(reverse("bank:dashboard"))
         else:
             return render(request, "home/logged_index.html",{
                 "setup":xt,

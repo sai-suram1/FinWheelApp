@@ -407,7 +407,7 @@ def process_order(ticker, side, type, time, qty, cash_amt, pricept: int, cash_ac
                 position_exists = True
                 position_qty = x["qty"]
                 break
-        if position_exists == False or qty > position_qty:
+        if position_exists == False or float(qty) > float(position_qty):
             return "You are selling more stock than you actually have."
         else:
             cash_account.cash_balance += decimal.Decimal((quote*float(qty)))
@@ -445,3 +445,56 @@ def process_order(ticker, side, type, time, qty, cash_amt, pricept: int, cash_ac
         print(response.text)
         return response.json()["id"]
 
+
+
+def load_documents_and_transactions(acct: CashAccount, type: str):
+
+    url = f"https://broker-api.sandbox.alpaca.markets/v1/accounts/{acct.customer_id}/documents?type={type}"
+    headers = {
+        "accept": "application/json",
+        "content-type": "application/json",
+        "authorization": "Basic Q0tCTVA1M0taSVc1V0JST0pUQlg6MnpsWGJncWJ3VU9xbGxFajVoeWJONnRvTGFpOE1rZVBjcUgyS09KOQ=="
+    }
+    response = requests.get(url, headers=headers)
+
+    return response.json()
+
+def find_document(account: CashAccount, doc_id):
+    import requests
+
+    url = f"https://broker-api.sandbox.alpaca.markets/v1/accounts/{account.customer_id}/documents/{doc_id}/download"
+
+    headers = {"authorization": "Basic Q0tCTVA1M0taSVc1V0JST0pUQlg6MnpsWGJncWJ3VU9xbGxFajVoeWJONnRvTGFpOE1rZVBjcUgyS09KOQ=="}
+
+    response = requests.get(url, headers=headers)
+    #print(response.is_redirect)
+    print(response.text)
+    f = open('res.pdf', 'ab')
+    f.write(str(response.text).encode("utf_32"))
+    f.close()
+    return response
+
+def get_alpaca_transfers(account: CashAccount):
+    import requests
+
+    url = f"https://broker-api.sandbox.alpaca.markets/v1/accounts/{account.customer_id}/transfers"
+    print(url)
+    headers = {
+        "accept": "application/json",
+        "authorization": "Basic Q0tCTVA1M0taSVc1V0JST0pUQlg6MnpsWGJncWJ3VU9xbGxFajVoeWJONnRvTGFpOE1rZVBjcUgyS09KOQ=="
+    }
+
+    response = requests.get(url, headers=headers)
+    #print(response.text)
+    return response.json()
+
+def get_user_portfolio_history(account: CashAccount, period, timeframe):
+    import requests
+
+    url = f"https://broker-api.sandbox.alpaca.markets/v1/trading/accounts/{account.customer_id}/account/portfolio/history?period={period}&timeframe={timeframe}&intraday_reporting=market_hours&pnl_reset=no_reset"
+
+    headers = {"accept": "application/json", "authorization": "Basic Q0tCTVA1M0taSVc1V0JST0pUQlg6MnpsWGJncWJ3VU9xbGxFajVoeWJONnRvTGFpOE1rZVBjcUgyS09KOQ=="}
+
+    response = requests.get(url, headers=headers)
+
+    return response.json()
