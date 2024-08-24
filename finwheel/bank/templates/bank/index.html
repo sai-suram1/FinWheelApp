@@ -189,14 +189,16 @@
                         const json = await response.json();
                         console.log(json);
 
-                        profit = 0
-                        pct = 0
+                        profit = json.profit_loss[json.profit_loss.length-1] - json.profit_loss[0];
+                        pct = json.profit_loss_pct[json.profit_loss_pct.length-1] - json.profit_loss_pct[0];
+                        /*
                         for (var x = 0; x < json.profit_loss.length; x++){
                             profit += json.profit_loss[x];
                             pct += json.profit_loss_pct[x];
                         }
-                        profit /= json.profit_loss.length;
-                        pct /= json.profit_loss.length;
+                        */
+                        //profit /= json.profit_loss.length;
+                        //pct /= json.profit_loss.length;
                         document.getElementById("p/l").innerText = `Profit/Loss: $${Math.round(profit*100)/100}`;
                         document.getElementById("p/l/pct").innerText = `Profit/Loss (%): ${Math.round(pct*100*100)/100}%`;
                         console.log(json.timestamp.length);

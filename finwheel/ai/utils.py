@@ -33,6 +33,11 @@ generation_config = {
     #"Content-Type": "application/json",
 }
 
+
+def print_history(hist):
+    for x in hist:
+        print(f"{x['role']}: {x['parts'][0]}")
+
 def refine_chat_history(history, user):
     hist=[]
     lk = model_parameters.objects.all()
@@ -90,6 +95,7 @@ def refine_chat_history(history, user):
                 "I understand that the user has that asset in his portfolio. I WILL USE BOTH THE TICKER AND THE EXCHANGE NAME TO FIND THE COMPANY NAME. "
             ],
         })
+    print(print_history(hist))
     return hist
 
 
@@ -281,9 +287,19 @@ def get_asset_data(history, user):
     elif str(texts[0]).strip() == "EARNINGS":
         #print(stock.get_earnings_trend())
         final_info = stock.get_earnings_dates().to_html()
+    elif str(texts[0]).strip() == "QUOTE":
+        x = get_quote(str(texts[1]).strip())["quote"]["ap"]
+        final_info = x
     else:
         final_info = stock.info
-    return final_info
+    for d in range(3):
+        try:
+            msg = analyzer.send_message(f"Take the user's last message and the information I am giving you which is the data they are looking for. Make a response that the user will see and understand. \n {str(texts[0]).strip()}:{final_info}")
+            return msg.text
+        except Exception as e:
+            print(f"Execution #{d} failed, trying again")
+            continue
+    return f"{str(texts[0]).strip()}: {final_info}"
 
 def FinChatReader(query):
     import requests

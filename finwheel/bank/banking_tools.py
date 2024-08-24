@@ -469,10 +469,14 @@ def find_document(account: CashAccount, doc_id):
     response = requests.get(url, headers=headers)
     #print(response.is_redirect)
     print(response.text)
+    response_dict = vars(response.history[0])
+    for var_name, var_value in response_dict.items():
+        print(f"{var_name}: {var_value}")
     f = open('res.pdf', 'ab')
-    f.write(str(response.text).encode("utf_32"))
+    f.write(str(response.text).encode("utf_8"))
     f.close()
-    return response
+    print(dict(response.history[0].headers)['Location'])
+    return dict(response.history[0].headers)['Location']
 
 def get_alpaca_transfers(account: CashAccount):
     import requests
@@ -491,7 +495,7 @@ def get_alpaca_transfers(account: CashAccount):
 def get_user_portfolio_history(account: CashAccount, period, timeframe):
     import requests
 
-    url = f"https://broker-api.sandbox.alpaca.markets/v1/trading/accounts/{account.customer_id}/account/portfolio/history?period={period}&timeframe={timeframe}&intraday_reporting=market_hours&pnl_reset=no_reset"
+    url = f"https://broker-api.sandbox.alpaca.markets/v1/trading/accounts/{account.customer_id}/account/portfolio/history?period={period}&timeframe={timeframe}&intraday_reporting=market_hours&pnl_reset=per_day"
 
     headers = {"accept": "application/json", "authorization": "Basic Q0tCTVA1M0taSVc1V0JST0pUQlg6MnpsWGJncWJ3VU9xbGxFajVoeWJONnRvTGFpOE1rZVBjcUgyS09KOQ=="}
 

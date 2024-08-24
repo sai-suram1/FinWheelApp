@@ -48,7 +48,9 @@
                             {% for key, value in x.items %} 
                                 {% if key == "symbol" or key == "qty" or key == "cost_basis" or key == "current_price" or key == "unrealized_pl" or key == "unrealized_plpc" %}
                                     {% if key == "unrealized_plpc" %}
-                                        <td><p>{{ value|mul:100 }}</p></td>
+                                        <td><p>{{ value|mul:100|floatformat:2 }}%</p></td>
+                                    {% elif key == "current_price" %}
+                                        <td><p>${{ value }}</p></td>
                                     {% else %} 
                                         <td><p>{{value}}</p></td>
                                     {% endif %}

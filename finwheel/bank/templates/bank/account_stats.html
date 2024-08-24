@@ -208,29 +208,33 @@
             </style>
             </head>
             <body>
-            
-            <h2>Account Information</h2>
-            
-            <div class="tab">
-              <button class="tablinks" onclick="openTab(event, 'transactions')">Transactions</button>
-              <button class="tablinks" onclick="openTab(event, 'documents')">Documents</button>
-              <button class="tablinks" onclick="openTab(event, 'trades')">Trades</button>
-            </div>
-            
-            <div id="transactions" class="tabcontent">
-              <h3>Transactions in last 30 days</h3>
-              <p>London is the capital city of England.</p>
-            </div>
-            
-            <div id="documents" class="tabcontent">
-              <h3>Documents</h3>
-              <p>Paris is the capital of France.</p> 
-            </div>
-            
-            <div id="trades" class="tabcontent">
-              <h3>Tokyo</h3>
-              <p>Tokyo is the capital of Japan.</p>
-            </div>
+              
+              <h2>Account Statements</h2>
+              {% if all_statements_count == 0 %} 
+                <h4>No Trade Confirmations</h4>
+              
+              {% else %}
+              <table>
+                <tr>
+                  <th>
+                    Type
+                  </th>
+                  <th>ID</th>
+                  <th>Date</th>
+                  <th>Download Link</th>
+                </tr>
+              
+                {% for xt in all_statements %} 
+                  <tr>
+                    <td>{{xt.type}}</td>
+                    <td>{{xt.id}}</td>
+                    <td>{{xt.date}}</td>
+                    <td><a href="{% url 'bank:view_document' xt.id %}">Download/View PDF</a></td>
+                  </tr>
+                {% endfor %}
+              </table>
+              {% endif %}
+            </body>
             
             <script>
             function openTab(evt, cityName) {

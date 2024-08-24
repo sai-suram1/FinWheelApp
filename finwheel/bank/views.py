@@ -166,6 +166,7 @@ def cancel_order_view(request, order_id):
 @login_required(login_url='/user/login')
 def transactions_view(request):
     all_documents = load_documents_and_transactions(acct=CashAccount.objects.get(for_user=request.user), type="")
+    all_statements = load_documents_and_transactions(acct=CashAccount.objects.get(for_user=request.user), type="account_statement")
     tax_documents = load_documents_and_transactions(acct=CashAccount.objects.get(for_user=request.user), type="tax_statement")
     trade_confirmations = load_documents_and_transactions(acct=CashAccount.objects.get(for_user=request.user), type="trade_confirmation")
     print(trade_confirmations)
@@ -174,13 +175,16 @@ def transactions_view(request):
         "tax_documents": tax_documents,
         "trade_confirmations": trade_confirmations,
         "trade_confirmations_count": len(trade_confirmations),
+        "all_statements": all_statements,
+        "all_statements_count": len(all_statements),
         "account_id": CashAccount.objects.get(for_user=request.user).customer_id
     })
 
 @login_required(login_url='/user/login')
 def view_document(request, doc_id):
     if request.method == "GET":
-        return find_document(CashAccount.objects.get(for_user=request.user), doc_id)
+        xt = find_document(CashAccount.objects.get(for_user=request.user), doc_id)
+        return render(request, "bank/pdf.html", {"u": xt})
 
 
 #transaction management
@@ -199,7 +203,7 @@ def start_transaction(request):
         lk = make_transaction(cash_account, bank, amount, order_type)
         if lk != True:
             print(lk)
-            return render(request, "bank/transaction.html", {"external_bank_accounts": l, "message": "withdrawal amount is past FinWheel Balance or some other error."})
+            return render(request, "bank/transaction.html", {"external_bank_accounts": l, "cash": alpaca_acct, "message": "withdrawal amount is past FinWheel Balance or some other error."})
         else:
             return HttpResponseRedirect(reverse("bank:dashboard"))
 
