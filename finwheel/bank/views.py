@@ -228,10 +228,43 @@ def make_order(request):
             xt = process_order(ticker, side, type, time, qty=None,cash_amt=qty, pricept=pricept, cash_account=cash_account)
         elif choice == "shares":
             xt = process_order(ticker, side, type, time, qty=qty, cash_amt=None, pricept=pricept, cash_account=cash_account)
-        if xt == None:
+        try:
+            import uuid
+            uu = uuid.UUID(xt)
+        except ValueError:
             return render(request, "bank/order.html", {"external_bank_accounts": l, "cash": cash_account, "message": xt})
         else:
             print("order processed")
+            print(xt)
+            from django.core.mail import send_mail
+            try:
+                """
+                send_mail(
+                    "Order Made",
+                    "Yo Dummy, we got your stock order",
+                    "customer-service@finwheel.tech",
+                    [request.user.email],
+                    fail_silently=False,
+                )
+                print("email sent")
+                
+            """
+                import os
+                from sendgrid import SendGridAPIClient
+                from sendgrid.helpers.mail import Mail
+                message = Mail(
+                    from_email='customer-service@finwheel.tech',
+                    to_emails=request.user.email,
+                    subject='Sending with Twilio SendGrid is Fun',
+                    html_content='<strong>and easy to do anywhere, even with Python</strong>')
+                sg = SendGridAPIClient(stuff['SENDGRID_API_KEY'])
+                response = sg.send(message)
+                print(response.status_code)
+                print(response.body)
+                print(response.headers)
+            except Exception as e:
+                print(e)
+                print("email failed")
             return HttpResponseRedirect(reverse("bank:investments"))
        
 from django.views.decorators.http import require_http_methods

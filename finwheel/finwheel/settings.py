@@ -140,8 +140,9 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.finwheel.tech'
+EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_USE_TLS = True
-EMAIL_PORT = 587
-EMAIL_HOST_USER = "customer-service@finwheel.tech"
-EMAIL_HOST_PASSWORD = "^YUZMwIA0"
+EMAIL_USE_SSL = False
+EMAIL_PORT = 25
+EMAIL_HOST_USER = "apikey"
+EMAIL_HOST_PASSWORD = "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"

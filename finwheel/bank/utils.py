@@ -61,6 +61,7 @@ try:
     schedule.save()
 except CrontabSchedule.DoesNotExist:
     schedule = CrontabSchedule.objects.get(minute='0', hour='9', day_of_week='1,6')
+
 def create_all_email_schedules():
     for k in CashAccount.objects.all():
         task = PeriodicTask.objects.create(
@@ -69,3 +70,4 @@ def create_all_email_schedules():
             task='your_app.tasks.send_email_task',
             args=['customer-service@finwheel.tech', [k.for_user.email], k],
         )
+
