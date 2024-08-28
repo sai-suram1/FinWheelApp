@@ -148,6 +148,7 @@ def find_and_make_trade(user, history):
             info.append({s[0].strip():s[1].strip()})
     #print("Dict: "+str(info))
     print("processing order")
+    xy = None
     if "QUANTITY OF SHARES" in x.text and "PRICEPOINT" in x.text:
         xy = process_order(ticker=info[0]["TICKER"], side=info[1]["ORDER SIDE"], type=info[3]["TYPE"], time=info[2]["TIME IN FORCE"], qty=info[4]["QUANTITY OF SHARES"], cash_account=CashAccount.objects.get(for_user=user), pricept=info[5]["PRICEPOINT"])
     elif "AMOUNT TO INVEST" in x.text and "PRICEPOINT" in x.text:
@@ -157,7 +158,7 @@ def find_and_make_trade(user, history):
     elif "AMOUNT TO INVEST" in x.text and "PRICEPOINT" not in x.text:
         xy = process_order(ticker=info[0]["TICKER"], side=info[1]["ORDER SIDE"], type=info[3]["TYPE"], time=info[2]["TIME IN FORCE"], cash_amt=info[4]["AMOUNT TO INVEST"], cash_account=CashAccount.objects.get(for_user=user), qty=None, pricept=None)
 
-    return f"Order had been made. Order ID is: {xy}"
+    return f"Order had been made. Order ID is: {str(xy)}"
 
 def create_financial_plan(user, history):
     analyzer = model.start_chat(history = refine_chat_history(history, user))
