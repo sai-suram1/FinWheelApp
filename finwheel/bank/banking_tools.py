@@ -251,7 +251,7 @@ def pull_ach_relationships(account_id):
 
 
 
-def make_transaction(account: CashAccount,acc_num, amount, order):
+def make_transaction(account: CashAccount, alpaca_info, acc_num, amount, order):
     import requests
     print(type(amount))
     url = f"https://broker-api.sandbox.alpaca.markets/v1/accounts/{account.customer_id}/transfers"
@@ -272,10 +272,10 @@ def make_transaction(account: CashAccount,acc_num, amount, order):
             "fee_payment_method": "user"
         }
         record.transaction_type = "DEP"
-        account.cash_balance += decimal.Decimal(amount)
+        #account.cash_balance += decimal.Decimal(amount)
     elif order == "OUTGOING":
         record.transaction_type = "WTH"
-        if account.cash_balance >= decimal.Decimal(amount):
+        if decimal.Decimal(alpaca_info["cash_withdrawable"]) >= decimal.Decimal(amount):
             payload = {
                 "transfer_type": "ach",
                 "direction": "OUTGOING",
@@ -284,9 +284,9 @@ def make_transaction(account: CashAccount,acc_num, amount, order):
                 "amount": amount,
                 "fee_payment_method": "user"
             }
-            account.cash_balance -= decimal.Decimal(amount)
+            #account.cash_balance -= decimal.Decimal(amount)
         else:
-            return False
+            return "Withdrawal request amount over the amount of cash withdrawable"
         
     
     response = requests.post(url, json=payload, headers=headers)
@@ -294,10 +294,66 @@ def make_transaction(account: CashAccount,acc_num, amount, order):
     print(response.text)
     print(response.status_code)
     if response.status_code != 200:
-        return False
+        return response.json()["message"]
     else:
         account.save()
         record.save()
+        eba = ExternalBankAccount.objects.get(for_user=account.for_user)
+        try:
+            import os
+            from sendgrid import SendGridAPIClient
+            from sendgrid.helpers.mail import Mail
+            message = Mail(
+                from_email='customer-service@finwheel.tech',
+                to_emails=account.for_user.email,
+                subject='Transaction Made',
+                html_content=f"""
+                    <!DOCTYPE html>
+                    <html lang="en">
+
+                    <head>
+                        <meta charset="UTF-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <title>Money Transfer Confirmation</title>
+                    </head>
+
+                    <body style="font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0;">
+                        <div style="max-width: 600px; margin: 20px auto; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+                            <div style="text-align: center; margin-bottom: 20px;">
+                                <img src="https://media.licdn.com/dms/image/D560BAQFYbp34o5N4Cg/company-logo_200_200/0/1713541491138?e=2147483647&v=beta&t=899Yiqf5482L3zz8Rq2cZ4Bxzx6QL2j1OBClsBCSfcc" alt="FinWheel Logo" style="max-width: 150px;">
+                            </div>
+                            <h1 style="color: #333333; text-align: center;">Money Transfer Confirmation</h1>
+                            <p style="color: #666666; line-height: 1.6;">Dear {account.for_user.first_name},</p>
+                            <p style="color: #666666; line-height: 1.6;">We are pleased to inform you that your recent money transfer between your bank account and your FinWheel account was successful.</p>
+                            
+                            <div style="margin: 20px 0;">
+                                <p style="margin: 5px 0; color: #666666;"><strong style="color: #333333;">Transfer Amount:</strong> ${amount}</p>
+                                <p style="margin: 5px 0; color: #666666;"><strong style="color: #333333;">Date:</strong> {datetime.datetime.now()}</p>
+                                <p style="margin: 5px 0; color: #666666;"><strong style="color: #333333;">Transaction Type:</strong> {payload["direction"]}</p>
+                                <p style="margin: 5px 0; color: #666666;"><strong style="color: #333333;">From/To Account:</strong> {eba.bank_name} - {eba.bank_account_number}</p>
+                            </div>
+
+                            <p style="color: #666666; line-height: 1.6;">If you have any questions or concerns, please feel free to contact our support team at customer-service@finwheel.tech</p>
+                            <p style="color: #666666; line-height: 1.6;">Thank you for trusting FinWheel with your investment management needs!</p>
+                            
+                            <a href="https://finwheel.tech/bank/investments" style="display: inline-block; background-color: #007BFF; color: #ffffff; padding: 10px 20px; border-radius: 5px; text-decoration: none; text-align: center; margin-top: 20px;">View Your Account</a>
+
+                            <div style="text-align: center; color: #999999; font-size: 12px; margin-top: 20px;">
+                                <p>&copy; 2024 FinWheel. All rights reserved.</p>
+                                <p>FinWheel Inc., 123 Financial Road, Suite 456, Financial City, FS 78901</p>
+                            </div>
+                        </div>
+                    </body>
+
+                    </html>
+
+
+                """)
+            sg = SendGridAPIClient(auth['SENDGRID_API_KEY'])
+            response = sg.send(message)
+        except Exception as e:
+            print(e)
+            print("email failed")
         return True
 
 
@@ -365,7 +421,7 @@ def get_quote(symbol):
 
     return response.json()
 
-def process_order(ticker, side, type, time, qty, cash_amt, pricept: int, cash_account: CashAccount):
+def process_order(ticker, side, type, time, qty, cash_amt, pricept: float, cash_account: CashAccount):
     import requests
     try:
         ticker = str(ticker)
@@ -443,6 +499,62 @@ def process_order(ticker, side, type, time, qty, cash_amt, pricept: int, cash_ac
         return response.json()["message"]
     else: 
         print(response.text)
+        try:
+            import os
+            from sendgrid import SendGridAPIClient
+            from sendgrid.helpers.mail import Mail
+            message = Mail(
+                from_email='customer-service@finwheel.tech',
+                to_emails=cash_account.for_user.email,
+                subject='Order Submitted',
+                html_content=f"""
+                        <!DOCTYPE html>
+                        <html lang="en">
+
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                            <title>Stock Order Confirmation</title>
+                        </head>
+
+                        <body style="font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0;">
+                            <div style="max-width: 600px; margin: 20px auto; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+                                <div style="text-align: center; margin-bottom: 20px;">
+                                    <img src="https://media.licdn.com/dms/image/D560BAQFYbp34o5N4Cg/company-logo_200_200/0/1713541491138?e=2147483647&v=beta&t=899Yiqf5482L3zz8Rq2cZ4Bxzx6QL2j1OBClsBCSfcc" alt="FinWheel Logo" style="max-width: 150px;">
+                                </div>
+                                <h1 style="color: #333333; text-align: center;">Stock Order Confirmation</h1>
+                                <p style="color: #666666; line-height: 1.6;">Dear {cash_account.for_user.first_name},</p>
+                                <p style="color: #666666; line-height: 1.6;">Your recent stock order has been successfully placed. Below are the details of your order:</p>
+                                
+                                <div style="margin: 20px 0;">
+                                    <p style="margin: 5px 0; color: #666666;"><strong style="color: #333333;">Order ID:</strong> {response.json()["id"]}</p>
+                                    <p style="margin: 5px 0; color: #666666;"><strong style="color: #333333;">Stock Name:</strong> {ticker}</p>
+                                    <p style="margin: 5px 0; color: #666666;"><strong style="color: #333333;">Order Type:</strong> {side}</p>
+                                    <p style="margin: 5px 0; color: #666666;"><strong style="color: #333333;">Quantity:</strong> {qty}</p>
+                                    <p style="margin: 5px 0; color: #666666;"><strong style="color: #333333;">Price per Share:</strong> ${pricept if pricept != None else get_quote(ticker)['quote']['ap']}</p>
+                                    <p style="margin: 5px 0; color: #666666;"><strong style="color: #333333;">Total Amount:</strong> ${round(quote*qty,ndigits=2)}</p>
+                                    <p style="margin: 5px 0; color: #666666;"><strong style="color: #333333;">Order Date:</strong> {datetime.datetime.now()}</p>
+                                </div>
+
+                                <p style="color: #666666; line-height: 1.6;">You can view the status of your order and your portfolio in your FinWheel account.</p>
+                                
+                                <a href="https://your-website.com" style="display: inline-block; background-color: #007BFF; color: #ffffff; padding: 10px 20px; border-radius: 5px; text-decoration: none; text-align: center; margin-top: 20px;">View Your Portfolio</a>
+
+                                <div style="text-align: center; color: #999999; font-size: 12px; margin-top: 20px;">
+                                    <p>&copy; 2024 FinWheel. All rights reserved.</p>
+                                    <p>FinWheel Inc., 123 Financial Road, Suite 456, Financial City, FS 78901</p>
+                                </div>
+                            </div>
+                        </body>
+
+                        </html>
+
+                """)
+            sg = SendGridAPIClient(auth['SENDGRID_API_KEY'])
+            res = sg.send(message)
+        except Exception as e:
+            print(e)
+            print("email failed")
         return response.json()["id"]
 
 

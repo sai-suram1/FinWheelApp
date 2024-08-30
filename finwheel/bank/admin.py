@@ -4,3 +4,4 @@ from bank.models import *
 admin.site.register(Transaction)
 admin.site.register(CashAccount)
 admin.site.register(ExternalBankAccount)
+admin.site.register(KYC)

@@ -200,10 +200,11 @@ def start_transaction(request):
         amount = request.POST["amount"]
         order_type = request.POST["order_type"]
         cash_account = CashAccount.objects.get(for_user=request.user)
-        lk = make_transaction(cash_account, bank, amount, order_type)
+        alpaca_acct = get_account_info(acct=cash_account)
+        lk = make_transaction(cash_account, alpaca_acct, bank, amount, order_type)
         if lk != True:
             print(lk)
-            return render(request, "bank/transaction.html", {"external_bank_accounts": l, "cash": alpaca_acct, "message": "withdrawal amount is past FinWheel Balance or some other error."})
+            return render(request, "bank/transaction.html", {"external_bank_accounts": l, "cash": alpaca_acct, "message": lk})
         else:
             return HttpResponseRedirect(reverse("bank:dashboard"))
 
@@ -222,7 +223,7 @@ def make_order(request):
         time = request.POST["order_time"]
         pricept = 0
         if "price" in request.POST.keys():  
-            pricept = request.POST["price"]
+            pricept = float(request.POST["price"])
         choice = request.POST["choice"]
         if choice == "dollars":
             xt = process_order(ticker, side, type, time, qty=None,cash_amt=qty, pricept=pricept, cash_account=cash_account)
@@ -231,40 +232,11 @@ def make_order(request):
         try:
             import uuid
             uu = uuid.UUID(xt)
-        except ValueError:
+        except Exception:
             return render(request, "bank/order.html", {"external_bank_accounts": l, "cash": cash_account, "message": xt})
         else:
             print("order processed")
             print(xt)
-            from django.core.mail import send_mail
-            try:
-                """
-                send_mail(
-                    "Order Made",
-                    "Yo Dummy, we got your stock order",
-                    "customer-service@finwheel.tech",
-                    [request.user.email],
-                    fail_silently=False,
-                )
-                print("email sent")
-                
-            """
-                import os
-                from sendgrid import SendGridAPIClient
-                from sendgrid.helpers.mail import Mail
-                message = Mail(
-                    from_email='customer-service@finwheel.tech',
-                    to_emails=request.user.email,
-                    subject='Sending with Twilio SendGrid is Fun',
-                    html_content='<strong>and easy to do anywhere, even with Python</strong>')
-                sg = SendGridAPIClient(stuff['SENDGRID_API_KEY'])
-                response = sg.send(message)
-                print(response.status_code)
-                print(response.body)
-                print(response.headers)
-            except Exception as e:
-                print(e)
-                print("email failed")
             return HttpResponseRedirect(reverse("bank:investments"))
        
 from django.views.decorators.http import require_http_methods
