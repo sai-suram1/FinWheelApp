@@ -11,7 +11,18 @@
             <form method="POST" action="{% url 'bank:order' %}">
                 {% csrf_token %}
                 <h3>Create a new Stock Order</h3><hr><br>
-                <label for="stock">Stock Ticker: </label>
+                <h3>For Account: </h3>
+                <select id="acct" name="account_number" required>
+                    <option value="">----</option>
+                    {% for x in accts %}
+                        <option value="{{x.customer_id}}">{{x.account_sub_type}} - {{x.id}}</option>
+                    {% endfor %}
+                    <!--
+                    <option value="buy_minus">Short</option>
+                    <option value="sell_short">Sell Short</option>
+                    -->
+                </select><br><br>
+                <label for="stock"><h3>Stock Ticker: </h3></label>
                 <input type="text" id="stock" name="stock_tick"><br><br>
                 <button onclick="getquote()">Get Quote</button><br><br>
                 <h4 id="stockprice">Price: -----</h4><br><br>

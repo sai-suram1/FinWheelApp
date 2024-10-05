@@ -41,6 +41,7 @@ def register_view(request):
             us = User(username=username, email=email, password=password)
             us.first_name = fname
             us.last_name = lname
+            us.set_password(password)
             us.save()
             login(request, us)  # Log in the new user
             new_chat = Chat(for_user = us, date_created=datetime.datetime.now())

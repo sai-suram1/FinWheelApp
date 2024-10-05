@@ -30,6 +30,7 @@ class KYC(models.Model):
     documents_verified = models.BooleanField(null=True)
 
 class CashAccount(models.Model):
+    name=models.TextField(null=True)
     customer_id = models.TextField(null=True)
     cash_balance = models.DecimalField(decimal_places=2, max_digits=9)
     for_user = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name="user_balance")

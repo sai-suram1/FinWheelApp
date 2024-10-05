@@ -210,21 +210,25 @@ def start_transaction(request):
 
 @login_required(login_url="/user/login")
 def make_order(request):
-    cash_account = CashAccount.objects.get(for_user=request.user)
+    cash_account = CashAccount.objects.filter(for_user=request.user)
     l = ExternalBankAccount.objects.filter(for_user=request.user, verified=True, ach_authorized=True)
     if request.method == "GET":
-        alpaca_acct = get_account_info(acct=cash_account)
-        return render(request, "bank/order.html", {"external_bank_accounts": l, "cash": alpaca_acct})
+        alpaca_acct = []
+        for n in cash_account:
+            alpaca_acct.append(get_account_info(n))
+        return render(request, "bank/order.html", {"external_bank_accounts": l, "accts": alpaca_acct})
     else:
         ticker = request.POST["stock_tick"]
         side = request.POST["order_side"]
         type = request.POST["order_type"]
         qty = request.POST["amount"]
         time = request.POST["order_time"]
+        acct = request.POST["account_number"]
         pricept = 0
         if "price" in request.POST.keys():  
             pricept = float(request.POST["price"])
         choice = request.POST["choice"]
+        cash_account = CashAccount.objects.get(for_user=request.user, customer_id=acct)
         if choice == "dollars":
             xt = process_order(ticker, side, type, time, qty=None,cash_amt=qty, pricept=pricept, cash_account=cash_account)
         elif choice == "shares":
