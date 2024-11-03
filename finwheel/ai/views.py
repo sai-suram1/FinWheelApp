@@ -52,7 +52,7 @@ def bot_operate(request):
             print(request.body)
             data = json.loads(request.body)
             print(data)
-            if data["chat"] == "":
+            if data["chat"] == None:
                 ch = Chat(chat_id=uuid.uuid4(), for_user=request.user, date_created=datetime.datetime.now(), chat_name=f"New Chat - {datetime.datetime.now()}")
                 ch.save()
             else:
